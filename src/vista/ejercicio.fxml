@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.EjercicioController">
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button cancelButton="true" mnemonicParsing="false" text="Cancelar" />
+            <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <Button defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Confirmar" />
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <top>
+      <VBox prefHeight="99.0" prefWidth="900.0" BorderPane.alignment="TOP_LEFT">
+         <children>
+            <Label text="Enunciado">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" text="¿Si un tren sale de Salamanca a las 4 de la tarde y otro sale de Madrid 30 minutos despues, cuantos abdominales tiene que hacer batman para recuperarse de su mision antes de pagar un hospital entero?" wrapText="true" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextArea>
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </VBox>
+   </top>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <RadioButton mnemonicParsing="false" text="Respuesta 1">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="respuestas" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Respuesta 2" toggleGroup="$respuestas">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton layoutX="10.0" layoutY="28.0" mnemonicParsing="false" text="Respuesta 3" toggleGroup="$respuestas">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton layoutX="10.0" layoutY="46.0" mnemonicParsing="false" text="Respuesta 4" toggleGroup="$respuestas">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Button mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/iconos/download.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
+</BorderPane>
