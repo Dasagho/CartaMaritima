@@ -6,11 +6,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.PantallaPrincipalUsuarioController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <HBox prefHeight="98.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -36,32 +37,29 @@
                   </HBox>
                </children>
                <padding>
-                  <Insets left="45.0" right="15.0" />
+                  <Insets left="25.0" right="15.0" />
                </padding>
             </VBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" HBox.hgrow="ALWAYS">
                <children>
                   <ImageView fitHeight="59.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../MEGAsync/Wallpaper/07.jpg" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="16.0" prefWidth="114.0" text="SuperNáutico_96">
-                     <font>
-                        <Font size="11.0" />
-                     </font></Label>
+                  <Label prefHeight="16.0" prefWidth="114.0" text="SuperNáutico_96" />
                   <Button mnemonicParsing="false">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/iconos/lapiz.png" />
+                              <Image url="@../Pictures/lapiz.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
                </children>
                <padding>
-                  <Insets right="45.0" />
+                  <Insets right="20.0" />
                </padding>
             </HBox>
          </children>
@@ -73,57 +71,40 @@
             <Button mnemonicParsing="false" text="Cerrar sesion" />
          </children>
          <padding>
-            <Insets bottom="20.0" left="45.0" />
+            <Insets bottom="20.0" left="20.0" />
          </padding>
       </HBox>
    </bottom>
    <center>
-      <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="50.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" maxHeight="262.0" maxWidth="720.0" prefHeight="262.0" prefWidth="472.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="64.0" right="64.0" />
+         </BorderPane.margin>
          <children>
-            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="76.0" prefWidth="472.0" text="REALIZAR PROBLEMA">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="472.0">
                <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="271.0" prefWidth="410.0" spacing="50.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="483.0" text="REALIZAR PROBLEMA">
-                           <font>
-                              <Font size="26.0" />
-                           </font>
-                        </Button>
-                        <HBox alignment="CENTER_LEFT" spacing="50.0">
-                           <children>
-                              <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="316.0" text="VER RESULTADOS">
-                                 <font>
-                                    <Font size="26.0" />
-                                 </font>
-                              </Button>
-                              <Button mnemonicParsing="false">
-                                 <graphic>
-                                    <ImageView fitHeight="75.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../resources/iconos/download.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <HBox.margin>
-                                    <Insets right="20.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </children>
-                     <padding>
-                        <Insets left="25.0" />
-                     </padding>
-                  </VBox>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="64.0" prefWidth="397.0" text="VER RESULTADOS" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="8.0" />
+                     </HBox.margin>
+                  </Button>
+                  <FlowPane maxWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
+                  <ImageView fitHeight="104.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                     <image>
+                        <Image url="@../Pictures/download.png" />
+                     </image>
+                  </ImageView>
                </children>
-               <padding>
-                  <Insets right="20.0" />
-               </padding>
             </HBox>
          </children>
-         <padding>
-            <Insets left="20.0" />
-         </padding>
       </VBox>
    </center>
 </BorderPane>
