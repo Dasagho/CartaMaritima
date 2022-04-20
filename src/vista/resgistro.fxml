@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.registrarseController">
+<BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.registrarseController">
    <center>
       <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
         <columnConstraints>
@@ -36,7 +36,7 @@
             <Label text="Nombre" />
             <Label layoutX="10.0" layoutY="69.0" prefHeight="40.0" prefWidth="75.0" text="Correo Electornico" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
             <Label layoutX="10.0" layoutY="203.0" text="Contraseña" GridPane.rowIndex="2" />
-            <Label layoutX="10.0" layoutY="170.0" prefHeight="35.0" prefWidth="82.0" text="Fecha de Nacimiento" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="4" />
+            <Label layoutX="10.0" layoutY="170.0" prefHeight="57.0" prefWidth="82.0" text="Fecha de Nacimiento" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="4" />
             <Label layoutX="10.0" layoutY="237.0" text="Avatar" GridPane.rowIndex="5" />
             <Label layoutX="10.0" layoutY="146.0" prefHeight="40.0" prefWidth="78.0" text="Confirmar Contraseña" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3" />
             <TextField GridPane.columnIndex="1" />
