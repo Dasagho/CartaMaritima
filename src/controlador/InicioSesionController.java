@@ -5,11 +5,15 @@
  */
 package controlador;
 
+import DBAccess.NavegacionDAOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import model.Navegacion;
+import model.User;
 
 /**
  * FXML Controller class
@@ -23,7 +27,8 @@ public class InicioSesionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // Inicializacion del Singleton a traves del modelo secretario
+        modelo.secretario.initialize();
     }
 
     /**
@@ -40,30 +45,21 @@ public class InicioSesionController implements Initializable {
      *
      * 4º Cambia la ventana a la pantalla principal de usuario
      */
-    
     @FXML
     public void iniciarSesion(ActionEvent e) {
     }
 
-    
-    
     /**
      * Muestra un cuadro de dialogo que pide que ingreses tu correo para que
      * pueda enviar mensaje de verificacion (no lo va a hacer) y se cierre el
      * cuadro
      */
-    
-    @FXML
     public void hasOlvidadoTuContrasena(ActionEvent e) {
     }
 
-    
-    
     /**
      * Te manda a la ventana de registro
      */
-    
-    @FXML
     public void todaviaNoTienesCuenta(ActionEvent e) {
     }
 
