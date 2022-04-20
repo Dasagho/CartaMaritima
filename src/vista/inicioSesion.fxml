@@ -19,7 +19,7 @@
    <bottom>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button defaultButton="true" mnemonicParsing="false" text="Iniciar sesion" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#iniciarSesion" text="Iniciar sesion" />
          </children>
          <BorderPane.margin>
             <Insets />
