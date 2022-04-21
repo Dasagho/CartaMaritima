@@ -5,14 +5,19 @@
  */
 package controlador;
 
-import DBAccess.NavegacionDAOException;
+import static aplicacion.Main.setRoot;
+import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import model.Navegacion;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.MouseEvent;
 import model.User;
 
 /**
@@ -22,13 +27,26 @@ import model.User;
  */
 public class InicioSesionController implements Initializable {
 
+    @FXML
+    private TextField email_textField;
+    @FXML
+    private PasswordField contrasena_textField;
+    @FXML
+    private Label email_error;
+    @FXML
+    private Label contrasena_error;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Nombramiento de la ventana
+        modelo.secretario.setTitulo("Iniciar sesion");
+
         // Inicializacion del Singleton a traves del modelo secretario
         modelo.secretario.initialize();
+
     }
 
     /**
@@ -46,7 +64,31 @@ public class InicioSesionController implements Initializable {
      * 4º Cambia la ventana a la pantalla principal de usuario
      */
     @FXML
-    public void iniciarSesion(ActionEvent e) {
+    public void iniciarSesion(ActionEvent e) throws IOException {
+        restablecerErrores();
+
+        /**
+         * Al mostrar errores: ¿Mostrar todos los errores o de uno en uno?
+         */
+        
+        if (!modelo.secretario.getNavegacion().exitsNickName(email_textField.getText())) {
+            email_error.setText("No existe un usuario con este NickName, introduce el NickName de un usuario registrado");
+            email_textField.requestFocus(); // Pone el foco en el textField del nickName
+            contrasena_textField.setText("");
+            return;
+        }
+
+        User usuario = modelo.secretario.getNavegacion().loginUser(email_textField.getText(), contrasena_textField.getText());
+        if (usuario == null) {
+            contrasena_error.setText("La contraseña introducida no pertenece a este usuario, intentalo de nuevo con otra contraseña");
+            contrasena_textField.setText("");
+            contrasena_textField.requestFocus();
+            return;
+        }
+
+        modelo.secretario.setUsuario(usuario);
+        setRoot("PaginaPrincipalUsuario");
+
     }
 
     /**
@@ -54,13 +96,28 @@ public class InicioSesionController implements Initializable {
      * pueda enviar mensaje de verificacion (no lo va a hacer) y se cierre el
      * cuadro
      */
-    public void hasOlvidadoTuContrasena(ActionEvent e) {
+    @FXML
+    private void hasOlvidadoTuContrasena(MouseEvent event) {
+        TextInputDialog dialogo = new TextInputDialog("");
+        dialogo.setTitle("Recuperar contraseña");
+        dialogo.setHeaderText("Introduce tu correo electronico");
+        Optional<String> recuperar = dialogo.showAndWait();
     }
+    
 
     /**
      * Te manda a la ventana de registro
      */
-    public void todaviaNoTienesCuenta(ActionEvent e) {
+    @FXML
+    public void todaviaNoTienesCuenta(MouseEvent event) throws IOException {
+        restablecerErrores();
+        setRoot("resgistro");
     }
+
+    public void restablecerErrores() {
+        email_error.setText("");
+        contrasena_error.setText("");
+    }
+
 
 }

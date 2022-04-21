@@ -27,7 +27,6 @@ public class secretario {
     public static Session getSesion() {
         return sesion;
     }
-    
 
     public static void sumarAcierto() {
     }
@@ -35,9 +34,9 @@ public class secretario {
     public static void sumarFallo() {
     }
 
-    
     /**
      * Objeto de Navegacion intermediaria entre la DB y nuestros controladores
+     *
      * @return nav
      */
     public static Navegacion getNavegacion() {
@@ -51,10 +50,19 @@ public class secretario {
     public static void initialize() {
         try {
             nav = getSingletonNavegacion();
-            
+
         } catch (NavegacionDAOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    // Modificar para que el titulo quede algo como: Subnautica - Iniciar sesion
+    // modelo.secretario.setTitulo("");
+    /**
+     * format(param) -> aplicacion.Main.getStage().setTitle(param)
+     */
+    public static void setTitulo(String titulo) {
+        aplicacion.Main.getStage().setTitle("Subnautica" + " - " + titulo);
     }
 
 }
