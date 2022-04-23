@@ -1,8 +1,10 @@
 package modelo;
 
 import DBAccess.NavegacionDAOException;
+import java.util.List;
 import model.Navegacion;
 import static model.Navegacion.getSingletonNavegacion;
+import model.Problem;
 import model.Session;
 import model.User;
 
@@ -11,6 +13,7 @@ public class secretario {
     private static User usuario;
     private static Session sesion;
     private static Navegacion nav;
+    private static List<Problem> lista;
 
     public static void setUsuario(User u) {
         usuario = u;
@@ -26,6 +29,10 @@ public class secretario {
 
     public static Session getSesion() {
         return sesion;
+    }
+    
+    public static List<Problem> getProblemas() {
+        return lista;
     }
 
     public static void sumarAcierto() {
@@ -52,8 +59,11 @@ public class secretario {
             nav = getSingletonNavegacion();
 
         } catch (NavegacionDAOException ex) {
+            System.out.println("No ha sido posible conectarse a la base de datos");
             ex.printStackTrace();
         }
+        lista = nav.getProblems();
+        
     }
 
     // Modificar para que el titulo quede algo como: Subnautica - Iniciar sesion
