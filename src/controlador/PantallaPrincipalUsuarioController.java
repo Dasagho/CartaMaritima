@@ -5,10 +5,15 @@
  */
 package controlador;
 
+import static aplicacion.Main.setRoot;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -17,12 +22,15 @@ import javafx.fxml.Initializable;
  */
 public class PantallaPrincipalUsuarioController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private Label etiquetaAlias;
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Esto se ejecuta al iniciar
+        modelo.secretario.setTitulo("Menú principal");
+        etiquetaAlias.setText(modelo.secretario.getUsuario().getNickName());
     }
     /**
      * Para el initialize: - Recupera el objeto sesion y el objeto usuario del
@@ -50,16 +58,23 @@ public class PantallaPrincipalUsuarioController implements Initializable {
     public void verResultados(ActionEvent e) {}
 
     
-    /**
-     * Crea un dialogo modal confirmando que se quiere cerrar sesion y cambia la
-     * vista a la inicio de sesion
-     */
-    public void cerrarSesion(ActionEvent e) {}
+
 
     
     /**
      * Enseña el mapa? seguro?
      */
     public void ensenaMapa(ActionEvent e) {}
+
+    
+    /**
+     * Crea un dialogo modal confirmando que se quiere cerrar sesion y cambia la
+     * vista a la inicio de sesion
+     */
+    @FXML
+    private void pulsarCerrarSesion(ActionEvent event) throws IOException {
+        modelo.secretario.cerrarSesion();
+        setRoot("inicioSesion");
+    }
 
 }

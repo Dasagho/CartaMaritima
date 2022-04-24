@@ -1,7 +1,11 @@
 package modelo;
 
 import DBAccess.NavegacionDAOException;
+import java.time.LocalDateTime;
+import static java.time.LocalDateTime.now;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Navegacion;
 import static model.Navegacion.getSingletonNavegacion;
 import model.Problem;
@@ -11,10 +15,17 @@ import model.User;
 public class secretario {
 
     private static User usuario;
-    private static Session sesion;
+//(No hace falta este atributo)    private static Session sesion;
     private static Navegacion nav;
     private static List<Problem> lista;
+    
+// - - - - - Atributos de sesión - - - - - - - - -
+    private static LocalDateTime fotoTemporal;
+    private static int aciertos = 0;
+    private static int fallos = 0;
+// - - - - - - - - - - - - - - - - - - - - - - - - 
 
+    
     public static void setUsuario(User u) {
         usuario = u;
     }
@@ -23,6 +34,8 @@ public class secretario {
         return usuario;
     }
 
+/** (No tiene sentido hacer esto: "Los atributos de un Session no pueden ser modificados tras haberse creado")
+ * 
     public static void almacenarSesion(Session s) {
         sesion = s;
     }
@@ -30,15 +43,37 @@ public class secretario {
     public static Session getSesion() {
         return sesion;
     }
+**/
+ 
+    
+    
+// - - - - - Métodos de sesión - - - - - - - - -
+    public static void iniciarSesion(){
+        fotoTemporal = now();
+    }
+    
+    public static void sumarAcierto() { aciertos++; }
+    public static void sumarFallo() { fallos++; }
+    public static int getAciertos(){return aciertos; }
+    public static int getFallos(){return fallos; }
+    
+    public static void cerrarSesion(){
+        // Almacenar objeto sesion en la base de datos
+        Session s = new Session(fotoTemporal, aciertos, fallos);
+        try {
+            usuario.addSession(s);
+        } catch (NavegacionDAOException ex) {
+            System.out.println("No ha sido posible conectarse a la base de datos");
+            ex.printStackTrace();
+        }
+    }
+// - - - - - - - - - - - - - - - - - - - - - - - - 
+
+    
+    
     
     public static List<Problem> getProblemas() {
         return lista;
-    }
-
-    public static void sumarAcierto() {
-    }
-
-    public static void sumarFallo() {
     }
 
     /**
