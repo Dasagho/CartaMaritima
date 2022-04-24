@@ -22,7 +22,7 @@ public class PantallaPrincipalUsuarioController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // Esto se ejecuta al iniciar
     }
     /**
      * Para el initialize: - Recupera el objeto sesion y el objeto usuario del
