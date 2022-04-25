@@ -11,9 +11,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -38,28 +43,6 @@ public class PantallaPrincipalUsuarioController implements Initializable {
      */
     
     
-    /**
-     * Envia los datos del usuario actual a la vista de registro y crea la
-     * ventana modal del registro
-     */
-    public void editarPerfil(ActionEvent e) {}
-
-    
-    /**
-     * Cambia a la ventana de seleccion de ejercicio
-     */
-    public void realizarProblema(ActionEvent e) {}
-
-    
-    /**
-     * Envia los datos del usuario actual a la vista de ver resultados cambia la
-     * vista a la de ver resultados
-     */
-    public void verResultados(ActionEvent e) {}
-
-    
-
-
     
     /**
      * Enseña el mapa? seguro?
@@ -76,5 +59,52 @@ public class PantallaPrincipalUsuarioController implements Initializable {
         modelo.secretario.cerrarSesion();
         setRoot("inicioSesion");
     }
+
+    
+    /**
+     * Cambia a la ventana de seleccion de ejercicio
+     */
+    @FXML
+    private void pulsarRealizarProblema(ActionEvent event) throws IOException {
+        setRoot("seleccionTipoPregunta");
+    }
+    
+    
+    /**
+     * Envia los datos del usuario actual a la vista de ver resultados cambia la
+     * vista a la de ver resultados
+     */
+    @FXML
+    private void pulsarVerResultados(ActionEvent event) {
+    }
+    
+    
+    /**
+     * Envia los datos del usuario actual a la vista de registro y crea la
+     * ventana modal del registro
+     */
+    @FXML
+    private void pulsarEditarPerfil(ActionEvent event) throws IOException {
+        
+        
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/resgistro.fxml"));
+        Parent root = miCargador.load();
+        
+        registrarseController controladorRegistro = miCargador.getController();
+        
+        controladorRegistro.initEdicion();
+        
+        
+        Scene escena = new Scene(root, 600, 400);
+        Stage escenario = new Stage();
+        escenario.setScene(escena);
+     //   escenario.setTitle("Editando tu perfil");
+        escenario.initModality(Modality.APPLICATION_MODAL); // Hacemos que la ventana nueva sea modal
+        escenario.showAndWait();
+    
+        
+    }
+        
+
 
 }

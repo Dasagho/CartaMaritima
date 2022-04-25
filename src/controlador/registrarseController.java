@@ -59,6 +59,8 @@ public class registrarseController implements Initializable {
     private DatePicker datePicker;
     @FXML
     private ImageView avatar;
+    
+    private boolean enEdicion = false;
 
     /**
      * Initializes the controller class.
@@ -68,10 +70,26 @@ public class registrarseController implements Initializable {
         // TODO
         // Nombramiento de la ventana
         modelo.secretario.setTitulo("Registrarse");
-
+        
         // Asignacion de la fecha actual al datePicker para evitar errores de NullPointer
-        datePicker.setValue(LocalDate.now());
+        datePicker.setValue(LocalDate.now());   
+        
     }
+    
+    public void initEdicion() { // Invocado desde la pantalla principal de usuario
+        enEdicion = true;
+        modelo.secretario.setTitulo("Editar Perfil");
+        System.out.println("Correcto");
+        nickName_textfield.setText( modelo.secretario.getUsuario().getNickName() );
+        nickName_textfield.setEditable(false);
+        email_textfield.setText( modelo.secretario.getUsuario().getEmail() );
+        contrasena_textfield.setText(modelo.secretario.getUsuario().getPassword());
+        confirmacion_textfield.setText(modelo.secretario.getUsuario().getPassword());
+        datePicker.setValue(modelo.secretario.getUsuario().getBirthdate());
+        avatar.setImage(modelo.secretario.getUsuario().getAvatar());
+        
+    }
+    
 
     @FXML
     private void cancelar(ActionEvent event) throws IOException {
