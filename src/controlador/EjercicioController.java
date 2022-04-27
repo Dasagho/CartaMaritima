@@ -115,7 +115,7 @@ public class EjercicioController implements Initializable {
                     break;
             }
 
-            System.out.println(respuestaCorrecta ? "has acertado" : "has fallado");
+            System.out.println(respuestaCorrecta ? "has acertado" : "has fallado");     // falta pulir
 
             volver_Button.setText("volver");
             volver_Button.setOnAction(this::volver);

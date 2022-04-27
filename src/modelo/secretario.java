@@ -6,6 +6,8 @@ import static java.time.LocalDateTime.now;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import model.Navegacion;
 import static model.Navegacion.getSingletonNavegacion;
 import model.Problem;
@@ -15,7 +17,6 @@ import model.User;
 public class secretario {
 
     private static User usuario;
-//(No hace falta este atributo)    private static Session sesion;
     private static Navegacion nav;
     private static List<Problem> lista;
     
@@ -24,27 +25,20 @@ public class secretario {
     private static int aciertos = 0;
     private static int fallos = 0;
 // - - - - - - - - - - - - - - - - - - - - - - - - 
-
+    private static BooleanProperty usuarioActivado = new SimpleBooleanProperty(false);   // <- Inicializamos la propiedad booleana
     
     public static void setUsuario(User u) {
         usuario = u;
+        usuarioActivado.setValue(Boolean.TRUE);     // <- Aviso de que hay un usuario activo
     }
 
     public static User getUsuario() {
         return usuario;
     }
-
-/** (No tiene sentido hacer esto: "Los atributos de un Session no pueden ser modificados tras haberse creado")
- * 
-    public static void almacenarSesion(Session s) {
-        sesion = s;
+    
+    public static BooleanProperty usuarioActivo() {
+        return usuarioActivado;
     }
-
-    public static Session getSesion() {
-        return sesion;
-    }
-**/
- 
     
     
 // - - - - - Métodos de sesión - - - - - - - - -
@@ -62,6 +56,8 @@ public class secretario {
         Session s = new Session(fotoTemporal, aciertos, fallos);
         try {
             usuario.addSession(s);
+            usuarioActivado.setValue(Boolean.FALSE);    // <- Aviso de que ya no hay un usuario activo
+            
         } catch (NavegacionDAOException ex) {
             System.out.println("No ha sido posible conectarse a la base de datos");
             ex.printStackTrace();
@@ -97,8 +93,7 @@ public class secretario {
             System.out.println("No ha sido posible conectarse a la base de datos");
             ex.printStackTrace();
         }
-        lista = nav.getProblems();
-        
+        lista = nav.getProblems();        
     }
 
     // Modificar para que el titulo quede algo como: Subnautica - Iniciar sesion

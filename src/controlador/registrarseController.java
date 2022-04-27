@@ -18,6 +18,8 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -25,10 +27,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import model.User;
 import static model.User.checkNickName;
 import static model.User.checkPassword;
+import modelo.secretario;
 
 /**
  * FXML Controller class
@@ -59,9 +63,8 @@ public class registrarseController implements Initializable {
     private DatePicker datePicker;
     @FXML
     private ImageView avatar;
-    
-    private boolean enEdicion = false;
 
+    // private boolean enEdicion = false;
     /**
      * Initializes the controller class.
      */
@@ -70,31 +73,38 @@ public class registrarseController implements Initializable {
         // TODO
         // Nombramiento de la ventana
         modelo.secretario.setTitulo("Registrarse");
-        
+
         // Asignacion de la fecha actual al datePicker para evitar errores de NullPointer
-        datePicker.setValue(LocalDate.now());   
-        
+        datePicker.setValue(LocalDate.now());
+
+        // Diferenciamos pagina de registro de Modificar perfil
+        nickName_textfield.disableProperty().bind(secretario.usuarioActivo());
+
     }
-    
+
     public void initEdicion() { // Invocado desde la pantalla principal de usuario
-        enEdicion = true;
+        // enEdicion = true;
         modelo.secretario.setTitulo("Editar Perfil");
         System.out.println("Correcto");
-        nickName_textfield.setText( modelo.secretario.getUsuario().getNickName() );
-        nickName_textfield.setEditable(false);
-        email_textfield.setText( modelo.secretario.getUsuario().getEmail() );
+        nickName_textfield.setText(modelo.secretario.getUsuario().getNickName());
+        // nickName_textfield.setEditable(false);
+        email_textfield.setText(modelo.secretario.getUsuario().getEmail());
         contrasena_textfield.setText(modelo.secretario.getUsuario().getPassword());
         confirmacion_textfield.setText(modelo.secretario.getUsuario().getPassword());
         datePicker.setValue(modelo.secretario.getUsuario().getBirthdate());
         avatar.setImage(modelo.secretario.getUsuario().getAvatar());
-        
+
     }
-    
 
     @FXML
     private void cancelar(ActionEvent event) throws IOException {
-        restablecerErrores();
-        Main.setRoot("inicioSesion");
+        if (secretario.usuarioActivo().getValue()) {                // <- Dividimos el comportamiento segun el contexto
+            ((Node)(event.getSource())).getScene().getWindow().hide();
+        
+        } else {
+            restablecerErrores();
+            Main.setRoot("inicioSesion");
+        }
     }
 
     @FXML
@@ -133,12 +143,25 @@ public class registrarseController implements Initializable {
             return;
         }
 
-        try {
-            User nuevoUsuario = modelo.secretario.getNavegacion().registerUser(nickName_textfield.getText(), email_textfield.getText(), contrasena_textfield.getText(), avatar.getImage(), datePicker.getValue());
-            modelo.secretario.setUsuario(nuevoUsuario);
-            Main.setRoot("PaginaPrincipalUsuario");
-        } catch (NavegacionDAOException ex) {
-            ex.printStackTrace();
+        if (modelo.secretario.usuarioActivo().getValue()) {                             // <- Comprueba si está registrando un usuario o modificando uno existente
+            try {
+                modelo.secretario.getUsuario().setEmail(email_textfield.getText());
+                modelo.secretario.getUsuario().setPassword(contrasena_textfield.getText());
+                modelo.secretario.getUsuario().setBirthdate(datePicker.getValue());
+                modelo.secretario.getUsuario().setAvatar(avatar.getImage());
+
+            } catch (NavegacionDAOException ex) {
+                Logger.getLogger(registrarseController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            try {
+                User nuevoUsuario = modelo.secretario.getNavegacion().registerUser(nickName_textfield.getText(), email_textfield.getText(), contrasena_textfield.getText(), avatar.getImage(), datePicker.getValue());
+                modelo.secretario.setUsuario(nuevoUsuario);
+                Main.setRoot("PaginaPrincipalUsuario");
+            } catch (NavegacionDAOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
