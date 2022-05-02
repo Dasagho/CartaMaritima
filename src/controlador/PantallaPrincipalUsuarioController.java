@@ -140,8 +140,6 @@ public class PantallaPrincipalUsuarioController implements Initializable {
         escenario.setScene(escena);
         escenario.initModality(Modality.APPLICATION_MODAL); // Hacemos que la ventana nueva sea modal
         escenario.showAndWait();
-    
-        
     }
 
     @FXML
