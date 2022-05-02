@@ -5,9 +5,14 @@
  */
 package controlador;
 
+import static aplicacion.Main.setRoot;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ToggleGroup;
 
 /**
  * FXML Controller class
@@ -16,12 +21,24 @@ import javafx.fxml.Initializable;
  */
 public class SeleccionTipoPreguntaController implements Initializable {
 
+    @FXML
+    private ToggleGroup sel;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    }
+
+    @FXML
+    private void pulsarCancelar(ActionEvent event) throws IOException {
+        setRoot("PaginaPrincipalUsuario");
+    }
+
+    @FXML
+    private void pulsarAceptar(ActionEvent event) {
     }
 
 }

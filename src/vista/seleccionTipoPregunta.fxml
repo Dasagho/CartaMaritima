@@ -7,12 +7,13 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.SeleccionTipoPreguntaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.SeleccionTipoPreguntaController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -36,8 +37,11 @@
                <VBox.margin>
                   <Insets left="40.0" />
                </VBox.margin>
+               <toggleGroup>
+                  <ToggleGroup fx:id="sel" />
+               </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Elegir un problema concreto:">
+            <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Elegir un problema concreto:" toggleGroup="$sel">
                <padding>
                   <Insets bottom="20.0" />
                </padding>
@@ -72,13 +76,13 @@
             </Separator>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button cancelButton="true" mnemonicParsing="false" text="Cancelar">
+                  <Button cancelButton="true" mnemonicParsing="false" onAction="#pulsarCancelar" text="Cancelar">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>
                   </Button>
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Button defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Aceptar">
+                  <Button defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#pulsarAceptar" text="Aceptar">
                      <HBox.margin>
                         <Insets right="50.0" />
                      </HBox.margin>

@@ -87,6 +87,7 @@ public class InicioSesionController implements Initializable {
         }
 
         modelo.secretario.setUsuario(usuario);
+        modelo.secretario.iniciarSesion();
         setRoot("PaginaPrincipalUsuario");
 
     }
