@@ -149,6 +149,7 @@ public class registrarseController implements Initializable {
                 modelo.secretario.getUsuario().setPassword(contrasena_textfield.getText());
                 modelo.secretario.getUsuario().setBirthdate(datePicker.getValue());
                 modelo.secretario.getUsuario().setAvatar(avatar.getImage());
+                modelo.secretario.iniciarSesion();
 
             } catch (NavegacionDAOException ex) {
                 Logger.getLogger(registrarseController.class.getName()).log(Level.SEVERE, null, ex);
@@ -158,7 +159,9 @@ public class registrarseController implements Initializable {
             try {
                 User nuevoUsuario = modelo.secretario.getNavegacion().registerUser(nickName_textfield.getText(), email_textfield.getText(), contrasena_textfield.getText(), avatar.getImage(), datePicker.getValue());
                 modelo.secretario.setUsuario(nuevoUsuario);
+                modelo.secretario.iniciarSesion();
                 Main.setRoot("PaginaPrincipalUsuario");
+                
             } catch (NavegacionDAOException ex) {
                 ex.printStackTrace();
             }

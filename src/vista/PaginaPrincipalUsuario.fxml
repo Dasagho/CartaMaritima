@@ -103,7 +103,7 @@
                   <FlowPane maxWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
                   <ImageView fitHeight="104.0" fitWidth="107.0" onMouseClicked="#pulsarMapa" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                      <image>
-                        <Image url="@../../../../../../../../../../MEGA/Universidad/2º%20curso/IPC%20(2ºcuatri)/Entregable%20final/Proyecto/CartaMaritima/src/resources/iconos/download.png" />
+                        <Image url="@../resources/iconos/download.png" />
                      </image>
                   </ImageView>
                </children>
