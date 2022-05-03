@@ -157,9 +157,6 @@ public class PantallaPrincipalUsuarioController implements Initializable {
         escenario.show();
     }
 
-    @FXML
-    private void pulsar(ActionEvent event) {
-    }
 
         
 

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +20,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -63,6 +67,8 @@ public class registrarseController implements Initializable {
     private DatePicker datePicker;
     @FXML
     private ImageView avatar;
+    @FXML
+    private Label etiquetaTitulo;
 
     // private boolean enEdicion = false;
     /**
@@ -85,7 +91,8 @@ public class registrarseController implements Initializable {
     public void initEdicion() { // Invocado desde la pantalla principal de usuario
         // enEdicion = true;
         modelo.secretario.setTitulo("Editar Perfil");
-        System.out.println("Correcto");
+        etiquetaTitulo.setText("EDITAR PERFIL");
+        // System.out.println("Correcto");
         nickName_textfield.setText(modelo.secretario.getUsuario().getNickName());
         // nickName_textfield.setEditable(false);
         email_textfield.setText(modelo.secretario.getUsuario().getEmail());
@@ -144,26 +151,55 @@ public class registrarseController implements Initializable {
         }
 
         if (modelo.secretario.usuarioActivo().getValue()) {                             // <- Comprueba si está registrando un usuario o modificando uno existente
-            try {
-                modelo.secretario.getUsuario().setEmail(email_textfield.getText());
-                modelo.secretario.getUsuario().setPassword(contrasena_textfield.getText());
-                modelo.secretario.getUsuario().setBirthdate(datePicker.getValue());
-                modelo.secretario.getUsuario().setAvatar(avatar.getImage());
-                modelo.secretario.iniciarSesion();
+            
+            // Se solicita confirmación para guardar cambios
+            Alert alerta1 = new Alert(AlertType.CONFIRMATION);
+            alerta1.setTitle("Guardar cambios");
+            alerta1.setHeaderText("Guardar cambios");
+            alerta1.setContentText("¿Deseas guardar los cambios?\n ");
+            Optional<ButtonType> respuesta = alerta1.showAndWait();
+            
+            if (respuesta.isPresent() && respuesta.get()==ButtonType.OK){               
+                try {
+                    modelo.secretario.getUsuario().setEmail(email_textfield.getText());
+                    modelo.secretario.getUsuario().setPassword(contrasena_textfield.getText());
+                    modelo.secretario.getUsuario().setBirthdate(datePicker.getValue());
+                    modelo.secretario.getUsuario().setAvatar(avatar.getImage());
+                    modelo.secretario.iniciarSesion();
 
-            } catch (NavegacionDAOException ex) {
-                Logger.getLogger(registrarseController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NavegacionDAOException ex) {
+                    Logger.getLogger(registrarseController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         } else {
-            try {
-                User nuevoUsuario = modelo.secretario.getNavegacion().registerUser(nickName_textfield.getText(), email_textfield.getText(), contrasena_textfield.getText(), avatar.getImage(), datePicker.getValue());
-                modelo.secretario.setUsuario(nuevoUsuario);
-                modelo.secretario.iniciarSesion();
-                Main.setRoot("PaginaPrincipalUsuario");
-                
-            } catch (NavegacionDAOException ex) {
-                ex.printStackTrace();
+            
+            // Se solicita confirmación para registrarse
+            Alert alerta2 = new Alert(AlertType.CONFIRMATION);
+            alerta2.setTitle("Nuevo usuario");
+            alerta2.setHeaderText("Nuevo usuario");
+            alerta2.setContentText("Se creará un nuevo usuario\n ");
+            Optional<ButtonType> respuesta = alerta2.showAndWait();
+            
+            
+            if (respuesta.isPresent() && respuesta.get()==ButtonType.OK){
+                try {
+                    User nuevoUsuario = modelo.secretario.getNavegacion().registerUser(nickName_textfield.getText(), email_textfield.getText(), contrasena_textfield.getText(), avatar.getImage(), datePicker.getValue());
+                    
+                    // Se informa de que la cuenta ha sido creada
+                    System.out.println("Correctísimo");
+                    Alert alerta3 = new Alert(AlertType.INFORMATION);
+                    alerta3.setTitle(null);
+                    alerta3.setHeaderText(null);
+                    alerta3.setContentText("Cuenta creada correctamente");
+                    alerta3.show();
+
+                    modelo.secretario.setUsuario(nuevoUsuario);
+                    modelo.secretario.iniciarSesion();
+                    Main.setRoot("PaginaPrincipalUsuario");
+                } catch (NavegacionDAOException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }

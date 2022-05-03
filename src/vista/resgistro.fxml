@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.registrarseController">
+<BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.registrarseController">
    <center>
       <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="900.0">
         <columnConstraints>
@@ -82,7 +82,7 @@
    <top>
       <HBox alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="REGISTRARSE" HBox.hgrow="ALWAYS">
+            <Label fx:id="etiquetaTitulo" text="REGISTRARSE" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
