@@ -43,7 +43,7 @@
             <TextField fx:id="email_textfield" layoutX="210.0" layoutY="27.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <PasswordField fx:id="contrasena_textfield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <PasswordField fx:id="confirmacion_textfield" layoutX="210.0" layoutY="142.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <DatePicker fx:id="datePicker" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+            <DatePicker fx:id="datePicker" editable="false" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
             <Label fx:id="nickName_error" alignment="CENTER" prefHeight="126.0" prefWidth="419.0" textAlignment="CENTER" textFill="RED" wrapText="true" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                <padding>
                   <Insets left="10.0" right="10.0" />

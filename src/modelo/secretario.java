@@ -19,6 +19,7 @@ public class secretario {
     private static User usuario;
     private static Navegacion nav;
     private static List<Problem> lista;
+    private static int indiceProblemaSel;
     
 // - - - - - Atributos de sesión - - - - - - - - -
     private static LocalDateTime fotoTemporal;
@@ -71,6 +72,14 @@ public class secretario {
     public static List<Problem> getProblemas() {
         return lista;
     }
+    
+    public static int getIndiceProblemaSel() {
+        return indiceProblemaSel;
+    }
+    
+    public static void setIndiceProblemaSel(int i){
+        indiceProblemaSel = i;
+    }
 
     /**
      * Objeto de Navegacion intermediaria entre la DB y nuestros controladores
@@ -80,6 +89,7 @@ public class secretario {
     public static Navegacion getNavegacion() {
         return nav;
     }
+    
 
     /**
      * Metodo inicializador del Singleton capaz de comunicarse con la base de
