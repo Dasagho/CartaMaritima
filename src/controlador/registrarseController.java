@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -190,29 +191,28 @@ public class registrarseController implements Initializable {
         fecha_error.setText("");
     }
 
+    
+    /** *
+     * Falta por modificar el ultimo avatar que debe ser un icono de añadir tu avatar personalizado
+     * @param event
+     * @throws IOException
+     * @throws URISyntaxException 
+     */
     @FXML
     private void cambiarAvatar(ActionEvent event) throws IOException, URISyntaxException {
-        Path pathPackage = new File(Main.class.getResource("/resources/avatars/avatar1.png").toURI()).getParentFile().toPath();
+        // Recuperamos la lista de los avatares por defecto de /resources
+        List<File> imagenesDefecto = recuperarAvataresPorDefecto();
 
-        File file = new File(pathPackage.toString());
-        String[] s = file.list();
-        File[] imagenes = new File[s.length];
-        for (int i = 0; i < s.length; i++) {
-            imagenes[i] = new File(Main.class.getResource("/resources/avatars/" + s[i]).toURI());
-        }
-
-        List<File> imagenesDefecto = Arrays.asList(imagenes);
-        for (File f : imagenesDefecto) {
-            System.out.println(f.toString());
-        }
-        System.out.println(imagenesDefecto.size());
-
+        // Creamos el container que almacenará los botones de seleccion de avatar
         GridPane grid = new GridPane();
         grid.setHgap(5);
         grid.setVgap(5);
+        grid.setAlignment(Pos.CENTER);
 
+        // Creamos la lista de ImageView en funcion de las imagenes por defecto que tengamos
         ImageView[] images = new ImageView[imagenesDefecto.size()];
 
+        // Inicializamos los ImageView y les asignamos los avatares por defecto
         for (int i = 0; i < imagenesDefecto.size(); i++) {
             images[i] = new ImageView(new Image("file:" + imagenesDefecto.get(i).toString()));
             images[i].setFitHeight(70);
@@ -222,32 +222,61 @@ public class registrarseController implements Initializable {
 
         int col = 0;
         int fil = 0;
-        
+
+        // Recorremos el grid creando los botones con los ImageView incorporados, además de asignarles su comportamiento
         for (int i = 0; i < imagenesDefecto.size(); i++) {
-           
-            if (col > 2) { col = 0; fil++; }
-            grid.add((images[i]), col, fil);
-            // System.out.println("file:" + imagenesDefecto.get(i).getAbsolutePath());
+
+            if (col % 3 == 0) {
+                col = 0;
+                fil++;
+            }
+
+            Button boton = new Button();
+            boton.setGraphic(images[i]);
+            boton.setOnAction(col == 2 && fil == 2 ? this::anadirAvatarPersonalizado : this::seleccionarAvatar);
+            grid.add(boton, col, fil);
+
             col++;
         }
 
-        Scene nuevaEscena = new Scene(grid, 220, 145);
+        // Finalmente creamos la escena y le agregamos dimensiones y el grid
+        Scene nuevaEscena = new Scene(grid, 445, 300);
         Stage nuevaVentana = new Stage();
         nuevaVentana.setScene(nuevaEscena);
 
         nuevaVentana.showAndWait();
-        // avatar.setImage(new Image("file:" + imagenesDefecto.get(0).toString()));
-        System.out.println(grid.getColumnCount() + ", " + grid.getRowCount());
 
-//        FileChooser selectorArchivo = new FileChooser();
-//        selectorArchivo.setTitle("Abrir avatar");
-//        selectorArchivo.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
-//        File ImagenSeleccionada
-//                = selectorArchivo.showOpenDialog(aplicacion.Main.getStage());
-//        if (ImagenSeleccionada != null) {
-//            avatar.setImage(new Image(ImagenSeleccionada.toURI().toString()));
-//        }
-//        System.out.println(ImagenSeleccionada.toURI());
     }
 
+    public void seleccionarAvatar(ActionEvent event) {
+        Button botonSel = (Button) event.getSource();
+        ImageView avatarSel = (ImageView) botonSel.getGraphic();
+        Image archivo = avatarSel.getImage();
+        avatar.setImage(archivo);
+    }
+
+    public void anadirAvatarPersonalizado(ActionEvent event) {
+        FileChooser selectorArchivo = new FileChooser();
+        selectorArchivo.setTitle("Abrir avatar");
+        selectorArchivo.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
+        File ImagenSeleccionada
+                = selectorArchivo.showOpenDialog(aplicacion.Main.getStage());
+        if (ImagenSeleccionada != null) {
+            avatar.setImage(new Image(ImagenSeleccionada.toURI().toString()));
+        }
+    }
+
+    private List<File> recuperarAvataresPorDefecto() throws URISyntaxException {
+        Path pathPackage = new File(Main.class.getResource("/resources/avatars/avatar1.png").toURI()).getParentFile().toPath();
+        File file = new File(pathPackage.toString());
+        String[] s = file.list();
+        Arrays.sort(s);
+        File[] imagenes = new File[s.length];
+        for (int i = 0; i < s.length; i++) {
+            imagenes[i] = new File(Main.class.getResource("/resources/avatars/" + s[i]).toURI());
+        }
+
+        List<File> imagenesDefecto = Arrays.asList(imagenes);
+        return imagenesDefecto;
+    }
 }
