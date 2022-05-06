@@ -126,7 +126,6 @@ public class PantallaPrincipalUsuarioController implements Initializable {
     @FXML
     private void pulsarEditarPerfil(ActionEvent event) throws IOException {
         
-        
         FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/resgistro.fxml"));
         Parent root = miCargador.load();
         
@@ -134,23 +133,17 @@ public class PantallaPrincipalUsuarioController implements Initializable {
         
         controladorRegistro.initEdicion();
         
-        
         Scene escena = new Scene(root, 600, 400);
         Stage escenario = new Stage();
         escenario.setScene(escena);
         escenario.initModality(Modality.APPLICATION_MODAL); // Hacemos que la ventana nueva sea modal
         escenario.showAndWait();
-    
-        
     }
 
     @FXML
     private void pulsarMapa(MouseEvent event) throws IOException {
         FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/cartaNavegacion.fxml"));
         Parent root = miCargador.load();
-        
-        
-        
         Scene escena = new Scene(root, 900, 600);
         Stage escenario = new Stage();
         escenario.setScene(escena);
@@ -158,12 +151,7 @@ public class PantallaPrincipalUsuarioController implements Initializable {
      //   escenario.initModality(Modality.APPLICATION_MODAL); // Hacemos que la ventana nueva sea modal
         escenario.show();
     }
-
-    @FXML
-    private void pulsar(ActionEvent event) {
-    }
-
-        
-
+    
+    
 
 }

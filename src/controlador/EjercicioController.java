@@ -60,7 +60,7 @@ public class EjercicioController implements Initializable {
         modelo.secretario.setTitulo("Ejercicio");
         
         // Recuperacion del problema proporcionado por el secretario
-        problema = modelo.secretario.getProblemas().get(0); // Falta implementar que el secretario proporcione un problema u otro segun la eleccion del usuario
+        problema = modelo.secretario.getProblemas().get(modelo.secretario.getIndiceProblemaSel());
         
         enunciado_textArea.setText(problema.getText());
         respuestasLista = problema.getAnswers();
