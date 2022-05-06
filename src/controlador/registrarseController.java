@@ -104,7 +104,7 @@ public class registrarseController implements Initializable {
     public void initEdicion() { // Invocado desde la pantalla principal de usuario
         // enEdicion = true;
         modelo.secretario.setTitulo("Editar Perfil");
-        etiquetaTitulo.setText("EDITAR PERFIL");
+        titulo.setText("EDITAR PERFIL");
         // System.out.println("Correcto");
         nickName_textfield.setText(modelo.secretario.getUsuario().getNickName());
         // nickName_textfield.setEditable(false);
