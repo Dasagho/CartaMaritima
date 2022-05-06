@@ -82,7 +82,7 @@
    <top>
       <HBox alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="etiquetaTitulo" text="REGISTRARSE" HBox.hgrow="ALWAYS">
+            <Label fx:id="titulo" text="REGISTRARSE" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets />
                </HBox.margin>

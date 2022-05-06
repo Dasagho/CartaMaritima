@@ -114,5 +114,4 @@ public class secretario {
     public static void setTitulo(String titulo) {
         aplicacion.Main.getStage().setTitle("Subnautica" + " - " + titulo);
     }
-
 }

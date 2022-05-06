@@ -9,19 +9,30 @@ import DBAccess.NavegacionDAOException;
 import aplicacion.Main;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
@@ -30,6 +41,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -68,7 +80,7 @@ public class registrarseController implements Initializable {
     @FXML
     private ImageView avatar;
     @FXML
-    private Label etiquetaTitulo;
+    private Label titulo;
 
     // private boolean enEdicion = false;
     /**
@@ -85,13 +97,14 @@ public class registrarseController implements Initializable {
 
         // Diferenciamos pagina de registro de Modificar perfil
         nickName_textfield.disableProperty().bind(secretario.usuarioActivo());
+        titulo.setText(secretario.usuarioActivo().getValue() ? "Modificar Perfil" : "Registrarse");
 
     }
 
     public void initEdicion() { // Invocado desde la pantalla principal de usuario
         // enEdicion = true;
         modelo.secretario.setTitulo("Editar Perfil");
-        etiquetaTitulo.setText("EDITAR PERFIL");
+        titulo.setText("EDITAR PERFIL");
         // System.out.println("Correcto");
         nickName_textfield.setText(modelo.secretario.getUsuario().getNickName());
         // nickName_textfield.setEditable(false);
@@ -106,8 +119,8 @@ public class registrarseController implements Initializable {
     @FXML
     private void cancelar(ActionEvent event) throws IOException {
         if (secretario.usuarioActivo().getValue()) {                // <- Dividimos el comportamiento segun el contexto
-            ((Node)(event.getSource())).getScene().getWindow().hide();
-        
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+
         } else {
             restablecerErrores();
             Main.setRoot("inicioSesion");
@@ -212,15 +225,92 @@ public class registrarseController implements Initializable {
         fecha_error.setText("");
     }
 
+    
+    /** *
+     * Falta por modificar el ultimo avatar que debe ser un icono de añadir tu avatar personalizado
+     * @param event
+     * @throws IOException
+     * @throws URISyntaxException 
+     */
     @FXML
-    private void cambiarAvatar(ActionEvent event) throws IOException {
+    private void cambiarAvatar(ActionEvent event) throws IOException, URISyntaxException {
+        // Recuperamos la lista de los avatares por defecto de /resources
+        List<File> imagenesDefecto = recuperarAvataresPorDefecto();
+
+        // Creamos el container que almacenará los botones de seleccion de avatar
+        GridPane grid = new GridPane();
+        grid.setHgap(5);
+        grid.setVgap(5);
+        grid.setAlignment(Pos.CENTER);
+
+        // Creamos la lista de ImageView en funcion de las imagenes por defecto que tengamos
+        ImageView[] images = new ImageView[imagenesDefecto.size()];
+
+        // Inicializamos los ImageView y les asignamos los avatares por defecto
+        for (int i = 0; i < imagenesDefecto.size(); i++) {
+            images[i] = new ImageView(new Image("file:" + imagenesDefecto.get(i).toString()));
+            images[i].setFitHeight(70);
+            images[i].setFitWidth(70);
+            images[i].setPreserveRatio(true);
+        }
+
+        int col = 0;
+        int fil = 0;
+
+        // Recorremos el grid creando los botones con los ImageView incorporados, además de asignarles su comportamiento
+        for (int i = 0; i < imagenesDefecto.size(); i++) {
+
+            if (col % 3 == 0) {
+                col = 0;
+                fil++;
+            }
+
+            Button boton = new Button();
+            boton.setGraphic(images[i]);
+            boton.setOnAction(col == 2 && fil == 2 ? this::anadirAvatarPersonalizado : this::seleccionarAvatar);
+            grid.add(boton, col, fil);
+
+            col++;
+        }
+
+        // Finalmente creamos la escena y le agregamos dimensiones y el grid
+        Scene nuevaEscena = new Scene(grid, 445, 300);
+        Stage nuevaVentana = new Stage();
+        nuevaVentana.setScene(nuevaEscena);
+
+        nuevaVentana.showAndWait();
+
+    }
+
+    public void seleccionarAvatar(ActionEvent event) {
+        Button botonSel = (Button) event.getSource();
+        ImageView avatarSel = (ImageView) botonSel.getGraphic();
+        Image archivo = avatarSel.getImage();
+        avatar.setImage(archivo);
+    }
+
+    public void anadirAvatarPersonalizado(ActionEvent event) {
         FileChooser selectorArchivo = new FileChooser();
         selectorArchivo.setTitle("Abrir avatar");
         selectorArchivo.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
-        File ImagenSeleccionada = selectorArchivo.showOpenDialog(aplicacion.Main.getStage());
+        File ImagenSeleccionada
+                = selectorArchivo.showOpenDialog(aplicacion.Main.getStage());
         if (ImagenSeleccionada != null) {
             avatar.setImage(new Image(ImagenSeleccionada.toURI().toString()));
         }
     }
 
+    private List<File> recuperarAvataresPorDefecto() throws URISyntaxException {
+        Path pathPackage = new File(Main.class.getResource("/resources/avatars/avatar1.png").toURI()).getParentFile().toPath();
+        File file = new File(pathPackage.toString());
+        String[] s = file.list();
+        Arrays.sort(s);
+        File[] imagenes = new File[s.length];
+        for (int i = 0; i < s.length; i++) {
+            imagenes[i] = new File(Main.class.getResource("/resources/avatars/" + s[i]).toURI());
+        }
+
+        List<File> imagenesDefecto = Arrays.asList(imagenes);
+        return imagenesDefecto;
+    }
 }
