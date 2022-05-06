@@ -178,7 +178,10 @@ public class registrarseController implements Initializable {
                     modelo.secretario.getUsuario().setPassword(contrasena_textfield.getText());
                     modelo.secretario.getUsuario().setBirthdate(datePicker.getValue());
                     modelo.secretario.getUsuario().setAvatar(avatar.getImage());
-                    modelo.secretario.iniciarSesion();
+                    // Procedimiento para cerrar la ventana de edición tras el guardado
+                    Node fuente = (Node) event.getSource();     
+                    Stage escenario = (Stage) fuente.getScene().getWindow();
+                    escenario.close();
 
                 } catch (NavegacionDAOException ex) {
                     Logger.getLogger(registrarseController.class.getName()).log(Level.SEVERE, null, ex);
