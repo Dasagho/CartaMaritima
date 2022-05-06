@@ -147,6 +147,7 @@ public class PantallaPrincipalUsuarioController implements Initializable {
         Scene escena = new Scene(root, 900, 600);
         Stage escenario = new Stage();
         escenario.setScene(escena);
+        escena.getStylesheets().add("/resources/estilos.css");
      //   escenario.setTitle("Editando tu perfil");
      //   escenario.initModality(Modality.APPLICATION_MODAL); // Hacemos que la ventana nueva sea modal
         escenario.show();
