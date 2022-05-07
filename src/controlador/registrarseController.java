@@ -43,6 +43,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import model.User;
@@ -277,7 +278,7 @@ public class registrarseController implements Initializable {
         Scene nuevaEscena = new Scene(grid, 445, 300);
         Stage nuevaVentana = new Stage();
         nuevaVentana.setScene(nuevaEscena);
-
+        nuevaVentana.initModality(Modality.APPLICATION_MODAL);
         nuevaVentana.showAndWait();
 
     }
