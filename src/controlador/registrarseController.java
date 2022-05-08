@@ -286,6 +286,7 @@ public class registrarseController implements Initializable {
         Button botonSel = (Button) event.getSource();
         ImageView avatarSel = (ImageView) botonSel.getGraphic();
         Image archivo = avatarSel.getImage();
+        System.out.println(archivo.getUrl());
         avatar.setImage(archivo);
     }
 
