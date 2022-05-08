@@ -55,17 +55,11 @@ public class PantallaPrincipalUsuarioController implements Initializable {
         imagenPerfil.setImage(modelo.secretario.getUsuario().getAvatar());
         
         // Resumen de historial
-        List<Session> sesiones = modelo.secretario.getUsuario().getSessions();
-        int problemasRealizados = 0;
-        int aciertos = 0;
+        int problemasRealizados = modelo.secretario.getTotalProblemasRealizados();
+        int aciertos = modelo.secretario.getTotalAciertos();
         Float porcentaje;
-        for (int i = 0; i < sesiones.size(); i++){
-            aciertos += sesiones.get(i).getHits();
-            problemasRealizados += (aciertos + sesiones.get(i).getFaults());
-        }
         xRealizados.setText("" + problemasRealizados);
         xAcertados.setText("" + aciertos);
-        
         porcentaje = ((float) aciertos) / ((float) problemasRealizados);
         if (porcentaje.toString() != "NaN"){
             xPorcentaje.setText("" + porcentaje + "%");
@@ -97,7 +91,6 @@ public class PantallaPrincipalUsuarioController implements Initializable {
         }
     }
 
-    
     /**
      * Cambia a la ventana de seleccion de ejercicio
      */
@@ -123,8 +116,8 @@ public class PantallaPrincipalUsuarioController implements Initializable {
             alert.showAndWait();
         }
     }
-    
-    
+
+
     /**
      * Envia los datos del usuario actual a la vista de registro y crea la
      * ventana modal del registro

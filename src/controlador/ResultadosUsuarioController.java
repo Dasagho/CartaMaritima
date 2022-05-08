@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -31,12 +32,14 @@ import modelo.secretario;
 /**
  * FXML Controller class
  *
- * @author david
+ * @author Germán
  */
 public class ResultadosUsuarioController implements Initializable {
 
     @FXML
     private Button pulsarVolver;
+    
+    //DATA PICKERS
     @FXML
     private DatePicker fechaDesde;
     @FXML
@@ -56,8 +59,28 @@ public class ResultadosUsuarioController implements Initializable {
     @FXML
     private TableColumn<SessionWrapper, Integer> columnaFallos;
     
-    //Lista sesiones
+    //LISTA SESIONES (CON CLASE ENVOLTORIO)
     List<SessionWrapper> listaSesionesWrapper;
+    
+    //LABELS MOSTRAR DATOS
+    int actualProblemas, actualAciertos, actualFallos;
+    @FXML
+    private Label totalSesionesID;
+    @FXML
+    private Label totalProblemasID;
+    @FXML
+    private Label totalAciertosID;
+    @FXML
+    private Label totalFallosID;
+    @FXML
+    private Label seleccionadoSesionesID;
+    @FXML
+    private Label seleccionadoProblemasID;
+    @FXML
+    private Label seleccionadoAciertosID;
+    @FXML
+    private Label seleccionadoFallosID;
+    
     
     /**
      * Initializes the controller class.
@@ -66,7 +89,6 @@ public class ResultadosUsuarioController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //PREPARAR LISTA Y LISTA DE SESSIONWRAPPER -------------------------------------
         List<Session> listaSesiones = secretario.getSesiones();
-        
         listaSesionesWrapper = new ArrayList<SessionWrapper>();
         for (int i = 0; i < listaSesiones.size(); i++) {
             SessionWrapper sw = new SessionWrapper(listaSesiones.get(i));
@@ -122,7 +144,6 @@ public class ResultadosUsuarioController implements Initializable {
                 public void updateItem(LocalDate date, boolean empty) {
                     super.updateItem(date, empty);
                     setDisable(empty || date.compareTo(fechaHasta.getValue()) > 0 || date.compareTo(diaPrimeraSesion) < 0);
-                    actualizarLista();
                 }
             };
         });
@@ -134,27 +155,71 @@ public class ResultadosUsuarioController implements Initializable {
                 public void updateItem(LocalDate date, boolean empty) {
                     super.updateItem(date, empty);
                     setDisable(empty || date.compareTo(LocalDate.now()) > 0 || date.compareTo(fechaDesde.getValue()) < 0);
-                    actualizarLista();
                 }
             };
         });
         //--------------------------------------------------------------------------------------
-        actualizarLista();
-        
+        actualizarListaYDatos();
+        actualizarDatosTotales();
+        actualizarDatosSeleccionados();
+    }
+    
+    @FXML
+    private void dataPickerCambiado(ActionEvent event) {
+        actualizarListaYDatos();
+        actualizarDatosSeleccionados();
     }
     
     //GESTIONAR LISTA ----------------------------
-    private void actualizarLista() {
+    private void actualizarListaYDatos() {
+        int aciertos;
+        int fallos;
+        int problemas;
+        
+        actualProblemas = 0;
+        actualAciertos = 0;
+        actualFallos = 0;
+        
         LocalDate fechaDesdeDia = fechaDesde.getValue();
         LocalDate fechaHastaDia = fechaHasta.getValue();
+
         tabla.getItems().clear();
-        for (int i = 0; i < listaSesionesWrapper.size(); i++) {
+        
+        for (int i = listaSesionesWrapper.size()-1; i >= 0 ; i--) {
             SessionWrapper s = listaSesionesWrapper.get(i);
             LocalDate l = s.getLocalDate();
             if (l.compareTo(fechaDesdeDia) >= 0 && l.compareTo(fechaHastaDia) <= 0) {
                 tabla.getItems().add(s);
+                aciertos = s.AciertosProperty().getValue(); 
+                fallos = s.FallosProperty().getValue();
+                problemas = s.ProblemasProperty().getValue();
+                actualAciertos += aciertos;
+                actualFallos += fallos;
+                actualProblemas += problemas;
             }
         }
+    }
+    
+    private void actualizarDatosTotales() {
+        String strSesiones = String.valueOf(listaSesionesWrapper.size());
+        String strProblemas = String.valueOf(secretario.getTotalProblemasRealizados());
+        String strAciertos = String.valueOf(secretario.getTotalAciertos());
+        String strFallos = String.valueOf(secretario.getTotalFallos());
+        totalSesionesID.setText(strSesiones);
+        totalProblemasID.setText(strProblemas);
+        totalAciertosID.setText(strAciertos);
+        totalFallosID.setText(strFallos);
+    }
+    
+    private void actualizarDatosSeleccionados() {
+        String strSesiones = String.valueOf(tabla.getItems().size());
+        String strProblemas = String.valueOf(actualProblemas);
+        String strAciertos = String.valueOf(actualAciertos);
+        String strFallos = String.valueOf(actualFallos);
+        seleccionadoSesionesID.setText(strSesiones);
+        seleccionadoProblemasID.setText(strProblemas);
+        seleccionadoAciertosID.setText(strAciertos);
+        seleccionadoFallosID.setText(strFallos);
     }
     
     //BOTON VOLVER ---------------------------
