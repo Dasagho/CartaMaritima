@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.paint.Paint;
 import model.Answer;
 import model.Problem;
 
@@ -43,34 +44,37 @@ public class EjercicioController implements Initializable {
     private RadioButton resp4_radioButton;
     @FXML
     private Button volver_Button;
+    @FXML
+    private Button confirmar_Button;
 
     private Problem problema;
     private List respuestasLista;
+    private Object[] respuestaArray;
 
     /**
      * Initializes the controller class.
      */
     @Override
+    @SuppressWarnings("empty-statement")
     public void initialize(URL url, ResourceBundle rb) {
 
         // Inicializacion del Singleton a traves del modelo secretario
         // modelo.secretario.initialize();
-
         // Nombramiento de la ventana
         modelo.secretario.setTitulo("Ejercicio");
-        
+
         // Recuperacion del problema proporcionado por el secretario
         problema = modelo.secretario.getProblemas().get(modelo.secretario.getIndiceProblemaSel());
-        
+
         enunciado_textArea.setText(problema.getText());
         respuestasLista = problema.getAnswers();
 
         // Tratamiento de las respuestas para pintarlas por pantalla
-        Object[] r = respuestasLista.toArray();
+        respuestaArray = respuestasLista.toArray();
         RadioButton[] radiob = {resp1_radioButton, resp2_radioButton, resp3_radioButton, resp4_radioButton};
 
-        for (int i = 0; i < r.length; i++) {
-            radiob[i].setText(((Answer) r[i]).getText());
+        for (int i = 0; i < respuestaArray.length; i++) {
+            radiob[i].setText(((Answer) respuestaArray[i]).getText());
         }
     }
 
@@ -101,24 +105,28 @@ public class EjercicioController implements Initializable {
                 case "resp1_radioButton":
                     respuestaCorrecta = ((Answer) respuestasLista.get(0)).getValidity();
                     break;
-                    
+
                 case "resp2_radioButton":
                     respuestaCorrecta = ((Answer) respuestasLista.get(1)).getValidity();
                     break;
-                    
+
                 case "resp3_radioButton":
                     respuestaCorrecta = ((Answer) respuestasLista.get(2)).getValidity();
                     break;
-                    
+
                 case "resp4_radioButton":
                     respuestaCorrecta = ((Answer) respuestasLista.get(3)).getValidity();
                     break;
             }
 
             System.out.println(respuestaCorrecta ? "has acertado" : "has fallado");     // falta pulir
-            
-            if (respuestaCorrecta) modelo.secretario.sumarAcierto(); else modelo.secretario.sumarFallo();
 
+            if (respuestaCorrecta) {
+                modelo.secretario.sumarAcierto();
+            } else {
+                modelo.secretario.sumarFallo();
+            }
+            mostrarResultados(respuestaCorrecta, seleccionado);
             volver_Button.setText("volver");
             volver_Button.setOnAction(this::volver);
         }
@@ -133,6 +141,15 @@ public class EjercicioController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(EjercicioController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void mostrarResultados(Boolean acertado, RadioButton radioButton) {
+        RadioButton[] radiob = {resp1_radioButton, resp2_radioButton, resp3_radioButton, resp4_radioButton};
+        radioButton.setTextFill(Paint.valueOf(acertado ? "green" : "red"));
+        for (RadioButton rb : radiob) {
+            rb.setDisable(true);
+        }
+        confirmar_Button.setDisable(true);
     }
 
 }
