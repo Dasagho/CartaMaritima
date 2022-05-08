@@ -286,8 +286,9 @@ public class registrarseController implements Initializable {
         Button botonSel = (Button) event.getSource();
         ImageView avatarSel = (ImageView) botonSel.getGraphic();
         Image archivo = avatarSel.getImage();
-        System.out.println(archivo.getUrl());
+        // System.out.println(archivo.getUrl());
         avatar.setImage(archivo);
+        ((Button)event.getSource()).getScene().getWindow().hide();
     }
 
     public void anadirAvatarPersonalizado(ActionEvent event) {
@@ -298,6 +299,7 @@ public class registrarseController implements Initializable {
                 = selectorArchivo.showOpenDialog(aplicacion.Main.getStage());
         if (ImagenSeleccionada != null) {
             avatar.setImage(new Image(ImagenSeleccionada.toURI().toString()));
+            ((Button)event.getSource()).getScene().getWindow().hide();
         }
     }
 

@@ -116,6 +116,8 @@ public class EjercicioController implements Initializable {
             }
 
             System.out.println(respuestaCorrecta ? "has acertado" : "has fallado");     // falta pulir
+            
+            if (respuestaCorrecta) modelo.secretario.sumarAcierto(); else modelo.secretario.sumarFallo();
 
             volver_Button.setText("volver");
             volver_Button.setOnAction(this::volver);
