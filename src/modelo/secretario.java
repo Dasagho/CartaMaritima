@@ -43,6 +43,14 @@ public class secretario {
     
     
 // - - - - - Métodos de sesión - - - - - - - - -
+    
+    public static boolean tieneSesiones() {
+        return !getSesiones().isEmpty();
+    }
+    public static List<Session> getSesiones() {
+        return usuario.getSessions();
+    }
+    
     public static void iniciarSesion(){
         fotoTemporal = now();
     }
@@ -58,6 +66,17 @@ public class secretario {
         try {
             usuario.addSession(s);
             usuarioActivado.setValue(Boolean.FALSE);    // <- Aviso de que ya no hay un usuario activo
+            
+        } catch (NavegacionDAOException ex) {
+            System.out.println("No ha sido posible conectarse a la base de datos");
+            ex.printStackTrace();
+        }
+    }
+    
+    public static void anadirSesion(LocalDateTime l, int ac, int fa){
+        Session s = new Session(l, ac, fa);
+        try {
+            usuario.addSession(s);
             
         } catch (NavegacionDAOException ex) {
             System.out.println("No ha sido posible conectarse a la base de datos");

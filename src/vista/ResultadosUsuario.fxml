@@ -33,7 +33,7 @@
    <bottom>
       <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Volver" />
+            <Button fx:id="pulsarVolver" mnemonicParsing="false" onAction="#pulsarVolver" text="Volver" />
          </children>
          <padding>
             <Insets left="30.0" />
@@ -57,14 +57,14 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Desde el dia" />
-                              <Label text="Hasta el dia" GridPane.rowIndex="1" />
-                              <DatePicker GridPane.columnIndex="1">
+                              <Label text="Desde el día" />
+                              <Label text="Hasta el día" GridPane.rowIndex="1" />
+                              <DatePicker fx:id="fechaDesde" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets left="20.0" right="20.0" />
                                  </GridPane.margin>
                               </DatePicker>
-                              <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <DatePicker fx:id="fechaHasta" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets left="20.0" right="20.0" />
                                  </GridPane.margin>
@@ -73,11 +73,17 @@
                         </GridPane>
                      </children>
                   </HBox>
-                  <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="tabla" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="columnaDia" prefWidth="94.0" text="Día" />
+                      <TableColumn fx:id="columnaHora" prefWidth="68.0" text="Hora" />
+                        <TableColumn fx:id="columnaProblemas" prefWidth="77.0" text="Problemas" />
+                        <TableColumn fx:id="columnaAciertos" minWidth="0.0" prefWidth="61.0" text="Aciertos" />
+                        <TableColumn fx:id="columnaFallos" prefWidth="81.0" text="Fallos" />
                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
                </children>
             </VBox>

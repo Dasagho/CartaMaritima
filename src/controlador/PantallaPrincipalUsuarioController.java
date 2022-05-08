@@ -95,8 +95,6 @@ public class PantallaPrincipalUsuarioController implements Initializable {
             modelo.secretario.cerrarSesion();
             setRoot("inicioSesion");
         }
-        
-        
     }
 
     
@@ -115,7 +113,15 @@ public class PantallaPrincipalUsuarioController implements Initializable {
      */
     @FXML
     private void pulsarVerResultados(ActionEvent event) throws IOException {
-        setRoot("ResultadosUsuario");
+        if (modelo.secretario.tieneSesiones())
+            setRoot("ResultadosUsuario");
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Ver Resultados");
+            alert.setHeaderText("No es posible ver resultados");
+            alert.setContentText("Este usuario no tiene sesiones guardadas actualmente, así que no se pueden ver los resultados.");
+            alert.showAndWait();
+        }
     }
     
     
