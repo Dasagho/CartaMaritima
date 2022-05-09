@@ -231,12 +231,15 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <BarChart prefHeight="140.0" prefWidth="462.0" titleSide="BOTTOM" VBox.vgrow="ALWAYS">
+                  <BarChart fx:id="grafico" animated="false" prefHeight="257.0" prefWidth="417.0" stylesheets="@../resources/estilo_grafico.css" title="Aciertos y fallos por sesiones" VBox.vgrow="ALWAYS">
                     <xAxis>
-                      <CategoryAxis side="BOTTOM" />
+                      <CategoryAxis animated="false" label="Sesiones" side="BOTTOM" />
                     </xAxis>
                     <yAxis>
-                      <NumberAxis prefHeight="234.0" prefWidth="14.0" side="LEFT" />
+                      <NumberAxis animated="false" minorTickCount="2" prefHeight="216.0" prefWidth="41.0" side="LEFT" upperBound="5.0">
+                           <tickLabelFont>
+                              <Font size="12.0" />
+                           </tickLabelFont></NumberAxis>
                     </yAxis>
                   </BarChart>
                </children>

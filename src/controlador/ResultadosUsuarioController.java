@@ -18,6 +18,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -44,6 +46,10 @@ public class ResultadosUsuarioController implements Initializable {
     private DatePicker fechaDesde;
     @FXML
     private DatePicker fechaHasta;
+    
+    //FORMATOS FECHA Y HORA
+    DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm:ss");
     
     //TABLA PRINCIPAL Y COLUMNAS
     @FXML
@@ -80,13 +86,24 @@ public class ResultadosUsuarioController implements Initializable {
     private Label seleccionadoAciertosID;
     @FXML
     private Label seleccionadoFallosID;
-    
+
+    //GRAFICO 
+    @FXML
+    private BarChart<SessionWrapper, Integer> grafico;
+    private XYChart.Series serieAciertos;
+    private XYChart.Series serieFallos;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        serieAciertos = new XYChart.Series();
+        serieFallos = new XYChart.Series();
+        serieAciertos.setName("Aciertos");
+        serieFallos.setName("Fallos");
+        
         //PREPARAR LISTA Y LISTA DE SESSIONWRAPPER -------------------------------------
         List<Session> listaSesiones = secretario.getSesiones();
         listaSesionesWrapper = new ArrayList<SessionWrapper>();
@@ -96,7 +113,6 @@ public class ResultadosUsuarioController implements Initializable {
         }
         
         //PREPARAR COLUMNAS TABLE VIEW -------------------------------------
-        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         columnaDia.setCellValueFactory(cellData -> cellData.getValue().FechaProperty()); 
         columnaDia.setCellFactory(columna -> {
             return new TableCell<SessionWrapper,LocalDate> () {
@@ -110,7 +126,6 @@ public class ResultadosUsuarioController implements Initializable {
                 }
             };
         });
-        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm:ss");
         columnaHora.setCellValueFactory(cellData -> cellData.getValue().HoraProperty());
         columnaHora.setCellFactory(columna -> {
             return new TableCell<SessionWrapper,LocalTime> () {
@@ -160,6 +175,7 @@ public class ResultadosUsuarioController implements Initializable {
         });
         //--------------------------------------------------------------------------------------
         actualizarListaYDatos();
+        rellenarDatosGrafica();
         actualizarDatosTotales();
         actualizarDatosSeleccionados();
     }
@@ -167,6 +183,7 @@ public class ResultadosUsuarioController implements Initializable {
     @FXML
     private void dataPickerCambiado(ActionEvent event) {
         actualizarListaYDatos();
+        rellenarDatosGrafica();
         actualizarDatosSeleccionados();
     }
     
@@ -185,11 +202,14 @@ public class ResultadosUsuarioController implements Initializable {
 
         tabla.getItems().clear();
         
-        for (int i = listaSesionesWrapper.size()-1; i >= 0 ; i--) {
+        for (int i = 0; i < listaSesionesWrapper.size() ; i++) {
             SessionWrapper s = listaSesionesWrapper.get(i);
             LocalDate l = s.getLocalDate();
+            //Si la sesión entra en las fechas indiadas
             if (l.compareTo(fechaDesdeDia) >= 0 && l.compareTo(fechaHastaDia) <= 0) {
+                //Añadimos a la tabla
                 tabla.getItems().add(s);
+                //Cambiamos datos a mostrar
                 aciertos = s.AciertosProperty().getValue(); 
                 fallos = s.FallosProperty().getValue();
                 problemas = s.ProblemasProperty().getValue();
@@ -200,6 +220,31 @@ public class ResultadosUsuarioController implements Initializable {
         }
     }
     
+    private void rellenarDatosGrafica() {
+        int maximoY = 0;
+        int aciertos = 0;
+        int fallos = 0;
+        grafico.getData().clear();
+        serieAciertos.getData().clear();
+        serieFallos.getData().clear();
+        for (int i = 0; i < tabla.getItems().size() ; i++) {
+            SessionWrapper s = tabla.getItems().get(i);
+            aciertos = s.AciertosProperty().getValue();
+            fallos = s.FallosProperty().getValue();
+            serieAciertos.getData().add(new XYChart.Data("Sesión del día\n" + formatoFecha.format(s.getLocalDate()) + "\n"+ formatoHora.format((LocalTime)s.HoraProperty().getValue()), aciertos));
+            serieFallos.getData().add(new XYChart.Data("Sesión del día\n" + formatoFecha.format(s.getLocalDate()) + "\n"+ formatoHora.format((LocalTime)s.HoraProperty().getValue()), fallos));
+            if (aciertos > maximoY){
+                maximoY = aciertos;
+            }
+            if (fallos > maximoY) {
+                maximoY = fallos;
+            }
+        }
+        grafico.getData().add(serieAciertos);
+        grafico.getData().add(serieFallos);
+    }
+    
+    //ACTUALIZAR VISUALIZACION DE DATOS TOTALES Y DE FECHAS SELECCIONADAS -------------------------
     private void actualizarDatosTotales() {
         String strSesiones = String.valueOf(listaSesionesWrapper.size());
         String strProblemas = String.valueOf(secretario.getTotalProblemasRealizados());
