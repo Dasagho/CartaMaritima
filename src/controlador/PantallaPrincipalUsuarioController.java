@@ -142,7 +142,7 @@ public class PantallaPrincipalUsuarioController implements Initializable {
 
     @FXML
     private void pulsarMapa(MouseEvent event) throws IOException {
-        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/cartaNavegacion.fxml"));
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/FXMLCartaNavegacion.fxml"));
         Parent root = miCargador.load();
         Scene escena = new Scene(root, 900, 600);
         Stage escenario = new Stage();
