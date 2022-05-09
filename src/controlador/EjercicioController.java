@@ -14,12 +14,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 import model.Answer;
 import model.Problem;
 
@@ -130,6 +134,18 @@ public class EjercicioController implements Initializable {
             volver_Button.setText("volver");
             volver_Button.setOnAction(this::volver);
         }
+    }
+
+    @FXML
+    private void mostrarCarta(ActionEvent event) throws IOException {
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/cartaNavegacion.fxml"));
+        Parent root = miCargador.load();
+        Scene escena = new Scene(root, 900, 600);
+        Stage escenario = new Stage();
+        escenario.setScene(escena);
+        escena.getStylesheets().add("/resources/estilos.css");
+        escenario.setTitle("Carta Nautica");
+        escenario.show();
     }
 
     /**
