@@ -27,7 +27,9 @@ import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -41,7 +43,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -179,6 +183,7 @@ public class registrarseController implements Initializable {
                     modelo.secretario.getUsuario().setBirthdate(datePicker.getValue());
                     modelo.secretario.getUsuario().setAvatar(avatar.getImage());
                     modelo.secretario.iniciarSesion();
+                    ((Button) event.getSource()).getScene().getWindow().hide();
 
                 } catch (NavegacionDAOException ex) {
                     Logger.getLogger(registrarseController.class.getName()).log(Level.SEVERE, null, ex);
@@ -239,9 +244,7 @@ public class registrarseController implements Initializable {
 
         // Creamos el container que almacenará los botones de seleccion de avatar
         GridPane grid = new GridPane();
-        grid.setHgap(5);
-        grid.setVgap(5);
-        grid.setAlignment(Pos.CENTER);
+        
 
         // Creamos la lista de ImageView en funcion de las imagenes por defecto que tengamos
         ImageView[] images = new ImageView[imagenesDefecto.size()];
@@ -249,6 +252,7 @@ public class registrarseController implements Initializable {
         // Inicializamos los ImageView y les asignamos los avatares por defecto
         for (int i = 0; i < imagenesDefecto.size(); i++) {
             images[i] = new ImageView(new Image("file:" + imagenesDefecto.get(i).toString()));
+            System.out.println("file:" + imagenesDefecto.get(i).toString());
             images[i].setFitHeight(70);
             images[i].setFitWidth(70);
             images[i].setPreserveRatio(true);
@@ -269,12 +273,21 @@ public class registrarseController implements Initializable {
             boton.setGraphic(images[i]);
             boton.setOnAction(col == 2 && fil == 2 ? this::anadirAvatarPersonalizado : this::seleccionarAvatar);
             grid.add(boton, col, fil);
+            grid.setHalignment(boton, HPos.CENTER);
 
             col++;
         }
 
+        grid.setHgap(5);
+        grid.setVgap(5);
+        grid.setAlignment(Pos.CENTER);
+        // for (ColumnConstraints cc : grid.getColumnConstraints()) cc.setHalignment(HPos.CENTER);
+        grid.styleProperty().setValue("-fx-background-color: #123456");
+        
+        // for (RowConstraints rc : grid.getRowConstraints()) rc.setValignment(VPos.CENTER);
+        
         // Finalmente creamos la escena y le agregamos dimensiones y el grid
-        Scene nuevaEscena = new Scene(grid, 445, 300);
+        Scene nuevaEscena = new Scene(grid, 300, 200);
         Stage nuevaVentana = new Stage();
         nuevaVentana.setScene(nuevaEscena);
 
@@ -286,7 +299,9 @@ public class registrarseController implements Initializable {
         Button botonSel = (Button) event.getSource();
         ImageView avatarSel = (ImageView) botonSel.getGraphic();
         Image archivo = avatarSel.getImage();
+        // System.out.println(archivo.getUrl());
         avatar.setImage(archivo);
+        ((Button)event.getSource()).getScene().getWindow().hide();
     }
 
     public void anadirAvatarPersonalizado(ActionEvent event) {
@@ -297,6 +312,7 @@ public class registrarseController implements Initializable {
                 = selectorArchivo.showOpenDialog(aplicacion.Main.getStage());
         if (ImagenSeleccionada != null) {
             avatar.setImage(new Image(ImagenSeleccionada.toURI().toString()));
+            ((Button)event.getSource()).getScene().getWindow().hide();
         }
     }
 

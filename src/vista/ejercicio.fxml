@@ -20,7 +20,7 @@
          <children>
             <Button fx:id="volver_Button" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
             <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <Button defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#confirmar" text="Confirmar" />
+            <Button fx:id="confirmar_Button" defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#confirmar" text="Confirmar" />
          </children>
          <padding>
             <Insets left="20.0" right="20.0" />
@@ -90,7 +90,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Button mnemonicParsing="false">
+                  <Button mnemonicParsing="false" onAction="#mostrarCarta">
                      <graphic>
                         <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                            <image>
