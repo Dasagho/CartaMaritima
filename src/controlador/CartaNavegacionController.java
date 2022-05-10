@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package poiupv;
+package controlador;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -71,6 +71,7 @@ public class CartaNavegacionController implements Initializable{
     //MARCAS
     TextField texto;
     Line linea;
+    Line lineaHorizontal, lineaVertical;
     Circle circulo;
     double inicioXArc;
     boolean textoCreado = false;
@@ -92,12 +93,15 @@ public class CartaNavegacionController implements Initializable{
     private Button lineaBoton;
     @FXML
     private Button panearBoton;
-    
+    @FXML
+    private Button extremosBoton;
+        
     //INSPECTOR
     @FXML
     private Slider sliderInspector;
     @FXML
     private ColorPicker colorInspector;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -228,23 +232,25 @@ public class CartaNavegacionController implements Initializable{
     //PULSAR EN EL MAPA Y CREAR MARCAS -----------------------------------
     @FXML
     private void ratonPulsadoMapa(MouseEvent event) {
+        //Si ya hay alguna caja de texto que se había dejado sin confirmar, llamamos al evento para crear el texto
         if (textoCreado) {
                 crearTexto(new ActionEvent());
                 return;
         }
+        //Si pulsas el botón princpipal del ratón
         if (event.getButton() == MouseButton.PRIMARY){
             if (tipoMarcaActual == textoBoton) {
-                    //Si está seleccionada texto, creo un TextField y lo pinta con los datos leídos del inspector
-                    texto = new TextField();
-                    zoomGroupMarcas.getChildren().add(texto);
-                    texto.setLayoutX(event.getX());
-                    texto.setLayoutY(event.getY());
-                    Font nuevaFuente = Font.font(3*sliderInspector.getValue());
-                    texto.setFont(nuevaFuente);
-                    texto.requestFocus();
-                    texto.setOnAction(this::crearTexto);
-                    textoCreado = true;
-                    event.consume();
+                //Si está seleccionada texto, creo un TextField y lo pinta con los datos leídos del inspector
+                texto = new TextField();
+                zoomGroupMarcas.getChildren().add(texto);
+                texto.setLayoutX(event.getX());
+                texto.setLayoutY(event.getY());
+                Font nuevaFuente = Font.font(3*sliderInspector.getValue());
+                texto.setFont(nuevaFuente);
+                texto.requestFocus();
+                texto.setOnAction(this::crearTexto);
+                textoCreado = true;
+                event.consume();
             } else if (tipoMarcaActual == puntoBoton) {
                 //Si está seleccionado el punto, creo un punto y lo pinta con los datos leídos del inspector
                 Circle punto = new Circle(1);
@@ -274,6 +280,21 @@ public class CartaNavegacionController implements Initializable{
                 circulo.setCenterX(event.getX());
                 circulo.setCenterY(event.getY());
                 inicioXArc = event.getX();
+                event.consume();
+            } else if (tipoMarcaActual == extremosBoton){
+                //Si está seleccionada la herramiento de extremos, dibuja una línea 
+                //en horizontal y otra en vertical que se cruzan en el punto seleccionado, con los datos del inspector
+                ImageView im = (ImageView) event.getSource();
+                lineaHorizontal = new Line(0,event.getY(),im.getBoundsInLocal().getMaxX(),event.getY());
+                lineaVertical = new Line(event.getX(),0,event.getX(),im.getBoundsInLocal().getMaxY());
+                aplicarValoresLinea(lineaHorizontal);
+                aplicarValoresLinea(lineaVertical);
+                zoomGroupMarcas.getChildren().add(lineaHorizontal);
+                zoomGroupMarcas.getChildren().add(lineaVertical);
+                lineaHorizontal.setOnContextMenuRequested(this::crearMenuContextual);
+                lineaHorizontal.setOnMousePressed(this::seleccionarElemento);
+                lineaVertical.setOnContextMenuRequested(this::crearMenuContextual);
+                lineaVertical.setOnMousePressed(this::seleccionarElemento);
                 event.consume();
             }
         }
