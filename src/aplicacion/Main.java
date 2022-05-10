@@ -67,6 +67,9 @@ public class Main extends Application {
                         modelo.secretario.cerrarSesion();
                         Platform.exit();
                         System.exit(0);
+                        
+                    } else {
+                        e.consume();
                     }
                 }
 

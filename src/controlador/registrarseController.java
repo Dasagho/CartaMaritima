@@ -24,6 +24,11 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,6 +54,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Duration;
 import model.User;
 import static model.User.checkNickName;
 import static model.User.checkPassword;
@@ -85,6 +91,16 @@ public class registrarseController implements Initializable {
     private ImageView avatar;
     @FXML
     private Label titulo;
+    @FXML
+    private Label nombre_label;
+    @FXML
+    private Label correo_label;
+    @FXML
+    private Label contrasena_label;
+    @FXML
+    private Label confirmar_label;
+    @FXML
+    private Label fecha_label;
 
     // private boolean enEdicion = false;
     /**
@@ -102,6 +118,20 @@ public class registrarseController implements Initializable {
         // Diferenciamos pagina de registro de Modificar perfil
         nickName_textfield.disableProperty().bind(secretario.usuarioActivo());
         titulo.setText(secretario.usuarioActivo().getValue() ? "Modificar Perfil" : "Registrarse");
+        
+        // Animaciones de los campos de texto
+        // nombre_label.visibleProperty().bind(nickName_textfield.focusedProperty());
+        // correo_label.visibleProperty().bind(email_textfield.focusedProperty());
+        // contrasena_label.visibleProperty().bind(contrasena_textfield.focusedProperty());
+        // confirmar_label.visibleProperty().bind(confirmacion_textfield.focusedProperty());
+        // fecha_label.visibleProperty().bind(datePicker.focusedProperty());
+        
+        
+        nickName_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { animacion(newVal, nombre_label); });
+        email_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { animacion(newVal, correo_label); });
+        contrasena_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { animacion(newVal, contrasena_label); });
+        confirmacion_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { animacion(newVal, confirmar_label); });
+        datePicker.focusedProperty().addListener((obs, oldVal, newVal) -> { animacion(newVal, fecha_label); });
 
     }
 
@@ -328,5 +358,36 @@ public class registrarseController implements Initializable {
 
         List<File> imagenesDefecto = Arrays.asList(imagenes);
         return imagenesDefecto;
+    }
+
+    public void animacion(Boolean newVal, Node nodo) {
+        if (newVal) {
+                nodo.setVisible(true);
+                TranslateTransition translateTransition = new TranslateTransition(Duration.millis(200), nodo);
+                translateTransition.setFromY(15.0);
+                translateTransition.setToY(0);
+                
+                
+                ParallelTransition parallelTransition = new ParallelTransition();
+                parallelTransition.getChildren().addAll(translateTransition);
+                
+                parallelTransition.play();
+                
+            } else {
+                
+                TranslateTransition translateTransition = new TranslateTransition(Duration.millis(200), nodo);
+                translateTransition.setFromY(0.0);
+                translateTransition.setToY(15.0);
+                
+                FadeTransition fadeTransition = new FadeTransition(Duration.millis(200), nodo);
+                fadeTransition.setByValue(0);
+                fadeTransition.setToValue(1);
+                
+                ParallelTransition parallelTransition = new ParallelTransition();
+                parallelTransition.getChildren().addAll(translateTransition);
+                
+                parallelTransition.play();
+                
+            }
     }
 }
