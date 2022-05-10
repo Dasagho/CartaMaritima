@@ -49,6 +49,12 @@ public class InicioSesionController implements Initializable {
     private Label contrasena_error;
     @FXML
     private Button btn;
+    @FXML
+    private Label hasOlvidadoContrasena;
+    @FXML
+    private Label nombreUsuario_label;
+    @FXML
+    private Label contrasena_label;
 
     /**
      * Initializes the controller class.
@@ -68,6 +74,8 @@ public class InicioSesionController implements Initializable {
                 .then("")
                 .otherwise("-fx-border-color: #F31226"));
 
+        email_textField.focusedProperty().addListener((obs, oldVal, newVal) -> {modelo.secretario.animacion(newVal, nombreUsuario_label);});
+        contrasena_textField.focusedProperty().addListener((obs, oldVal, newVal) -> {modelo.secretario.animacion(newVal, contrasena_label);});
     }
 
     /**
@@ -107,6 +115,7 @@ public class InicioSesionController implements Initializable {
             contrasena_error.setText("La contraseña introducida no pertenece a este usuario, intentalo de nuevo con otra contraseña");
             contrasena_textField.setText("");
             contrasena_textField.requestFocus();
+            hasOlvidadoContrasena.setVisible(true);
             return;
         }
 

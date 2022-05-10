@@ -129,11 +129,11 @@ public class registrarseController implements Initializable {
         // fecha_label.visibleProperty().bind(datePicker.focusedProperty());
         
         
-        nickName_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { animacion(newVal, nombre_label); });
-        email_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { animacion(newVal, correo_label); });
-        contrasena_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { animacion(newVal, contrasena_label); });
-        confirmacion_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { animacion(newVal, confirmar_label); });
-        datePicker.focusedProperty().addListener((obs, oldVal, newVal) -> { animacion(newVal, fecha_label); });
+        nickName_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { modelo.secretario.animacion(newVal, nombre_label); });
+        email_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { modelo.secretario.animacion(newVal, correo_label); });
+        contrasena_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { modelo.secretario.animacion(newVal, contrasena_label); });
+        confirmacion_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { modelo.secretario.animacion(newVal, confirmar_label); });
+        datePicker.focusedProperty().addListener((obs, oldVal, newVal) -> { modelo.secretario.animacion(newVal, fecha_label); });
            
         
     }
@@ -363,34 +363,5 @@ public class registrarseController implements Initializable {
         return imagenesDefecto;
     }
 
-    public void animacion(Boolean newVal, Node nodo) {
-        if (newVal) {
-                nodo.setVisible(true);
-                TranslateTransition translateTransition = new TranslateTransition(Duration.millis(200), nodo);
-                translateTransition.setFromY(15.0);
-                translateTransition.setToY(0);
-                
-                
-                ParallelTransition parallelTransition = new ParallelTransition();
-                parallelTransition.getChildren().addAll(translateTransition);
-                
-                parallelTransition.play();
-                
-            } else {
-                
-                TranslateTransition translateTransition = new TranslateTransition(Duration.millis(200), nodo);
-                translateTransition.setFromY(0.0);
-                translateTransition.setToY(15.0);
-                
-                FadeTransition fadeTransition = new FadeTransition(Duration.millis(200), nodo);
-                fadeTransition.setByValue(0);
-                fadeTransition.setToValue(1);
-                
-                ParallelTransition parallelTransition = new ParallelTransition();
-                parallelTransition.getChildren().addAll(translateTransition);
-                
-                parallelTransition.play();
-                
-            }
-    }
+    
 }

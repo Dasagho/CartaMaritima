@@ -35,12 +35,16 @@
          <children>
             <VBox alignment="CENTER" GridPane.columnSpan="2147483647">
                <children>
-                  <Label fx:id="nombre_label" text="Nombre de usuario">
-                     <font>
-                        <Font name="System Bold" size="11.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="nickName_textfield" maxWidth="-Infinity" prefWidth="300.0" promptText="usuario123" />
+                  <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="300.0">
+                     <children>
+                        <Label fx:id="nombre_label" text="Nombre de usuario">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="nickName_textfield" maxWidth="-Infinity" prefWidth="300.0" promptText="usuario123" />
+                     </children>
+                  </VBox>
                   <Label fx:id="nickName_error" alignment="CENTER" prefHeight="120.0" prefWidth="580.0" textAlignment="CENTER" textFill="RED" wrapText="true">
                      <VBox.margin>
                         <Insets />
@@ -50,45 +54,61 @@
             </VBox>
             <VBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="correo_label" text="Correo Electronico">
-                     <font>
-                        <Font name="System Bold" size="11.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="email_textfield" maxWidth="-Infinity" prefWidth="300.0" promptText="usuario@dominio.com" />
+                  <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="300.0">
+                     <children>
+                        <Label fx:id="correo_label" text="Correo Electronico">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="email_textfield" maxWidth="-Infinity" prefWidth="300.0" promptText="usuario@dominio.com" />
+                     </children>
+                  </VBox>
                   <Label fx:id="email_error" alignment="CENTER" prefHeight="80.0" prefWidth="600.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
                </children>
             </VBox>
             <VBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
                <children>
-                  <Label fx:id="contrasena_label" text="Contraseña">
-                     <font>
-                        <Font name="System Bold" size="11.0" />
-                     </font>
-                  </Label>
-                  <PasswordField fx:id="contrasena_textfield" maxWidth="-Infinity" prefWidth="300.0" promptText="Pass123+" />
+                  <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="300.0">
+                     <children>
+                        <Label fx:id="contrasena_label" text="Contraseña">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <PasswordField fx:id="contrasena_textfield" maxWidth="-Infinity" prefWidth="300.0" promptText="Pass123+" />
+                     </children>
+                  </VBox>
                   <Label fx:id="contrasena_error" alignment="CENTER" ellipsisString="......." prefHeight="80.0" textAlignment="CENTER" textFill="RED" />
                </children>
             </VBox>
             <VBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
                <children>
-                  <Label fx:id="confirmar_label" text="Confirmar Contraseña">
-                     <font>
-                        <Font name="System Bold" size="11.0" />
-                     </font>
-                  </Label>
-                  <PasswordField fx:id="confirmacion_textfield" maxWidth="-Infinity" prefWidth="300.0" />
+                  <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="300.0">
+                     <children>
+                        <Label fx:id="confirmar_label" text="Confirmar Contraseña">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <PasswordField fx:id="confirmacion_textfield" maxWidth="-Infinity" prefWidth="300.0" />
+                     </children>
+                  </VBox>
                   <Label fx:id="confirmacion_error" alignment="CENTER" prefHeight="80.0" prefWidth="600.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
                </children>
             </VBox>
             <VBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
                <children>
-                  <Label fx:id="fecha_label" minWidth="-Infinity" prefHeight="10.0" prefWidth="154.0" text="Fecha de Nacimiento">
-                     <font>
-                        <Font name="System Bold" size="11.0" />
-                     </font>
-                  </Label>
-                  <DatePicker fx:id="datePicker" editable="false" showWeekNumbers="true" />
+                  <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="300.0">
+                     <children>
+                        <Label fx:id="fecha_label" minWidth="-Infinity" prefHeight="10.0" prefWidth="154.0" text="Fecha de Nacimiento">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="datePicker" editable="false" prefHeight="24.0" prefWidth="300.0" showWeekNumbers="true" />
+                     </children>
+                  </VBox>
                   <Label fx:id="fecha_error" alignment="CENTER" prefHeight="80.0" prefWidth="600.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
                </children>
             </VBox>

@@ -67,12 +67,21 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="email_textField" maxWidth="-Infinity" prefWidth="300.0" promptText="Nombre de usuario" />
+            <VBox alignment="TOP_CENTER">
+               <children>
+                  <Label fx:id="nombreUsuario_label" text="Nombre de usuario">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="email_textField" maxWidth="-Infinity" prefWidth="300.0" />
+               </children>
+            </VBox>
             <Label fx:id="email_error" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="10.0" layoutY="36.0" prefHeight="82.0" prefWidth="205.0" textAlignment="CENTER" textFill="RED" wrapText="true" GridPane.columnIndex="1" />
             <Label fx:id="contrasena_error" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="10.0" layoutY="36.0" prefHeight="82.0" prefWidth="207.0" textAlignment="CENTER" textFill="RED" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <VBox alignment="CENTER" spacing="5.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
                <children>
-                  <Label onMouseClicked="#hasOlvidadoTuContrasena" text="has olvidado tu contraseña?" underline="true" />
+                  <Label fx:id="hasOlvidadoContrasena" onMouseClicked="#hasOlvidadoTuContrasena" text="has olvidado tu contraseña?" underline="true" visible="false" />
                   <Label onMouseClicked="#todaviaNoTienesCuenta" prefHeight="40.0" prefWidth="280.0" text="todavia no tienes cuenta? Registrate" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="System Bold" size="14.0" />
@@ -80,7 +89,16 @@
                   </Label>
                </children>
             </VBox>
-            <PasswordField fx:id="contrasena_textField" maxWidth="-Infinity" prefWidth="300.0" promptText="Contraseña" GridPane.rowIndex="1" />
+            <VBox alignment="TOP_CENTER" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="contrasena_label" text="Contraseña">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="contrasena_textField" maxWidth="-Infinity" prefWidth="300.0" />
+               </children>
+            </VBox>
          </children>
          <padding>
             <Insets left="20.0" right="20.0" />
