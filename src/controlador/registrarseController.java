@@ -101,6 +101,8 @@ public class registrarseController implements Initializable {
     private Label confirmar_label;
     @FXML
     private Label fecha_label;
+    @FXML
+    private GridPane grid;
 
     // private boolean enEdicion = false;
     /**
@@ -132,7 +134,8 @@ public class registrarseController implements Initializable {
         contrasena_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { animacion(newVal, contrasena_label); });
         confirmacion_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { animacion(newVal, confirmar_label); });
         datePicker.focusedProperty().addListener((obs, oldVal, newVal) -> { animacion(newVal, fecha_label); });
-
+           
+        
     }
 
     public void initEdicion() { // Invocado desde la pantalla principal de usuario
@@ -178,7 +181,7 @@ public class registrarseController implements Initializable {
         }
 
         if (!checkPassword(contrasena_textfield.getText())) {
-            contrasena_error.setText("Contraseña introducida no es valida, por favor introduce una contraseña que contenga:\n- Entre 8 y 20 caracteres\n- Minimo una letra Mayúscula y Minúscula\n- Minimo un dígito\n- Minimo un caracter de los siguientes: !@#$%&*()-+=\n- No contener ningun espacio en blanco");
+            contrasena_error.setText("Introduce una contraseña que contenga: Entre 8 y 20 caracteres, Minimo una letra Mayúscula y Minúscula, un dígito, un caracter de los siguientes: !@#$%&*()-+= y No contener ningun espacio en blanco");
             contrasena_textfield.setText("");
             confirmacion_textfield.setText("");
             contrasena_textfield.requestFocus();
