@@ -163,7 +163,9 @@ public class EjercicioController implements Initializable {
         RadioButton[] radiob = {resp1_radioButton, resp2_radioButton, resp3_radioButton, resp4_radioButton};
         radioButton.setTextFill(Paint.valueOf(acertado ? "green" : "red"));
         for (RadioButton rb : radiob) {
+            rb.getStylesheets().add("-fx-opacity: 1.0");
             rb.setDisable(true);
+            rb.getStylesheets().add("-fx-opacity: 1.0");
         }
         confirmar_Button.setDisable(true);
     }

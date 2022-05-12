@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InicioSesionController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InicioSesionController">
    <bottom>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -81,8 +81,8 @@
             <Label fx:id="contrasena_error" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="10.0" layoutY="36.0" prefHeight="82.0" prefWidth="207.0" textAlignment="CENTER" textFill="RED" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <VBox alignment="CENTER" spacing="5.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
                <children>
-                  <Label fx:id="hasOlvidadoContrasena" onMouseClicked="#hasOlvidadoTuContrasena" text="has olvidado tu contraseña?" underline="true" visible="false" />
-                  <Label onMouseClicked="#todaviaNoTienesCuenta" prefHeight="40.0" prefWidth="280.0" text="todavia no tienes cuenta? Registrate" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="hasOlvidadoContrasena" onMouseClicked="#hasOlvidadoTuContrasena" text="¿Ha olvidado su contraseña?" underline="true" visible="false" />
+                  <Label onMouseClicked="#todaviaNoTienesCuenta" prefHeight="40.0" prefWidth="280.0" text="¿Todavía no tiene cuenta? Registrarse" textAlignment="CENTER" underline="true" wrapText="true">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

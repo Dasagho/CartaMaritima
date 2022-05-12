@@ -102,8 +102,8 @@ public class secretario {
             TranslateTransition translateTransition = new TranslateTransition(Duration.millis(200), nodo);
             translateTransition.setFromY(0);
             translateTransition.setToY(-5.0);
-            translateTransition.setFromX(1.0);
-            translateTransition.setToX(-65);
+            // translateTransition.setFromX(1.0);
+            // translateTransition.setToX(-65);
 
             // Creacion de Animacion de scalado para agrandar la letra
             ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), nodo);
@@ -124,8 +124,8 @@ public class secretario {
             translateTransition.setFromY(-5.0);
             translateTransition.setToY(0.0);
             
-            translateTransition.setFromX(-65);
-            translateTransition.setToX(1.0);
+            // translateTransition.setFromX(-65);
+            // translateTransition.setToX(1.0);
 
             ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), nodo);
             scaleTransition.setFromX(1.3);

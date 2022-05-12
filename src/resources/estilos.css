@@ -21,3 +21,8 @@
     height: 30;
     width: 30;
 }
+
+.radioButton:disabled {
+    -fx-opacity: 1.0;
+
+}

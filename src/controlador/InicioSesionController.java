@@ -95,8 +95,8 @@ public class InicioSesionController implements Initializable {
     @FXML
     public void iniciarSesion(ActionEvent e) throws IOException {
         restablecerErrores();
-        AudioClip click = new AudioClip(getClass().getResource("/resources/Sounds/click.wav").toExternalForm());
-        click.play();
+        // AudioClip click = new AudioClip(getClass().getResource("/resources/Sounds/click.wav").toExternalForm());
+        // click.play();
 
         /**
          * Al mostrar errores: ¿Mostrar todos los errores o de uno en uno?
