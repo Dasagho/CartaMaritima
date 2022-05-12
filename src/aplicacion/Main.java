@@ -44,7 +44,7 @@ public class Main extends Application {
         stage = primaryStage;
         primaryStage.setTitle("Subnautica");
 
-        Escena = new Scene(loadFXML("inicioSesion"), 600, 500);
+        Escena = new Scene(loadFXML("inicioSesion"), 900, 600);
         Escena.getStylesheets().add("/resources/estilos.css");
         primaryStage.setScene(Escena);
         primaryStage.show();

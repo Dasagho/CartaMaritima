@@ -125,11 +125,9 @@ public class EjercicioController implements Initializable {
 
             System.out.println(respuestaCorrecta ? "has acertado" : "has fallado");     // falta pulir
 
-            if (respuestaCorrecta) {
-                modelo.secretario.sumarAcierto();
-            } else {
-                modelo.secretario.sumarFallo();
-            }
+            if (respuestaCorrecta) { modelo.secretario.sumarAcierto(); } 
+            else { modelo.secretario.sumarFallo(); }
+            
             mostrarResultados(respuestaCorrecta, seleccionado);
             volver_Button.setText("volver");
             volver_Button.setOnAction(this::volver);
@@ -160,14 +158,13 @@ public class EjercicioController implements Initializable {
     }
 
     private void mostrarResultados(Boolean acertado, RadioButton radioButton) {
+        confirmar_Button.setDisable(true);
         RadioButton[] radiob = {resp1_radioButton, resp2_radioButton, resp3_radioButton, resp4_radioButton};
         radioButton.setTextFill(Paint.valueOf(acertado ? "green" : "red"));
-        for (RadioButton rb : radiob) {
-            rb.getStylesheets().add("-fx-opacity: 1.0");
-            rb.setDisable(true);
-            rb.getStylesheets().add("-fx-opacity: 1.0");
+        
+        for (int i = 0; i < radiob.length; i++) {
+            if (!radiob[i].isSelected() && ((Answer) respuestasLista.get(i)).getValidity()) { radiob[i].setTextFill(Paint.valueOf("green")); }
         }
-        confirmar_Button.setDisable(true);
     }
 
 }
