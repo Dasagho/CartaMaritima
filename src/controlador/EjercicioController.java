@@ -164,6 +164,9 @@ public class EjercicioController implements Initializable {
         
         for (int i = 0; i < radiob.length; i++) {
             if (!radiob[i].isSelected() && ((Answer) respuestasLista.get(i)).getValidity()) { radiob[i].setTextFill(Paint.valueOf("green")); }
+            radiob[i].setDisable(true);
+            radiob[i].setOpacity(1);
+            
         }
     }
 
