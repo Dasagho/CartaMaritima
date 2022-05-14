@@ -286,7 +286,6 @@ public class registrarseController implements Initializable {
         // Inicializamos los ImageView y les asignamos los avatares por defecto
         for (int i = 0; i < imagenesDefecto.size(); i++) {
             images[i] = new ImageView(new Image("file:" + imagenesDefecto.get(i).toString()));
-            System.out.println("file:" + imagenesDefecto.get(i).toString());
             images[i].setFitHeight(70);
             images[i].setFitWidth(70);
             images[i].setPreserveRatio(true);
