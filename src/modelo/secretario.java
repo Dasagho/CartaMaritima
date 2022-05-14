@@ -33,7 +33,12 @@ public class secretario {
     private static int fallos = 0;
 // - - - - - - - - - - - - - - - - - - - - - - - - 
     private static BooleanProperty usuarioActivado = new SimpleBooleanProperty(false);   // <- Inicializamos la propiedad booleana
-
+// - - - - - - - - - - - - - - - - - - - - - - - - 
+    private static int totalProblemasRealizados = 0;
+    private static int totalAciertos = 0;
+    private static int totalFallos = 0;
+// - - - - - - - - - - - - - - - - - - - - - - - - 
+    
     public static void setUsuario(User u) {
         usuario = u;
         usuarioActivado.setValue(Boolean.TRUE);     // <- Aviso de que hay un usuario activo
@@ -48,8 +53,17 @@ public class secretario {
     }
 
 // - - - - - Métodos de sesión - - - - - - - - -
-    public static void iniciarSesion() {
+    
+    public static boolean tieneSesiones() {
+        return !getSesiones().isEmpty();
+    }
+    public static List<Session> getSesiones() {
+        return usuario.getSessions();
+    }
+    
+    public static void iniciarSesion(){
         fotoTemporal = now();
+        CalcularAciertosYProblemasRealizados();
     }
 
     public static void sumarAcierto() {
@@ -80,8 +94,47 @@ public class secretario {
             ex.printStackTrace();
         }
     }
+    
+    public static void anadirSesion(LocalDateTime l, int ac, int fa){
+        Session s = new Session(l, ac, fa);
+        try {
+            usuario.addSession(s);
+            
+        } catch (NavegacionDAOException ex) {
+            System.out.println("No ha sido posible conectarse a la base de datos");
+            ex.printStackTrace();
+        }
+    }
 // - - - - - - - - - - - - - - - - - - - - - - - - 
 
+    public static int getTotalAciertos() {
+        return secretario.totalAciertos;
+    }
+    
+    public static int getTotalFallos() {
+        return secretario.totalFallos;
+    }
+    
+    public static int getTotalProblemasRealizados() {
+        return secretario.totalProblemasRealizados;
+    }
+    
+    private static void CalcularAciertosYProblemasRealizados() {
+        int aciertos;
+        int fallos;
+        totalFallos = 0;
+        totalAciertos = 0;
+        totalProblemasRealizados = 0;
+        List<Session> sesiones = getSesiones();
+        for (int i = 0; i < sesiones.size(); i++){
+            aciertos = sesiones.get(i).getHits();
+            fallos = sesiones.get(i).getFaults();
+            totalFallos += fallos;
+            totalAciertos += aciertos;
+            totalProblemasRealizados += (aciertos + fallos);
+        }
+    }
+    
     public static List<Problem> getProblemas() {
         return lista;
     }

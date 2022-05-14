@@ -52,6 +52,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
@@ -285,7 +286,6 @@ public class registrarseController implements Initializable {
         // Inicializamos los ImageView y les asignamos los avatares por defecto
         for (int i = 0; i < imagenesDefecto.size(); i++) {
             images[i] = new ImageView(new Image("file:" + imagenesDefecto.get(i).toString()));
-            System.out.println("file:" + imagenesDefecto.get(i).toString());
             images[i].setFitHeight(70);
             images[i].setFitWidth(70);
             images[i].setPreserveRatio(true);
@@ -323,7 +323,7 @@ public class registrarseController implements Initializable {
         Scene nuevaEscena = new Scene(grid, 300, 200);
         Stage nuevaVentana = new Stage();
         nuevaVentana.setScene(nuevaEscena);
-
+        nuevaVentana.initModality(Modality.APPLICATION_MODAL);
         nuevaVentana.showAndWait();
 
     }
