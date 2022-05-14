@@ -55,17 +55,11 @@ public class PantallaPrincipalUsuarioController implements Initializable {
         imagenPerfil.setImage(modelo.secretario.getUsuario().getAvatar());
         
         // Resumen de historial
-        List<Session> sesiones = modelo.secretario.getUsuario().getSessions();
-        int problemasRealizados = 0;
-        int aciertos = 0;
+        int problemasRealizados = modelo.secretario.getTotalProblemasRealizados();
+        int aciertos = modelo.secretario.getTotalAciertos();
         Float porcentaje;
-        for (int i = 0; i < sesiones.size(); i++){
-            aciertos += sesiones.get(i).getHits();
-            problemasRealizados += (aciertos + sesiones.get(i).getFaults());
-        }
         xRealizados.setText("" + problemasRealizados);
         xAcertados.setText("" + aciertos);
-        
         porcentaje = ((float) aciertos) / ((float) problemasRealizados);
         if (porcentaje.toString() != "NaN"){
             xPorcentaje.setText("" + porcentaje + "%");
@@ -95,11 +89,8 @@ public class PantallaPrincipalUsuarioController implements Initializable {
             modelo.secretario.cerrarSesion();
             setRoot("inicioSesion");
         }
-        
-        
     }
 
-    
     /**
      * Cambia a la ventana de seleccion de ejercicio
      */
@@ -115,10 +106,18 @@ public class PantallaPrincipalUsuarioController implements Initializable {
      */
     @FXML
     private void pulsarVerResultados(ActionEvent event) throws IOException {
-        setRoot("ResultadosUsuario");
+        if (modelo.secretario.tieneSesiones())
+            setRoot("ResultadosUsuario");
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Ver Resultados");
+            alert.setHeaderText("No es posible ver resultados");
+            alert.setContentText("Este usuario no tiene sesiones guardadas actualmente, así que no se pueden ver los resultados.");
+            alert.showAndWait();
+        }
     }
-    
-    
+
+
     /**
      * Envia los datos del usuario actual a la vista de registro y crea la
      * ventana modal del registro
@@ -142,7 +141,7 @@ public class PantallaPrincipalUsuarioController implements Initializable {
 
     @FXML
     private void pulsarMapa(MouseEvent event) throws IOException {
-        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/cartaNavegacion.fxml"));
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/FXMLCartaNavegacion.fxml"));
         Parent root = miCargador.load();
         Scene escena = new Scene(root, 900, 600);
         Stage escenario = new Stage();
