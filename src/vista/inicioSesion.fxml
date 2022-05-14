@@ -15,11 +15,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InicioSesionController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InicioSesionController">
    <bottom>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#iniciarSesion" text="Iniciar sesion" />
+            <Button fx:id="btn" defaultButton="true" mnemonicParsing="false" onAction="#iniciarSesion" text="Iniciar sesion" />
          </children>
          <BorderPane.margin>
             <Insets />
@@ -32,7 +32,7 @@
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="1054.0" text="Subnautica" HBox.hgrow="ALWAYS">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="2091.0" text="Subnautica" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
@@ -58,9 +58,8 @@
    <center>
       <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="33.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="33.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="33.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" percentWidth="50.0" prefWidth="200.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -68,22 +67,38 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="NickName" />
-            <Label text="Contraseña" GridPane.rowIndex="1" />
-            <TextField fx:id="email_textField" GridPane.columnIndex="1" />
-            <Label fx:id="email_error" disable="true" layoutX="10.0" layoutY="36.0" prefHeight="82.0" prefWidth="205.0" textAlignment="CENTER" textFill="RED" wrapText="true" GridPane.columnIndex="2" />
-            <Label fx:id="contrasena_error" disable="true" layoutX="10.0" layoutY="36.0" prefHeight="82.0" prefWidth="207.0" textAlignment="CENTER" textFill="RED" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" spacing="40.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <VBox alignment="TOP_CENTER">
                <children>
-                  <Label onMouseClicked="#hasOlvidadoTuContrasena" text="has olvidado tu contraseña?" underline="true" />
-                  <Label onMouseClicked="#todaviaNoTienesCuenta" text="todavia no tienes cuenta?">
+                  <Label fx:id="nombreUsuario_label" text="Nombre de usuario">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="email_textField" maxWidth="-Infinity" prefWidth="300.0" />
+               </children>
+            </VBox>
+            <Label fx:id="email_error" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="10.0" layoutY="36.0" prefHeight="82.0" prefWidth="205.0" textAlignment="CENTER" textFill="RED" wrapText="true" GridPane.columnIndex="1" />
+            <Label fx:id="contrasena_error" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="10.0" layoutY="36.0" prefHeight="82.0" prefWidth="207.0" textAlignment="CENTER" textFill="RED" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <VBox alignment="CENTER" spacing="5.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+               <children>
+                  <Label fx:id="hasOlvidadoContrasena" onMouseClicked="#hasOlvidadoTuContrasena" text="¿Ha olvidado su contraseña?" underline="true" visible="false" />
+                  <Label onMouseClicked="#todaviaNoTienesCuenta" prefHeight="40.0" prefWidth="280.0" text="¿Todavía no tiene cuenta? Registrarse" textAlignment="CENTER" underline="true" wrapText="true">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <PasswordField fx:id="contrasena_textField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <VBox alignment="TOP_CENTER" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="contrasena_label" text="Contraseña">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="contrasena_textField" maxWidth="-Infinity" prefWidth="300.0" />
+               </children>
+            </VBox>
          </children>
          <padding>
             <Insets left="20.0" right="20.0" />

@@ -5,20 +5,31 @@
  */
 package controlador;
 
+import aplicacion.Main;
 import static aplicacion.Main.setRoot;
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 import model.User;
 
 /**
@@ -36,6 +47,14 @@ public class InicioSesionController implements Initializable {
     private Label email_error;
     @FXML
     private Label contrasena_error;
+    @FXML
+    private Button btn;
+    @FXML
+    private Label hasOlvidadoContrasena;
+    @FXML
+    private Label nombreUsuario_label;
+    @FXML
+    private Label contrasena_label;
 
     /**
      * Initializes the controller class.
@@ -49,11 +68,14 @@ public class InicioSesionController implements Initializable {
         modelo.secretario.initialize();
 
         email_textField.styleProperty().bind(Bindings.when(email_error.disableProperty())
-                                      .then("")
-                                      .otherwise("-fx-border-color: #F31226"));
+                .then("")
+                .otherwise("-fx-border-color: #F31226"));
         contrasena_textField.styleProperty().bind(Bindings.when(contrasena_error.disableProperty())
-                                      .then("")
-                                      .otherwise("-fx-border-color: #F31226"));
+                .then("")
+                .otherwise("-fx-border-color: #F31226"));
+
+        email_textField.focusedProperty().addListener((obs, oldVal, newVal) -> {modelo.secretario.animacion(newVal, nombreUsuario_label);});
+        contrasena_textField.focusedProperty().addListener((obs, oldVal, newVal) -> {modelo.secretario.animacion(newVal, contrasena_label);});
     }
 
     /**
@@ -73,11 +95,12 @@ public class InicioSesionController implements Initializable {
     @FXML
     public void iniciarSesion(ActionEvent e) throws IOException {
         restablecerErrores();
+        // AudioClip click = new AudioClip(getClass().getResource("/resources/Sounds/click.wav").toExternalForm());
+        // click.play();
 
         /**
          * Al mostrar errores: ¿Mostrar todos los errores o de uno en uno?
          */
-        
         if (!modelo.secretario.getNavegacion().exitsNickName(email_textField.getText())) {
             email_error.setDisable(false);
             email_error.setText("No existe un usuario con este NickName, introduce el NickName de un usuario registrado");
@@ -92,6 +115,7 @@ public class InicioSesionController implements Initializable {
             contrasena_error.setText("La contraseña introducida no pertenece a este usuario, intentalo de nuevo con otra contraseña");
             contrasena_textField.setText("");
             contrasena_textField.requestFocus();
+            hasOlvidadoContrasena.setVisible(true);
             return;
         }
 
@@ -113,7 +137,6 @@ public class InicioSesionController implements Initializable {
         dialogo.setHeaderText("Introduce tu correo electronico");
         Optional<String> recuperar = dialogo.showAndWait();
     }
-    
 
     /**
      * Te manda a la ventana de registro
@@ -130,6 +153,5 @@ public class InicioSesionController implements Initializable {
         contrasena_error.setText("");
         contrasena_error.setDisable(true);
     }
-
 
 }

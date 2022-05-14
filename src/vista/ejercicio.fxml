@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.EjercicioController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.EjercicioController">
    <bottom>
       <HBox alignment="CENTER" prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="volver_Button" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
             <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <Button defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#confirmar" text="Confirmar" />
+            <Button fx:id="confirmar_Button" defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#confirmar" text="Confirmar" />
          </children>
          <padding>
             <Insets left="20.0" right="20.0" />
@@ -53,7 +53,7 @@
                <children>
                   <RadioButton fx:id="resp1_radioButton" contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="600.0" text="Respuesta 1" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="14.0" />
                      </font>
                      <toggleGroup>
                         <ToggleGroup fx:id="respuestas" />
@@ -64,7 +64,7 @@
                   </RadioButton>
                   <RadioButton fx:id="resp2_radioButton" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="600.0" text="Respuesta 2" textAlignment="CENTER" toggleGroup="$respuestas" wrapText="true" VBox.vgrow="ALWAYS">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="14.0" />
                      </font>
                      <padding>
                         <Insets left="20.0" />
@@ -72,7 +72,7 @@
                   </RadioButton>
                   <RadioButton fx:id="resp3_radioButton" contentDisplay="CENTER" layoutX="10.0" layoutY="28.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="600.0" text="Respuesta 3" textAlignment="CENTER" toggleGroup="$respuestas" VBox.vgrow="ALWAYS">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="14.0" />
                      </font>
                      <padding>
                         <Insets left="20.0" />
@@ -80,7 +80,7 @@
                   </RadioButton>
                   <RadioButton fx:id="resp4_radioButton" contentDisplay="CENTER" layoutX="10.0" layoutY="46.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="600.0" text="Respuesta 4" textAlignment="CENTER" toggleGroup="$respuestas" VBox.vgrow="ALWAYS">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="14.0" />
                      </font>
                      <padding>
                         <Insets left="20.0" />
@@ -90,9 +90,9 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Button mnemonicParsing="false">
+                  <Button mnemonicParsing="false" onAction="#mostrarCarta">
                      <graphic>
-                        <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/iconos/download.png" />
                            </image>
