@@ -123,8 +123,6 @@ public class EjercicioController implements Initializable {
                     break;
             }
 
-            System.out.println(respuestaCorrecta ? "has acertado" : "has fallado");     // falta pulir
-
             if (respuestaCorrecta) { modelo.secretario.sumarAcierto(); } 
             else { modelo.secretario.sumarFallo(); }
             
@@ -136,13 +134,12 @@ public class EjercicioController implements Initializable {
 
     @FXML
     private void mostrarCarta(ActionEvent event) throws IOException {
-        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/cartaNavegacion.fxml"));
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/FXMLCartaNavegacion.fxml"));
         Parent root = miCargador.load();
         Scene escena = new Scene(root, 900, 600);
         Stage escenario = new Stage();
         escenario.setScene(escena);
         escena.getStylesheets().add("/resources/estilos.css");
-        escenario.setTitle("Carta Nautica");
         escenario.show();
     }
 
