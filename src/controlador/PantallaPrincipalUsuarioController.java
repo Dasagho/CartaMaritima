@@ -137,6 +137,7 @@ public class PantallaPrincipalUsuarioController implements Initializable {
         escenario.setScene(escena);
         escenario.initModality(Modality.APPLICATION_MODAL); // Hacemos que la ventana nueva sea modal
         escenario.showAndWait();
+        imagenPerfil.setImage(modelo.secretario.getUsuario().getAvatar()); // Actualiza la img de perfil por si ha sido modificada
     }
 
     @FXML
@@ -151,6 +152,7 @@ public class PantallaPrincipalUsuarioController implements Initializable {
      //   escenario.initModality(Modality.APPLICATION_MODAL); // Hacemos que la ventana nueva sea modal
         escenario.show();
     }
+    
     
     
 
