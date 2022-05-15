@@ -123,13 +123,9 @@ public class EjercicioController implements Initializable {
                     break;
             }
 
-            System.out.println(respuestaCorrecta ? "has acertado" : "has fallado");     // falta pulir
-
-            if (respuestaCorrecta) {
-                modelo.secretario.sumarAcierto();
-            } else {
-                modelo.secretario.sumarFallo();
-            }
+            if (respuestaCorrecta) { modelo.secretario.sumarAcierto(); } 
+            else { modelo.secretario.sumarFallo(); }
+            
             mostrarResultados(respuestaCorrecta, seleccionado);
             volver_Button.setText("volver");
             volver_Button.setOnAction(this::volver);
@@ -138,13 +134,12 @@ public class EjercicioController implements Initializable {
 
     @FXML
     private void mostrarCarta(ActionEvent event) throws IOException {
-        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/cartaNavegacion.fxml"));
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/FXMLCartaNavegacion.fxml"));
         Parent root = miCargador.load();
         Scene escena = new Scene(root, 900, 600);
         Stage escenario = new Stage();
         escenario.setScene(escena);
         escena.getStylesheets().add("/resources/estilos.css");
-        escenario.setTitle("Carta Nautica");
         escenario.show();
     }
 
@@ -160,12 +155,16 @@ public class EjercicioController implements Initializable {
     }
 
     private void mostrarResultados(Boolean acertado, RadioButton radioButton) {
+        confirmar_Button.setDisable(true);
         RadioButton[] radiob = {resp1_radioButton, resp2_radioButton, resp3_radioButton, resp4_radioButton};
         radioButton.setTextFill(Paint.valueOf(acertado ? "green" : "red"));
-        for (RadioButton rb : radiob) {
-            rb.setDisable(true);
+        
+        for (int i = 0; i < radiob.length; i++) {
+            if (!radiob[i].isSelected() && ((Answer) respuestasLista.get(i)).getValidity()) { radiob[i].setTextFill(Paint.valueOf("green")); }
+            radiob[i].setDisable(true);
+            radiob[i].setOpacity(1);
+            
         }
-        confirmar_Button.setDisable(true);
     }
 
 }

@@ -54,7 +54,6 @@ public class Main extends Application {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent e) {
-                System.out.println("Mira mama estoy en " + ((Stage) e.getSource()).getTitle());
 
                 if (modelo.secretario.usuarioActivo().get()) {
                     Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
@@ -67,6 +66,9 @@ public class Main extends Application {
                         modelo.secretario.cerrarSesion();
                         Platform.exit();
                         System.exit(0);
+                        
+                    } else {
+                        e.consume();
                     }
                 }
 

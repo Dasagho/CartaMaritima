@@ -24,6 +24,11 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,6 +55,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Duration;
 import model.User;
 import static model.User.checkNickName;
 import static model.User.checkPassword;
@@ -86,6 +92,18 @@ public class registrarseController implements Initializable {
     private ImageView avatar;
     @FXML
     private Label titulo;
+    @FXML
+    private Label nombre_label;
+    @FXML
+    private Label correo_label;
+    @FXML
+    private Label contrasena_label;
+    @FXML
+    private Label confirmar_label;
+    @FXML
+    private Label fecha_label;
+    @FXML
+    private GridPane grid;
 
     // private boolean enEdicion = false;
     /**
@@ -103,7 +121,22 @@ public class registrarseController implements Initializable {
         // Diferenciamos pagina de registro de Modificar perfil
         nickName_textfield.disableProperty().bind(secretario.usuarioActivo());
         titulo.setText(secretario.usuarioActivo().getValue() ? "Modificar Perfil" : "Registrarse");
-
+        
+        // Animaciones de los campos de texto
+        // nombre_label.visibleProperty().bind(nickName_textfield.focusedProperty());
+        // correo_label.visibleProperty().bind(email_textfield.focusedProperty());
+        // contrasena_label.visibleProperty().bind(contrasena_textfield.focusedProperty());
+        // confirmar_label.visibleProperty().bind(confirmacion_textfield.focusedProperty());
+        // fecha_label.visibleProperty().bind(datePicker.focusedProperty());
+        
+        
+        nickName_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { modelo.secretario.animacion(newVal, nombre_label); });
+        email_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { modelo.secretario.animacion(newVal, correo_label); });
+        contrasena_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { modelo.secretario.animacion(newVal, contrasena_label); });
+        confirmacion_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> { modelo.secretario.animacion(newVal, confirmar_label); });
+        datePicker.focusedProperty().addListener((obs, oldVal, newVal) -> { modelo.secretario.animacion(newVal, fecha_label); });
+           
+        
     }
 
     public void initEdicion() { // Invocado desde la pantalla principal de usuario
@@ -149,7 +182,7 @@ public class registrarseController implements Initializable {
         }
 
         if (!checkPassword(contrasena_textfield.getText())) {
-            contrasena_error.setText("Contraseña introducida no es valida, por favor introduce una contraseña que contenga:\n- Entre 8 y 20 caracteres\n- Minimo una letra Mayúscula y Minúscula\n- Minimo un dígito\n- Minimo un caracter de los siguientes: !@#$%&*()-+=\n- No contener ningun espacio en blanco");
+            contrasena_error.setText("Introduce una contraseña que contenga: Entre 8 y 20 caracteres, Minimo una letra Mayúscula y Minúscula, un dígito, un caracter de los siguientes: !@#$%&*()-+= y No contener ningun espacio en blanco");
             contrasena_textfield.setText("");
             confirmacion_textfield.setText("");
             contrasena_textfield.requestFocus();
@@ -253,7 +286,6 @@ public class registrarseController implements Initializable {
         // Inicializamos los ImageView y les asignamos los avatares por defecto
         for (int i = 0; i < imagenesDefecto.size(); i++) {
             images[i] = new ImageView(new Image("file:" + imagenesDefecto.get(i).toString()));
-            System.out.println("file:" + imagenesDefecto.get(i).toString());
             images[i].setFitHeight(70);
             images[i].setFitWidth(70);
             images[i].setPreserveRatio(true);
@@ -330,4 +362,6 @@ public class registrarseController implements Initializable {
         List<File> imagenesDefecto = Arrays.asList(imagenes);
         return imagenesDefecto;
     }
+
+    
 }
