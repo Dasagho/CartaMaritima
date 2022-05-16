@@ -74,8 +74,19 @@ public class InicioSesionController implements Initializable {
                 .then("")
                 .otherwise("-fx-border-color: #F31226"));
 
-        email_textField.focusedProperty().addListener((obs, oldVal, newVal) -> {modelo.secretario.animacion(newVal, nombreUsuario_label);});
-        contrasena_textField.focusedProperty().addListener((obs, oldVal, newVal) -> {modelo.secretario.animacion(newVal, contrasena_label);});
+        email_textField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            modelo.secretario.animacion(newVal, nombreUsuario_label);
+            if (!newVal) {
+                comprobarErrores();
+            }
+        });
+        contrasena_textField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            modelo.secretario.animacion(newVal, contrasena_label);
+            if (!newVal) {
+                comprobarErrores();
+            }
+        });
+        email_textField.requestFocus();
     }
 
     /**
@@ -134,7 +145,7 @@ public class InicioSesionController implements Initializable {
     private void hasOlvidadoTuContrasena(MouseEvent event) {
         TextInputDialog dialogo = new TextInputDialog("");
         dialogo.setTitle("Recuperar contraseña");
-        dialogo.setHeaderText("Introduce tu correo electronico");
+        dialogo.setHeaderText("Introduce tu correo electrónico");
         Optional<String> recuperar = dialogo.showAndWait();
     }
 
@@ -145,6 +156,29 @@ public class InicioSesionController implements Initializable {
     public void todaviaNoTienesCuenta(MouseEvent event) throws IOException {
         restablecerErrores();
         setRoot("resgistro");
+    }
+
+    public void comprobarErrores() {
+        if (!modelo.secretario.getNavegacion().exitsNickName(email_textField.getText())) {
+            email_error.setDisable(false);
+            email_error.setText("No existe un usuario con este NickName, introduce el NickName de un usuario registrado");
+            contrasena_textField.setText("");
+            return;
+        } else {
+            email_error.setText("");
+            email_error.setDisable(true);
+        }
+
+        User usuario = modelo.secretario.getNavegacion().loginUser(email_textField.getText(), contrasena_textField.getText());
+        if (usuario == null) {
+            contrasena_error.setDisable(false);
+            contrasena_error.setText("La contraseña introducida no pertenece a este usuario, intentalo de nuevo con otra contraseña");
+            contrasena_textField.setText("");
+            hasOlvidadoContrasena.setVisible(true);
+        } else {
+            contrasena_error.setText("");
+            contrasena_error.setDisable(true);
+        }
     }
 
     public void restablecerErrores() {

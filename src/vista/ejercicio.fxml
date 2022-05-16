@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.EjercicioController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.EjercicioController">
    <bottom>
       <HBox fx:id="hBoxBotones" alignment="CENTER" prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -23,13 +23,22 @@
             <Button fx:id="confirmar_Button" defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#confirmar" text="Confirmar" />
          </children>
          <padding>
-            <Insets left="20.0" right="20.0" />
+            <Insets left="40.0" right="40.0" />
          </padding>
       </HBox>
    </bottom>
    <top>
-      <VBox prefHeight="150.0" prefWidth="900.0" BorderPane.alignment="TOP_LEFT">
+      <VBox alignment="CENTER_LEFT" prefHeight="176.0" prefWidth="700.0" spacing="5.0" BorderPane.alignment="TOP_LEFT">
          <children>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Ejercicio">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <Label text="Enunciado">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -42,12 +51,12 @@
             </TextArea>
          </children>
          <padding>
-            <Insets left="20.0" right="20.0" top="10.0" />
+            <Insets left="40.0" right="40.0" top="10.0" />
          </padding>
       </VBox>
    </top>
    <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="219.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
@@ -102,6 +111,9 @@
                </children>
             </VBox>
          </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
       </HBox>
    </center>
 </BorderPane>
