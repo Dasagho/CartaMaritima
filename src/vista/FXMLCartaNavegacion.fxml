@@ -177,7 +177,7 @@
                            <children>
                               <ImageView onMouseDragged="#ratonMantenidoMapa" onMousePressed="#ratonPulsadoMapa" onMouseReleased="#ratonSoltadoMapa" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../resources/carta_nautica.jpg" />
+                                    <Image url="@../resources/carta_nautica.png" />
                                  </image>
                               </ImageView>
                            </children>
