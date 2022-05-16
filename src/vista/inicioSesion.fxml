@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InicioSesionController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InicioSesionController">
    <bottom>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -58,8 +58,7 @@
    <center>
       <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" percentWidth="50.0" prefWidth="200.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" percentWidth="75.0" prefWidth="200.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -75,10 +74,9 @@
                      </font>
                   </Label>
                   <TextField fx:id="email_textField" maxWidth="-Infinity" prefWidth="300.0" />
+                  <Label fx:id="email_error" alignment="CENTER" contentDisplay="CENTER" disable="true" prefHeight="82.0" prefWidth="205.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
                </children>
             </VBox>
-            <Label fx:id="email_error" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="10.0" layoutY="36.0" prefHeight="82.0" prefWidth="205.0" textAlignment="CENTER" textFill="RED" wrapText="true" GridPane.columnIndex="1" />
-            <Label fx:id="contrasena_error" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="10.0" layoutY="36.0" prefHeight="82.0" prefWidth="207.0" textAlignment="CENTER" textFill="RED" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <VBox alignment="CENTER" spacing="5.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
                <children>
                   <Label fx:id="hasOlvidadoContrasena" onMouseClicked="#hasOlvidadoTuContrasena" text="¿Ha olvidado su contraseña?" underline="true" visible="false" />
@@ -97,6 +95,7 @@
                      </font>
                   </Label>
                   <PasswordField fx:id="contrasena_textField" maxWidth="-Infinity" prefWidth="300.0" />
+                  <Label fx:id="contrasena_error" alignment="CENTER" contentDisplay="CENTER" disable="true" prefHeight="82.0" prefWidth="207.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
                </children>
             </VBox>
          </children>
