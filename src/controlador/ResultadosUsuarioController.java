@@ -109,7 +109,8 @@ public class ResultadosUsuarioController implements Initializable {
         listaSesionesWrapper = new ArrayList<SessionWrapper>();
         for (int i = 0; i < listaSesiones.size(); i++) {
             SessionWrapper sw = new SessionWrapper(listaSesiones.get(i));
-            listaSesionesWrapper.add(sw);
+            if (sw.ProblemasProperty().getValue() > 0)
+                listaSesionesWrapper.add(sw);
         }
         
         //PREPARAR COLUMNAS TABLE VIEW -------------------------------------
@@ -192,7 +193,7 @@ public class ResultadosUsuarioController implements Initializable {
         int aciertos;
         int fallos;
         int problemas;
-        
+        //Primero se reinician valores
         actualProblemas = 0;
         actualAciertos = 0;
         actualFallos = 0;
@@ -201,11 +202,11 @@ public class ResultadosUsuarioController implements Initializable {
         LocalDate fechaHastaDia = fechaHasta.getValue();
 
         tabla.getItems().clear();
-        
+        //For para recorrer todas las sesiones del usuario actual y ver cuales son las que están el rango de fechas seleccionadas
         for (int i = 0; i < listaSesionesWrapper.size() ; i++) {
             SessionWrapper s = listaSesionesWrapper.get(i);
             LocalDate l = s.getLocalDate();
-            //Si la sesión entra en las fechas indiadas
+            //Si la sesión entra en las fechas indicadas
             if (l.compareTo(fechaDesdeDia) >= 0 && l.compareTo(fechaHastaDia) <= 0) {
                 //Añadimos a la tabla
                 tabla.getItems().add(s);
@@ -221,12 +222,14 @@ public class ResultadosUsuarioController implements Initializable {
     }
     
     private void rellenarDatosGrafica() {
+        //Primero se reinician valores
         int maximoY = 0;
         int aciertos = 0;
         int fallos = 0;
         grafico.getData().clear();
         serieAciertos.getData().clear();
         serieFallos.getData().clear();
+        //Se recorren los elementos actuales en la tabla, se y se generan los datos necesarios para el gráfico (dos series, una para aciertos y otra para fallos)
         for (int i = 0; i < tabla.getItems().size() ; i++) {
             SessionWrapper s = tabla.getItems().get(i);
             aciertos = s.AciertosProperty().getValue();
@@ -240,6 +243,7 @@ public class ResultadosUsuarioController implements Initializable {
                 maximoY = fallos;
             }
         }
+        //Se añaden los datos en el gráfico
         grafico.getData().add(serieAciertos);
         grafico.getData().add(serieFallos);
     }

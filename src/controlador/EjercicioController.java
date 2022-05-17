@@ -13,17 +13,26 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.Answer;
 import model.Problem;
 
@@ -54,6 +63,12 @@ public class EjercicioController implements Initializable {
     private Problem problema;
     private List respuestasLista;
     private Object[] respuestaArray;
+    @FXML
+    private HBox hBoxBotones;
+    @FXML
+    private Region regionBotones;
+    @FXML
+    private VBox vBoxMapa;
 
     /**
      * Initializes the controller class.
@@ -123,29 +138,53 @@ public class EjercicioController implements Initializable {
                     break;
             }
 
-            System.out.println(respuestaCorrecta ? "has acertado" : "has fallado");     // falta pulir
-
             if (respuestaCorrecta) {
                 modelo.secretario.sumarAcierto();
             } else {
                 modelo.secretario.sumarFallo();
             }
+
             mostrarResultados(respuestaCorrecta, seleccionado);
-            volver_Button.setText("volver");
-            volver_Button.setOnAction(this::volver);
+
+            respuestaUsuario(respuestaCorrecta);
         }
     }
 
+    private void respuestaUsuario(boolean respuestaCorrecta) {
+        volver_Button.setText("Volver");
+        volver_Button.setOnAction(this::volver);
+        volver_Button.setScaleX(1.25);
+        volver_Button.setScaleY(1.25);
+        vBoxMapa.getChildren().clear();
+        Text t = new Text();
+        t.styleProperty().set("-fx-font-size:25px");
+        t.setText(respuestaCorrecta ? "RESPUESTA CORRECTA, ¡ENHORABUENA!" : "RESPUESTA INCORRECTA, INTÉNTALO DE NUEVO");
+        t.setFill(respuestaCorrecta ? Color.GREEN : Color.RED);
+        vBoxMapa.getChildren().add(t);
+
+    }
+
     @FXML
-    private void mostrarCarta(ActionEvent event) throws IOException {
-        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/cartaNavegacion.fxml"));
-        Parent root = miCargador.load();
-        Scene escena = new Scene(root, 900, 600);
-        Stage escenario = new Stage();
-        escenario.setScene(escena);
-        escena.getStylesheets().add("/resources/estilos.css");
-        escenario.setTitle("Carta Nautica");
-        escenario.show();
+    private void pulsarMapa(ActionEvent event) throws IOException {
+        if (!modelo.secretario.cartaAbierta()) {
+            modelo.secretario.setCartaAbierta(true);
+            FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/FXMLCartaNavegacion.fxml"));
+            Parent root = miCargador.load();
+            Scene escena = new Scene(root, 850, 550);
+            Stage escenario = new Stage();
+            escenario.setMinHeight(550);
+            escenario.setMinWidth(850);
+            escenario.setScene(escena);
+            escena.getStylesheets().add("/resources/estilos.css");
+            escenario.show();
+
+            escenario.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent e) {
+                    modelo.secretario.setCartaAbierta(false);
+                }
+            });
+        }
     }
 
     /**
@@ -153,19 +192,26 @@ public class EjercicioController implements Initializable {
      */
     public void volver(ActionEvent e) {
         try {
-            Main.setRoot("PaginaPrincipalUsuario");
+            Main.setRoot("seleccionTipoPregunta");
         } catch (IOException ex) {
             Logger.getLogger(EjercicioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private void mostrarResultados(Boolean acertado, RadioButton radioButton) {
+        hBoxBotones.getChildren().remove(confirmar_Button);
+        hBoxBotones.getChildren().remove(regionBotones);
         RadioButton[] radiob = {resp1_radioButton, resp2_radioButton, resp3_radioButton, resp4_radioButton};
         radioButton.setTextFill(Paint.valueOf(acertado ? "green" : "red"));
-        for (RadioButton rb : radiob) {
-            rb.setDisable(true);
+
+        for (int i = 0; i < radiob.length; i++) {
+            if (!radiob[i].isSelected() && ((Answer) respuestasLista.get(i)).getValidity()) {
+                radiob[i].setTextFill(Paint.valueOf("green"));
+            }
+            radiob[i].setDisable(true);
+            radiob[i].setOpacity(1);
+
         }
-        confirmar_Button.setDisable(true);
     }
 
 }

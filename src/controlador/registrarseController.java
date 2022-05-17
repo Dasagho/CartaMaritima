@@ -24,6 +24,11 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,6 +42,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -50,6 +56,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Duration;
 import model.User;
 import static model.User.checkNickName;
 import static model.User.checkPassword;
@@ -86,6 +93,18 @@ public class registrarseController implements Initializable {
     private ImageView avatar;
     @FXML
     private Label titulo;
+    @FXML
+    private Label nombre_label;
+    @FXML
+    private Label correo_label;
+    @FXML
+    private Label contrasena_label;
+    @FXML
+    private Label confirmar_label;
+    @FXML
+    private Label fecha_label;
+    @FXML
+    private GridPane grid;
 
     // private boolean enEdicion = false;
     /**
@@ -104,6 +123,38 @@ public class registrarseController implements Initializable {
         nickName_textfield.disableProperty().bind(secretario.usuarioActivo());
         titulo.setText(secretario.usuarioActivo().getValue() ? "Modificar Perfil" : "Registrarse");
 
+        // Notificamos de los errores al usuario al perder el foco
+        nickName_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            modelo.secretario.animacion(newVal, nombre_label);
+            comprobarErrores();
+        });
+        email_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            modelo.secretario.animacion(newVal, correo_label);
+            comprobarErrores();
+        });
+        contrasena_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            modelo.secretario.animacion(newVal, contrasena_label);
+            comprobarErrores();
+        });
+        confirmacion_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            modelo.secretario.animacion(newVal, confirmar_label);
+            comprobarErrores();
+        });
+        datePicker.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            modelo.secretario.animacion(newVal, fecha_label);
+            comprobarErrores();
+        });
+
+        // Bloqueamos los dias posteriores a hoy
+        datePicker.setDayCellFactory((DatePicker picker) -> {
+            return new DateCell() {
+                @Override
+                public void updateItem(LocalDate date, boolean empty) {
+                    super.updateItem(date, empty);
+                    setDisable(empty || date.compareTo(datePicker.getValue()) > 0);
+                }
+            };
+        });
     }
 
     public void initEdicion() { // Invocado desde la pantalla principal de usuario
@@ -149,7 +200,7 @@ public class registrarseController implements Initializable {
         }
 
         if (!checkPassword(contrasena_textfield.getText())) {
-            contrasena_error.setText("Contraseña introducida no es valida, por favor introduce una contraseña que contenga:\n- Entre 8 y 20 caracteres\n- Minimo una letra Mayúscula y Minúscula\n- Minimo un dígito\n- Minimo un caracter de los siguientes: !@#$%&*()-+=\n- No contener ningun espacio en blanco");
+            contrasena_error.setText("Introduce una contraseña que contenga: Entre 8 y 20 caracteres, Minimo una letra Mayúscula y Minúscula, un dígito, un caracter de los siguientes: !@#$%&*()-+= y No contener ningun espacio en blanco");
             contrasena_textfield.setText("");
             confirmacion_textfield.setText("");
             contrasena_textfield.requestFocus();
@@ -169,15 +220,15 @@ public class registrarseController implements Initializable {
         }
 
         if (modelo.secretario.usuarioActivo().getValue()) {                             // <- Comprueba si está registrando un usuario o modificando uno existente
-            
+
             // Se solicita confirmación para guardar cambios
             Alert alerta1 = new Alert(AlertType.CONFIRMATION);
             alerta1.setTitle("Guardar cambios");
             alerta1.setHeaderText("Guardar cambios");
             alerta1.setContentText("¿Deseas guardar los cambios?\n ");
             Optional<ButtonType> respuesta = alerta1.showAndWait();
-            
-            if (respuesta.isPresent() && respuesta.get()==ButtonType.OK){               
+
+            if (respuesta.isPresent() && respuesta.get() == ButtonType.OK) {
                 try {
                     modelo.secretario.getUsuario().setEmail(email_textfield.getText());
                     modelo.secretario.getUsuario().setPassword(contrasena_textfield.getText());
@@ -192,19 +243,18 @@ public class registrarseController implements Initializable {
             }
 
         } else {
-            
+
             // Se solicita confirmación para registrarse
             Alert alerta2 = new Alert(AlertType.CONFIRMATION);
             alerta2.setTitle("Nuevo usuario");
             alerta2.setHeaderText("Nuevo usuario");
             alerta2.setContentText("Se creará un nuevo usuario\n ");
             Optional<ButtonType> respuesta = alerta2.showAndWait();
-            
-            
-            if (respuesta.isPresent() && respuesta.get()==ButtonType.OK){
+
+            if (respuesta.isPresent() && respuesta.get() == ButtonType.OK) {
                 try {
                     User nuevoUsuario = modelo.secretario.getNavegacion().registerUser(nickName_textfield.getText(), email_textfield.getText(), contrasena_textfield.getText(), avatar.getImage(), datePicker.getValue());
-                    
+
                     // Se informa de que la cuenta ha sido creada
                     System.out.println("Correctísimo");
                     Alert alerta3 = new Alert(AlertType.INFORMATION);
@@ -223,6 +273,39 @@ public class registrarseController implements Initializable {
         }
     }
 
+    private void comprobarErrores() {
+        if (!checkNickName(nickName_textfield.getText()) && !nickName_textfield.getText().isEmpty()) {
+            nickName_error.setText("Nombre de usuario no valido, un nombre valido debe tener entre 6 y 15 caracteres y solo puede contener mayúsculas, minúsculas, guiones o guiones bajos");
+            return;
+        } else {
+            nickName_error.setText("");
+        }
+
+        if (!User.checkEmail(email_textfield.getText()) && !email_textfield.getText().isEmpty()) {
+            email_error.setText("Formato del correo electronico introducido no es valido por favor introduce un correo valido con formato x@x.x");
+            return;
+        } else {
+            email_error.setText("");
+        }
+
+        if (!checkPassword(contrasena_textfield.getText()) && !contrasena_textfield.getText().isBlank()) {
+            contrasena_error.setText("Introduce una contraseña que contenga: Entre 8 y 20 caracteres, Minimo una letra Mayúscula y Minúscula, un dígito, un caracter de los siguientes: !@#$%&*()-+= y No contener ningun espacio en blanco");
+            contrasena_textfield.setText("");
+            confirmacion_textfield.setText("");
+            return;
+        } else { System.out.println("aqui");
+            contrasena_error.setText("");
+        }
+
+        if (!contrasena_textfield.getText().equals(confirmacion_textfield.getText()) && !confirmacion_textfield.getText().isEmpty()) {
+            confirmacion_error.setText("No coinciden las contraseñas");
+            confirmacion_textfield.setText("");
+            return;
+        } else {
+            confirmacion_error.setText("");
+        }
+    }
+
     private void restablecerErrores() {
         nickName_error.setText("");
         email_error.setText("");
@@ -231,12 +314,14 @@ public class registrarseController implements Initializable {
         fecha_error.setText("");
     }
 
-    
-    /** *
-     * Falta por modificar el ultimo avatar que debe ser un icono de añadir tu avatar personalizado
+    /**
+     * *
+     * Falta por modificar el ultimo avatar que debe ser un icono de añadir tu
+     * avatar personalizado
+     *
      * @param event
      * @throws IOException
-     * @throws URISyntaxException 
+     * @throws URISyntaxException
      */
     @FXML
     private void cambiarAvatar(ActionEvent event) throws IOException, URISyntaxException {
@@ -245,7 +330,6 @@ public class registrarseController implements Initializable {
 
         // Creamos el container que almacenará los botones de seleccion de avatar
         GridPane grid = new GridPane();
-        
 
         // Creamos la lista de ImageView en funcion de las imagenes por defecto que tengamos
         ImageView[] images = new ImageView[imagenesDefecto.size()];
@@ -253,7 +337,6 @@ public class registrarseController implements Initializable {
         // Inicializamos los ImageView y les asignamos los avatares por defecto
         for (int i = 0; i < imagenesDefecto.size(); i++) {
             images[i] = new ImageView(new Image("file:" + imagenesDefecto.get(i).toString()));
-            System.out.println("file:" + imagenesDefecto.get(i).toString());
             images[i].setFitHeight(70);
             images[i].setFitWidth(70);
             images[i].setPreserveRatio(true);
@@ -284,9 +367,8 @@ public class registrarseController implements Initializable {
         grid.setAlignment(Pos.CENTER);
         // for (ColumnConstraints cc : grid.getColumnConstraints()) cc.setHalignment(HPos.CENTER);
         grid.styleProperty().setValue("-fx-background-color: #123456");
-        
+
         // for (RowConstraints rc : grid.getRowConstraints()) rc.setValignment(VPos.CENTER);
-        
         // Finalmente creamos la escena y le agregamos dimensiones y el grid
         Scene nuevaEscena = new Scene(grid, 300, 200);
         Stage nuevaVentana = new Stage();
@@ -302,7 +384,7 @@ public class registrarseController implements Initializable {
         Image archivo = avatarSel.getImage();
         // System.out.println(archivo.getUrl());
         avatar.setImage(archivo);
-        ((Button)event.getSource()).getScene().getWindow().hide();
+        ((Button) event.getSource()).getScene().getWindow().hide();
     }
 
     public void anadirAvatarPersonalizado(ActionEvent event) {
@@ -313,7 +395,7 @@ public class registrarseController implements Initializable {
                 = selectorArchivo.showOpenDialog(aplicacion.Main.getStage());
         if (ImagenSeleccionada != null) {
             avatar.setImage(new Image(ImagenSeleccionada.toURI().toString()));
-            ((Button)event.getSource()).getScene().getWindow().hide();
+            ((Button) event.getSource()).getScene().getWindow().hide();
         }
     }
 
@@ -330,4 +412,5 @@ public class registrarseController implements Initializable {
         List<File> imagenesDefecto = Arrays.asList(imagenes);
         return imagenesDefecto;
     }
+
 }

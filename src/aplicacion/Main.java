@@ -44,7 +44,9 @@ public class Main extends Application {
         stage = primaryStage;
         primaryStage.setTitle("Subnautica");
 
-        Escena = new Scene(loadFXML("inicioSesion"), 900, 600);
+        Escena = new Scene(loadFXML("inicioSesion"), 900, 650);
+        primaryStage.setMinHeight(650);
+        primaryStage.setMinWidth(900);
         Escena.getStylesheets().add("/resources/estilos.css");
         primaryStage.setScene(Escena);
         primaryStage.show();
@@ -54,7 +56,6 @@ public class Main extends Application {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent e) {
-                System.out.println("Mira mama estoy en " + ((Stage) e.getSource()).getTitle());
 
                 if (modelo.secretario.usuarioActivo().get()) {
                     Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
@@ -67,6 +68,9 @@ public class Main extends Application {
                         modelo.secretario.cerrarSesion();
                         Platform.exit();
                         System.exit(0);
+                        
+                    } else {
+                        e.consume();
                     }
                 }
 
