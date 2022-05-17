@@ -7,6 +7,8 @@ package controlador;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +20,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -25,14 +28,19 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -57,8 +65,6 @@ public class CartaNavegacionController implements Initializable{
     @FXML
     private Slider zoom_slider;
     @FXML
-    private Label posicion;
-    @FXML
     private CheckBox mostrarTransportadorID;
     
     //TRANSPORTADOR
@@ -81,26 +87,34 @@ public class CartaNavegacionController implements Initializable{
     boolean contextMenuCreado = false;
     
     //BOTONES
-    Button tipoMarcaActual;
+    //Button tipoMarcaActual;
+    @FXML
+    private ToggleGroup herramientas;
     
     @FXML
-    private Button puntoBoton;
+    private ToggleButton puntoBoton;
     @FXML
-    private Button circuloBoton;
+    private ToggleButton circuloBoton;
     @FXML
-    private Button textoBoton;
+    private ToggleButton textoBoton;
     @FXML
-    private Button lineaBoton;
+    private ToggleButton lineaBoton;
     @FXML
-    private Button panearBoton;
+    private ToggleButton panearBoton;
     @FXML
-    private Button extremosBoton;
+    private ToggleButton extremosBoton;
         
     //INSPECTOR
     @FXML
     private Slider sliderInspector;
     @FXML
     private ColorPicker colorInspector;
+    @FXML
+    private VBox vboxFormaPunto;
+    @FXML
+    private ChoiceBox<String> choiceBoxForma;
+    ObservableList<String> listaFormas = FXCollections.observableArrayList("Circulo","Cuadrado");
+
 
 
     @Override
@@ -126,13 +140,30 @@ public class CartaNavegacionController implements Initializable{
         
         //Checkbox de mostrar transportador
         transportadorImagen.visibleProperty().bind(mostrarTransportadorID.selectedProperty());
-        transportador.disableProperty().bind(mostrarTransportadorID.selectedProperty().not()); 
+        transportador.disableProperty().bind(mostrarTransportadorID.selectedProperty().not());
+        
+        //Poner datos a los toggles para luego usar un switch
+        circuloBoton.setUserData("circuloBoton");
+        lineaBoton.setUserData("lineaBoton");
+        puntoBoton.setUserData("puntoBoton");
+        textoBoton.setUserData("textoBoton");
+        extremosBoton.setUserData("extremosBoton");
+        panearBoton.setUserData("panearBoton");
+        
+        //Si se deja de seleccionar las herramientas, se pone automaticamente la de panear
+        herramientas.selectedToggleProperty().addListener((obs, oldV, newV) -> {
+            if (newV == null) {
+                herramientas.selectToggle(panearBoton);
+                panearBoton.requestFocus();
+            }
+        });
+        
+        //Inicializar Choice Box del Inspector
+        choiceBoxForma.setItems(listaFormas);
+        choiceBoxForma.setValue("Circulo");
+        vboxFormaPunto.disableProperty().bind(puntoBoton.selectedProperty().not());
     }
     
-    @FXML
-    private void muestraPosicion(MouseEvent event) {
-        posicion.setText("Longitud:" + (int) event.getX() + ",          Latitud:" + (int) event.getY());
-    }
     
     //ZOOM -----------------------------------
     @FXML
@@ -226,8 +257,7 @@ public class CartaNavegacionController implements Initializable{
     @FXML
     private void seleccionarTipoMarca(ActionEvent event) {
         map_scrollpane.setPannable(false);
-        tipoMarcaActual = (Button)event.getSource();
-        if (tipoMarcaActual == panearBoton)  map_scrollpane.setPannable(true);
+        if (herramientas.getSelectedToggle() == panearBoton)  map_scrollpane.setPannable(true);
     }
     //PULSAR EN EL MAPA Y CREAR MARCAS -----------------------------------
     @FXML
@@ -237,88 +267,196 @@ public class CartaNavegacionController implements Initializable{
                 crearTexto(new ActionEvent());
                 return;
         }
-        //Si pulsas el botón princpipal del ratón
+        //Si pulsas el botón principal del ratón
         if (event.getButton() == MouseButton.PRIMARY){
-            if (tipoMarcaActual == textoBoton) {
-                //Si está seleccionada texto, creo un TextField y lo pinta con los datos leídos del inspector
-                texto = new TextField();
-                zoomGroupMarcas.getChildren().add(texto);
-                texto.setLayoutX(event.getX());
-                texto.setLayoutY(event.getY());
-                Font nuevaFuente = Font.font(3*sliderInspector.getValue());
-                texto.setFont(nuevaFuente);
-                texto.requestFocus();
-                texto.setOnAction(this::crearTexto);
-                textoCreado = true;
-                event.consume();
-            } else if (tipoMarcaActual == puntoBoton) {
-                //Si está seleccionado el punto, creo un punto y lo pinta con los datos leídos del inspector
-                Circle punto = new Circle(1);
-                aplicarValoresPunto(punto);
-                zoomGroupMarcas.getChildren().add(punto);
-                punto.setOnContextMenuRequested(this::crearMenuContextual);
-                punto.setOnMousePressed(this::seleccionarElemento);
-                punto.setCenterX(event.getX());
-                punto.setCenterY(event.getY());
-                event.consume();
-            } else if (tipoMarcaActual == lineaBoton) {
-                //Si está seleccionada la línea, crea el inicio de una línea y la pinta con los datos leídos del inspector
-                linea = new Line(event.getX(),event.getY(),event.getX(),event.getY());
-                aplicarValoresLinea(linea);
-                zoomGroupMarcas.getChildren().add(linea);
-                linea.setOnContextMenuRequested(this::crearMenuContextual);
-                linea.setOnMousePressed(this::seleccionarElemento);
-                event.consume();
-            } else if (tipoMarcaActual == circuloBoton){
-                //Si está seleccionado el círculo, crea un circulo y lo pinta con los datos leídos del inspector
-                circulo = new Circle(1);
-                circulo.setFill(Color.TRANSPARENT);
-                aplicarValoresCirculo(circulo);
-                zoomGroupMarcas.getChildren().add(circulo);
-                circulo.setOnContextMenuRequested(this::crearMenuContextual);
-                circulo.setOnMousePressed(this::seleccionarElemento);
-                circulo.setCenterX(event.getX());
-                circulo.setCenterY(event.getY());
-                inicioXArc = event.getX();
-                event.consume();
-            } else if (tipoMarcaActual == extremosBoton){
-                //Si está seleccionada la herramiento de extremos, dibuja una línea 
-                //en horizontal y otra en vertical que se cruzan en el punto seleccionado, con los datos del inspector
-                ImageView im = (ImageView) event.getSource();
-                lineaHorizontal = new Line(0,event.getY(),im.getBoundsInLocal().getMaxX(),event.getY());
-                lineaVertical = new Line(event.getX(),0,event.getX(),im.getBoundsInLocal().getMaxY());
-                aplicarValoresLinea(lineaHorizontal);
-                aplicarValoresLinea(lineaVertical);
-                zoomGroupMarcas.getChildren().add(lineaHorizontal);
-                zoomGroupMarcas.getChildren().add(lineaVertical);
-                lineaHorizontal.setOnContextMenuRequested(this::crearMenuContextual);
-                lineaHorizontal.setOnMousePressed(this::seleccionarElemento);
-                lineaVertical.setOnContextMenuRequested(this::crearMenuContextual);
-                lineaVertical.setOnMousePressed(this::seleccionarElemento);
-                event.consume();
+            
+            switch(herramientas.getSelectedToggle().getUserData().toString()) {
+                case "textoBoton":
+                    crearTexto(event);
+                    break;
+                case "puntoBoton":
+                    crearPunto(event, choiceBoxForma.getValue());
+                    break;
+                case "lineaBoton":
+                    crearLinea(event);
+                    break;
+                case "circuloBoton":
+                    crearCirculo(event);
+                    break;
+                case "extremosBoton":
+                    crearExtremos(event);
+                    break;
+                default:
+                    break;
             }
         }
     }
+    
+    private void crearPunto(MouseEvent event, String forma) {
+        //Si está seleccionado el punto, creo un punto y lo pinta con los datos leídos del inspector
+                    switch (forma) {
+                        case "Circulo":
+                            crearPuntoCirculo(event.getX(),event.getY());
+                            break;
+                        case "Cuadrado":
+                            crearPuntoCuadrado(event.getX(), event.getY());
+                            break;
+                    }
+                    event.consume();
+    }
+    
+    private void crearPuntoCirculo(double x, double y){
+        Circle c = new Circle(sliderInspector.getValue());
+        c.setFill(colorInspector.getValue());
+        c.setStroke(colorInspector.getValue());
+        c.setCenterX(x);
+        c.setCenterY(y);
+        anadirALista(c);
+    }
+    
+    private void crearPuntoCuadrado(double x, double y){
+        double v = sliderInspector.getValue()*2;
+        Rectangle r = new Rectangle(v,v);
+        r.setFill(colorInspector.getValue());
+        r.setStroke(colorInspector.getValue());
+        r.setX(x-(r.getWidth()/2));
+        r.setY(y-(r.getWidth()/2));
+        anadirALista(r);
+    }
+    
+    private void crearTexto(MouseEvent event) {
+        //Si está seleccionada texto, creo un TextField y lo pinta con los datos leídos del inspector
+        texto = new TextField();
+        zoomGroupMarcas.getChildren().add(texto);
+        texto.setLayoutX(event.getX());
+        texto.setLayoutY(event.getY());
+        Font nuevaFuente = Font.font(3 * sliderInspector.getValue());
+        texto.setFont(nuevaFuente);
+        texto.requestFocus();
+        texto.setOnAction(this::crearTexto);
+        textoCreado = true;
+        event.consume();
+    }
+    
+    private void crearTexto(ActionEvent e){
+        if (!texto.getText().isBlank()){
+            Text textoT = new Text(texto.getText());
+            textoT.setX(texto.getLayoutX());
+            textoT.setY(texto.getLayoutY());
+            aplicarValoresTexto(textoT);
+            anadirALista(textoT);
+        }
+        zoomGroupMarcas.getChildren().remove(texto);
+        textoCreado = false;
+        e.consume();
+    }
+    
+    private void crearLinea (MouseEvent event) {
+        //Si está seleccionada la línea, crea el inicio de una línea y la pinta con los datos leídos del inspector
+                    linea = new Line(event.getX(),event.getY(),event.getX(),event.getY());
+                    aplicarValoresLinea(linea);
+                    anadirALista(linea);
+                    event.consume();
+    }
+    
+    private void crearCirculo (MouseEvent event) {
+        //Si está seleccionado el círculo, crea un circulo y lo pinta con los datos leídos del inspector
+                    circulo = new Circle(1);
+                    circulo.setFill(Color.TRANSPARENT);
+                    aplicarValoresCirculo(circulo);
+                    anadirALista(circulo);
+                    circulo.setCenterX(event.getX());
+                    circulo.setCenterY(event.getY());
+                    inicioXArc = event.getX();
+                    event.consume();
+    }
+    
+    private void crearExtremos (MouseEvent event) {
+        //Si está seleccionada la herramiento de extremos, dibuja una línea 
+                    //en horizontal y otra en vertical que se cruzan en el punto seleccionado, con los datos del inspector
+                    ImageView im = (ImageView) event.getSource();
+                    lineaHorizontal = new Line(0,event.getY(),im.getBoundsInLocal().getMaxX(),event.getY());
+                    lineaVertical = new Line(event.getX(),0,event.getX(),im.getBoundsInLocal().getMaxY());
+                    aplicarValoresLinea(lineaHorizontal);
+                    aplicarValoresLinea(lineaVertical);
+                    anadirALista(lineaHorizontal);
+                    anadirALista(lineaVertical);
+                    event.consume();
+    }
+    
     @FXML
     private void ratonMantenidoMapa(MouseEvent event) {
-        if (tipoMarcaActual == lineaBoton) {
-            if (linea != null) {
-                linea.setEndX(event.getX());
-                linea.setEndY(event.getY());
-                event.consume();
-            }
-        } else if (tipoMarcaActual == circuloBoton){
-            if (circulo != null) {
-                double radio = Math.abs(event.getX()-inicioXArc);
-                circulo.setRadius(radio);
-                event.consume();
-            }
+        switch(herramientas.getSelectedToggle().getUserData().toString()) {
+            case "lineaBoton":
+                if (linea != null) {
+                    linea.setEndX(event.getX());
+                    linea.setEndY(event.getY());
+                    event.consume();
+                }
+                break;
+            case "circuloBoton":
+                if (circulo != null) {
+                    double radio = Math.abs(event.getX()-inicioXArc);
+                    circulo.setRadius(radio);
+                    event.consume();
+                }
+                break;
+            default:
+                break;
         }
     }
     @FXML
     private void ratonSoltadoMapa(MouseEvent event) {
         linea = null;
         circulo = null;
+    }
+    
+    //METODOS PARA AÑADIR A LA LISTA DEL GRUPO Y DE MODIFICAR VALORES DE LAS MARCAS
+    
+    private void anadirALista(Node n) {
+        zoomGroupMarcas.getChildren().add(n);
+        n.setOnContextMenuRequested(this::crearMenuContextual);
+        n.setOnMousePressed(this::seleccionarElemento);
+    }
+    
+    private void aplicarValoresTexto(Text t) {
+        t.setFill(colorInspector.getValue());
+        Font nuevaFuente = Font.font(3*sliderInspector.getValue());
+        t.setFont(nuevaFuente);
+    }
+    
+    private void aplicarValoresLinea(Line l) {
+        l.setFill(colorInspector.getValue());
+        l.setStroke(colorInspector.getValue());
+        l.setStrokeWidth(sliderInspector.getValue());
+    }
+    
+    private void aplicarValoresCirculo(Circle c) {
+        c.setStroke(colorInspector.getValue());
+        c.setStrokeWidth(sliderInspector.getValue());
+    }
+    
+    private void editarPuntoCirculo(Circle c) {
+        if (choiceBoxForma.getValue() == "Circulo") {
+            c.setFill(colorInspector.getValue());
+            c.setStroke(colorInspector.getValue());
+            c.setRadius(sliderInspector.getValue());
+        } else {
+            crearPuntoCuadrado(c.getCenterX(), c.getCenterY());
+            zoomGroupMarcas.getChildren().remove(c);
+        }
+    }
+    
+    private void editarPuntoCuadrado(Rectangle r) {
+        if (choiceBoxForma.getValue() == "Cuadrado") {
+            r.setFill(colorInspector.getValue());
+            r.setStroke(colorInspector.getValue());
+            r.setHeight(sliderInspector.getValue() * 2);
+            r.setWidth(sliderInspector.getValue() * 2);
+        } else {
+            crearPuntoCirculo(r.getX() + (r.getHeight() / 2), r.getY() + (r.getHeight() / 2));
+            zoomGroupMarcas.getChildren().remove(r);
+        }
     }
     
     //EVENTOS MARCAS -----------------------------------
@@ -346,20 +484,6 @@ public class CartaNavegacionController implements Initializable{
             Node n = (Node)e.getSource();
             editarNodo(n);
         }
-    }
-    private void crearTexto(ActionEvent e){
-        if (!texto.getText().isBlank()){
-            Text textoT = new Text(texto.getText());
-            textoT.setX(texto.getLayoutX());
-            textoT.setY(texto.getLayoutY());
-            aplicarValoresTexto(textoT);
-            zoomGroupMarcas.getChildren().add(textoT);
-            textoT.setOnContextMenuRequested(this::crearMenuContextual);
-            textoT.setOnMousePressed(this::seleccionarElemento);
-        }
-        zoomGroupMarcas.getChildren().remove(texto);
-        textoCreado = false;
-        e.consume();
     }
     private void crearMenuContextual (ContextMenuEvent e){
         if (!contextMenuCreado){
@@ -389,7 +513,7 @@ public class CartaNavegacionController implements Initializable{
         cM.show((Node)e.getSource(),e.getScreenX(), e.getScreenY());
         e.consume();
     }
-    //METODOS AYUDA CREAR Y EDITAR MARCAS ------------------------------
+    //METODOS EDITAR NODO ------------------------------
     private void editarNodo(Node n) {
         if (n instanceof Text){
                 Text texto = (Text) n;
@@ -397,39 +521,17 @@ public class CartaNavegacionController implements Initializable{
         } else if (n instanceof Circle){
             Circle circle = (Circle) n;
             if (circle.getFill() == Color.TRANSPARENT) {
-                //Si es un circulo
                 aplicarValoresCirculo(circle);
             } else {
-                //Si es un punto
-                aplicarValoresPunto(circle);
+                editarPuntoCirculo(circle);
             }
         } else if (n instanceof Line) {
             Line line = (Line) n;
             aplicarValoresLinea(line);
+        } else {
+            Rectangle r = (Rectangle) n;
+            editarPuntoCuadrado(r);
         }
-    }
-    
-    private void aplicarValoresTexto(Text t) {
-        t.setFill(colorInspector.getValue());
-        Font nuevaFuente = Font.font(3*sliderInspector.getValue());
-        t.setFont(nuevaFuente);
-    }
-    
-    private void aplicarValoresLinea(Line l) {
-        l.setFill(colorInspector.getValue());
-        l.setStroke(colorInspector.getValue());
-        l.setStrokeWidth(sliderInspector.getValue());
-    }
-    
-    private void aplicarValoresCirculo(Circle c) {
-        c.setStroke(colorInspector.getValue());
-        c.setStrokeWidth(sliderInspector.getValue());
-    }
-    
-    private void aplicarValoresPunto(Circle c) {
-        c.setFill(colorInspector.getValue());
-        c.setStroke(colorInspector.getValue());
-        c.setRadius(sliderInspector.getValue());
     }
     
 }
