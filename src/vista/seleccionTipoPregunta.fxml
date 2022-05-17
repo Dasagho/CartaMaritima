@@ -12,20 +12,34 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.SeleccionTipoPreguntaController">
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Elige un problema a realizar:" />
-         </children>
+      <VBox BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="16.0" />
          </BorderPane.margin>
-         <padding>
-            <Insets left="50.0" />
-         </padding>
-      </HBox>
+         <children>
+            <HBox alignment="CENTER_RIGHT" prefHeight="47.0">
+               <children>
+                  <Label text="SELECCIÓN DE PREGUNTA">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <Label prefHeight="64.0" prefWidth="600.0" text="Elige un problema a realizar:">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
    </top>
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" spacing="32.0" BorderPane.alignment="CENTER">
