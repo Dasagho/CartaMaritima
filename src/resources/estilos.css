@@ -44,4 +44,7 @@
 .root{
     -fx-font-family: monospace;
     -fx-background-image: url("clouds-sky-anime.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: cover;
 }
