@@ -151,15 +151,25 @@ public class PantallaPrincipalUsuarioController implements Initializable {
 
     @FXML
     private void pulsarMapa(ActionEvent event) throws IOException {
-        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/FXMLCartaNavegacion.fxml"));
-        Parent root = miCargador.load();
-        Scene escena = new Scene(root, 850 , 550);
-        Stage escenario = new Stage();
-        escenario.setMinHeight(550);
-        escenario.setMinWidth(850);
-        escenario.setScene(escena);
-        escena.getStylesheets().add("/resources/estilos.css");
-        escenario.show();
+        if (!modelo.secretario.cartaAbierta()) {
+            modelo.secretario.setCartaAbierta(true);
+            FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/FXMLCartaNavegacion.fxml"));
+            Parent root = miCargador.load();
+            Scene escena = new Scene(root, 850, 550);
+            Stage escenario = new Stage();
+            escenario.setMinHeight(550);
+            escenario.setMinWidth(850);
+            escenario.setScene(escena);
+            escena.getStylesheets().add("/resources/estilos.css");
+            escenario.show();
+
+            escenario.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent e) {
+                    modelo.secretario.setCartaAbierta(false);
+                }
+            });
+        }
     }
 
 }
