@@ -159,7 +159,7 @@ public class InicioSesionController implements Initializable {
     }
 
     public void comprobarErrores() {
-        if (!modelo.secretario.getNavegacion().exitsNickName(email_textField.getText())) {
+        if (!modelo.secretario.getNavegacion().exitsNickName(email_textField.getText()) && !email_textField.getText().isEmpty()) {
             email_error.setDisable(false);
             email_error.setText("No existe un usuario con este NickName, introduce el NickName de un usuario registrado");
             contrasena_textField.setText("");
@@ -170,12 +170,7 @@ public class InicioSesionController implements Initializable {
         }
 
         User usuario = modelo.secretario.getNavegacion().loginUser(email_textField.getText(), contrasena_textField.getText());
-        if (usuario == null) {
-            contrasena_error.setDisable(false);
-            contrasena_error.setText("La contraseña introducida no pertenece a este usuario, intentalo de nuevo con otra contraseña");
-            contrasena_textField.setText("");
-            hasOlvidadoContrasena.setVisible(true);
-        } else {
+        if (!contrasena_textField.getText().isEmpty()) {
             contrasena_error.setText("");
             contrasena_error.setDisable(true);
         }

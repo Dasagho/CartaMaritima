@@ -165,7 +165,7 @@ public class EjercicioController implements Initializable {
     }
 
     @FXML
-    private void pulsarMapa(MouseEvent event) throws IOException {
+    private void pulsarMapa(ActionEvent event) throws IOException {
         if (!modelo.secretario.cartaAbierta()) {
             modelo.secretario.setCartaAbierta(true);
             FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/FXMLCartaNavegacion.fxml"));

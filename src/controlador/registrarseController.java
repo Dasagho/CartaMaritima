@@ -122,8 +122,7 @@ public class registrarseController implements Initializable {
         // Diferenciamos pagina de registro de Modificar perfil
         nickName_textfield.disableProperty().bind(secretario.usuarioActivo());
         titulo.setText(secretario.usuarioActivo().getValue() ? "Modificar Perfil" : "Registrarse");
-        
-        
+
         // Notificamos de los errores al usuario al perder el foco
         nickName_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> {
             modelo.secretario.animacion(newVal, nombre_label);
@@ -275,42 +274,35 @@ public class registrarseController implements Initializable {
     }
 
     private void comprobarErrores() {
-        if (!checkNickName(nickName_textfield.getText())) {
+        if (!checkNickName(nickName_textfield.getText()) && !nickName_textfield.getText().isEmpty()) {
             nickName_error.setText("Nombre de usuario no valido, un nombre valido debe tener entre 6 y 15 caracteres y solo puede contener mayúsculas, minúsculas, guiones o guiones bajos");
             return;
         } else {
             nickName_error.setText("");
         }
 
-        if (!User.checkEmail(email_textfield.getText())) {
+        if (!User.checkEmail(email_textfield.getText()) && !email_textfield.getText().isEmpty()) {
             email_error.setText("Formato del correo electronico introducido no es valido por favor introduce un correo valido con formato x@x.x");
             return;
         } else {
             email_error.setText("");
         }
 
-        if (!checkPassword(contrasena_textfield.getText())) {
+        if (!checkPassword(contrasena_textfield.getText()) && !contrasena_textfield.getText().isBlank()) {
             contrasena_error.setText("Introduce una contraseña que contenga: Entre 8 y 20 caracteres, Minimo una letra Mayúscula y Minúscula, un dígito, un caracter de los siguientes: !@#$%&*()-+= y No contener ningun espacio en blanco");
             contrasena_textfield.setText("");
             confirmacion_textfield.setText("");
             return;
-        } else {
+        } else { System.out.println("aqui");
             contrasena_error.setText("");
         }
 
-        if (!contrasena_textfield.getText().equals(confirmacion_textfield.getText())) {
+        if (!contrasena_textfield.getText().equals(confirmacion_textfield.getText()) && !confirmacion_textfield.getText().isEmpty()) {
             confirmacion_error.setText("No coinciden las contraseñas");
             confirmacion_textfield.setText("");
             return;
         } else {
             confirmacion_error.setText("");
-        }
-
-        if (Period.between(datePicker.getValue(), LocalDate.now()).getYears() < 16) {
-            fecha_error.setText("Debes tener 16 años o mas para poder registrarte");
-            return;
-        } else {
-            fecha_error.setText("");
         }
     }
 
