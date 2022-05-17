@@ -53,7 +53,7 @@ public class Main extends Application {
         primaryStage.show();
         
         // Establecimiento del icono de la aplicación en miniatura
-        stage.getIcons().add(new Image("/resources/logotipos/icono-pixelizado.png"));
+        stage.getIcons().add(new Image("/resources/logotipos/icono-pixelizado-miniatura.png"));
 
         // Manejador que captura la peticion de cerrar la ventana y ejecuta un 
         // codigo asociado al acabar

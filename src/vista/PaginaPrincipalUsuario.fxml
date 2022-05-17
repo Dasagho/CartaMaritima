@@ -15,18 +15,15 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.PantallaPrincipalUsuarioController">
    <top>
-      <HBox prefHeight="98.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox fx:id="cabeceraFX" prefHeight="98.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER_LEFT" prefWidth="64.0" spacing="5.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
                <children>
                   <HBox spacing="5.0">
                      <children>
                         <Label text="X" fx:id="xRealizados" />
                         <Label text="problemas realizados" />
-                     </children>
-                  </HBox>
-                  <HBox spacing="5.0">
-                     <children>
+                        <Label text="  |  " />
                         <Label text="X" fx:id="xAcertados" />
                         <Label text="respuestas correctas" />
                      </children>
@@ -42,7 +39,7 @@
                   <Insets left="25.0" right="15.0" />
                </padding>
             </VBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="4.0" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_RIGHT" minWidth="400.0" prefHeight="100.0" spacing="4.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label fx:id="etiquetaAlias" text="SuperNáutico_96">
                      <font>

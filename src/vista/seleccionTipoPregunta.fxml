@@ -21,7 +21,7 @@
             <Insets bottom="16.0" />
          </BorderPane.margin>
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="47.0" style="-fx-background-color: teal;">
+            <HBox fx:id="cabeceraFX" alignment="CENTER_RIGHT" prefHeight="47.0">
                <children>
                   <Label text="SELECCIÓN DE PREGUNTA">
                      <font>
