@@ -11,7 +11,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,6 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.Session;
 
 /**
@@ -77,7 +80,6 @@ public class PantallaPrincipalUsuarioController implements Initializable {
      * Para el initialize: - Recupera el objeto sesion y el objeto usuario del
      * modelo
      */
-
     /**
      * Crea un dialogo modal confirmando que se quiere cerrar sesion y cambia la
      * vista a la inicio de sesion
@@ -149,15 +151,25 @@ public class PantallaPrincipalUsuarioController implements Initializable {
 
     @FXML
     private void pulsarMapa(ActionEvent event) throws IOException {
-        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/FXMLCartaNavegacion.fxml"));
-        Parent root = miCargador.load();
-        Scene escena = new Scene(root, 850 , 550);
-        Stage escenario = new Stage();
-        escenario.setMinHeight(550);
-        escenario.setMinWidth(850);
-        escenario.setScene(escena);
-        escena.getStylesheets().add("/resources/estilos.css");
-        escenario.show();
+        if (!modelo.secretario.cartaAbierta()) {
+            modelo.secretario.setCartaAbierta(true);
+            FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/FXMLCartaNavegacion.fxml"));
+            Parent root = miCargador.load();
+            Scene escena = new Scene(root, 850, 550);
+            Stage escenario = new Stage();
+            escenario.setMinHeight(550);
+            escenario.setMinWidth(850);
+            escenario.setScene(escena);
+            escena.getStylesheets().add("/resources/estilos.css");
+            escenario.show();
+
+            escenario.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent e) {
+                    modelo.secretario.setCartaAbierta(false);
+                }
+            });
+        }
     }
 
 }

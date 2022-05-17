@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -30,6 +32,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.Answer;
 import model.Problem;
 
@@ -162,16 +165,26 @@ public class EjercicioController implements Initializable {
     }
 
     @FXML
-    private void mostrarCarta(ActionEvent event) throws IOException {
-        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/FXMLCartaNavegacion.fxml"));
-        Parent root = miCargador.load();
-        Scene escena = new Scene(root, 850, 550);
-        Stage escenario = new Stage();
-        escenario.setMinHeight(550);
-        escenario.setMinWidth(850);
-        escenario.setScene(escena);
-        escena.getStylesheets().add("/resources/estilos.css");
-        escenario.show();
+    private void pulsarMapa(ActionEvent event) throws IOException {
+        if (!modelo.secretario.cartaAbierta()) {
+            modelo.secretario.setCartaAbierta(true);
+            FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/FXMLCartaNavegacion.fxml"));
+            Parent root = miCargador.load();
+            Scene escena = new Scene(root, 850, 550);
+            Stage escenario = new Stage();
+            escenario.setMinHeight(550);
+            escenario.setMinWidth(850);
+            escenario.setScene(escena);
+            escena.getStylesheets().add("/resources/estilos.css");
+            escenario.show();
+
+            escenario.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent e) {
+                    modelo.secretario.setCartaAbierta(false);
+                }
+            });
+        }
     }
 
     /**

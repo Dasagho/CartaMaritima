@@ -33,6 +33,7 @@ public class secretario {
     private static int fallos = 0;
 // - - - - - - - - - - - - - - - - - - - - - - - - 
     private static BooleanProperty usuarioActivado = new SimpleBooleanProperty(false);   // <- Inicializamos la propiedad booleana
+    private static BooleanProperty cartaAbierta = new SimpleBooleanProperty(false);      // <- Consulta de ventana de Carta Nautica Abierta o no
 // - - - - - - - - - - - - - - - - - - - - - - - - 
     private static int totalProblemasRealizados = 0;
     private static int totalAciertos = 0;
@@ -50,6 +51,14 @@ public class secretario {
 
     public static BooleanProperty usuarioActivo() {
         return usuarioActivado;
+    }
+    
+    public static boolean cartaAbierta() {
+        return cartaAbierta.getValue();
+    }
+    
+    public static void setCartaAbierta(Boolean value) {
+        cartaAbierta.setValue(value);
     }
 
 // - - - - - Métodos de sesión - - - - - - - - -

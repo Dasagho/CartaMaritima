@@ -20,7 +20,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ResultadosUsuarioController">
    <top>
-      <HBox alignment="CENTER" prefHeight="49.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_RIGHT" prefHeight="49.0" prefWidth="600.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
             <Label text="RESULTADOS SESIONES">
                <font>
@@ -28,6 +28,12 @@
                </font>
             </Label>
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets right="20.0" />
+         </padding>
       </HBox>
    </top>
    <bottom>
@@ -57,8 +63,14 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Desde el día" />
-                              <Label text="Hasta el día" GridPane.rowIndex="1" />
+                              <Label fx:id="desdeLabel" text="Desde el día">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <Label fx:id="hastaLabel" text="Hasta el día" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
                               <DatePicker fx:id="fechaDesde" onAction="#dataPickerCambiado" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets left="20.0" right="20.0" />
@@ -91,7 +103,7 @@
                <children>
                   <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="24.0" spacing="30.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" maxWidth="300.0" prefHeight="222.0" prefWidth="231.0" HBox.hgrow="ALWAYS">
+                        <VBox alignment="TOP_CENTER" maxWidth="300.0" prefHeight="222.0" prefWidth="231.0" style="-fx-background-color: grey;" HBox.hgrow="ALWAYS">
                            <children>
                               <Label prefHeight="37.0" prefWidth="222.0" text="DATOS DE TODAS LAS SESIONES" textAlignment="CENTER" wrapText="true">
                                  <font>
@@ -159,7 +171,7 @@
                            </HBox.margin>
                         </VBox>
                         <Separator minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="168.0" prefWidth="25.0" />
-                        <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="25.0" maxWidth="300.0" prefHeight="261.0" prefWidth="206.0" HBox.hgrow="ALWAYS">
+                        <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="25.0" maxWidth="300.0" prefHeight="261.0" prefWidth="206.0" style="-fx-background-color: grey;" HBox.hgrow="ALWAYS">
                            <children>
                               <Label prefHeight="20.0" text="DATOS FECHAS SELECCIONADAS" textAlignment="CENTER" wrapText="true">
                                  <font>
