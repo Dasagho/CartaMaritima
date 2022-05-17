@@ -46,6 +46,10 @@ public class ResultadosUsuarioController implements Initializable {
     private DatePicker fechaDesde;
     @FXML
     private DatePicker fechaHasta;
+    @FXML
+    private Label desdeLabel;
+    @FXML
+    private Label hastaLabel;
     
     //FORMATOS FECHA Y HORA
     DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -92,6 +96,7 @@ public class ResultadosUsuarioController implements Initializable {
     private BarChart<SessionWrapper, Integer> grafico;
     private XYChart.Series serieAciertos;
     private XYChart.Series serieFallos;
+
     
     /**
      * Initializes the controller class.
@@ -179,6 +184,10 @@ public class ResultadosUsuarioController implements Initializable {
         rellenarDatosGrafica();
         actualizarDatosTotales();
         actualizarDatosSeleccionados();
+        
+        //Animaciones labels ------------------------------------------------------------------
+        fechaDesde.focusedProperty().addListener((obs, oldVal, newVal) -> {modelo.secretario.animacion(newVal, desdeLabel);});
+        fechaHasta.focusedProperty().addListener((obs, oldVal, newVal) -> {modelo.secretario.animacion(newVal, hastaLabel);});
     }
     
     @FXML

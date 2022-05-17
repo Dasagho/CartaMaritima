@@ -24,6 +24,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
@@ -48,6 +49,10 @@ public class PantallaPrincipalUsuarioController implements Initializable {
     private Label xAcertados;
     @FXML
     private Label xPorcentaje;
+    @FXML
+    private Button botonRealizarProblema;
+    @FXML
+    private MenuButton menuPerfil;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -62,7 +67,7 @@ public class PantallaPrincipalUsuarioController implements Initializable {
         Float porcentaje;
         xRealizados.setText("" + problemasRealizados);
         xAcertados.setText("" + aciertos);
-        porcentaje = ((float) aciertos) / ((float) problemasRealizados);
+        porcentaje = ((float) ((int) ( ( ((float) aciertos) / ((float) problemasRealizados) ) * 10000))) /100;
         if (porcentaje.toString() != "NaN") {
             xPorcentaje.setText("" + porcentaje + "%");
         } else {
@@ -145,7 +150,7 @@ public class PantallaPrincipalUsuarioController implements Initializable {
     }
 
     @FXML
-    private void pulsarMapa(MouseEvent event) throws IOException {
+    private void pulsarMapa(ActionEvent event) throws IOException {
         if (!modelo.secretario.cartaAbierta()) {
             modelo.secretario.setCartaAbierta(true);
             FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/vista/FXMLCartaNavegacion.fxml"));
