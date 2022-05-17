@@ -39,7 +39,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
@@ -273,7 +272,7 @@ public class CartaNavegacionController implements Initializable{
             
             switch(herramientas.getSelectedToggle().getUserData().toString()) {
                 case "textoBoton":
-                    crearTextoB(event);
+                    crearTexto(event);
                     break;
                 case "puntoBoton":
                     crearPunto(event, choiceBoxForma.getValue());
@@ -325,18 +324,18 @@ public class CartaNavegacionController implements Initializable{
         anadirALista(r);
     }
     
-    private void crearTextoB(MouseEvent event) {
+    private void crearTexto(MouseEvent event) {
         //Si está seleccionada texto, creo un TextField y lo pinta con los datos leídos del inspector
-                    texto = new TextField();
-                    zoomGroupMarcas.getChildren().add(texto);
-                    texto.setLayoutX(event.getX());
-                    texto.setLayoutY(event.getY());
-                    Font nuevaFuente = Font.font(3*sliderInspector.getValue());
-                    texto.setFont(nuevaFuente);
-                    texto.requestFocus();
-                    texto.setOnAction(this::crearTexto);
-                    textoCreado = true;
-                    event.consume();
+        texto = new TextField();
+        zoomGroupMarcas.getChildren().add(texto);
+        texto.setLayoutX(event.getX());
+        texto.setLayoutY(event.getY());
+        Font nuevaFuente = Font.font(3 * sliderInspector.getValue());
+        texto.setFont(nuevaFuente);
+        texto.requestFocus();
+        texto.setOnAction(this::crearTexto);
+        textoCreado = true;
+        event.consume();
     }
     
     private void crearTexto(ActionEvent e){
@@ -412,6 +411,8 @@ public class CartaNavegacionController implements Initializable{
         circulo = null;
     }
     
+    //METODOS PARA AÑADIR A LA LISTA DEL GRUPO Y DE MODIFICAR VALORES DE LAS MARCAS
+    
     private void anadirALista(Node n) {
         zoomGroupMarcas.getChildren().add(n);
         n.setOnContextMenuRequested(this::crearMenuContextual);
@@ -435,27 +436,27 @@ public class CartaNavegacionController implements Initializable{
         c.setStrokeWidth(sliderInspector.getValue());
     }
     
-    private void editarPunto(Shape p) {
-        if (p instanceof Circle){
-            Circle c = (Circle)p;
-            if (choiceBoxForma.getValue() == "Circulo") {
-                c.setRadius(sliderInspector.getValue());
-            } else {
-                crearPuntoCuadrado(c.getCenterX(),c.getCenterY());
-                zoomGroupMarcas.getChildren().remove(p);
-            }
+    private void editarPuntoCirculo(Circle c) {
+        if (choiceBoxForma.getValue() == "Circulo") {
+            c.setFill(colorInspector.getValue());
+            c.setStroke(colorInspector.getValue());
+            c.setRadius(sliderInspector.getValue());
         } else {
-            Rectangle r = (Rectangle)p;
-            if (choiceBoxForma.getValue() == "Cuadrado") {
-                r.setHeight(sliderInspector.getValue()*2);
-                r.setWidth(sliderInspector.getValue()*2);
-            } else {
-                crearPuntoCirculo(r.getX()+(r.getHeight()/2),r.getY()+(r.getHeight()/2));
-                zoomGroupMarcas.getChildren().remove(p);
-            }
+            crearPuntoCuadrado(c.getCenterX(), c.getCenterY());
+            zoomGroupMarcas.getChildren().remove(c);
         }
-        p.setFill(colorInspector.getValue());
-        p.setStroke(colorInspector.getValue());
+    }
+    
+    private void editarPuntoCuadrado(Rectangle r) {
+        if (choiceBoxForma.getValue() == "Cuadrado") {
+            r.setFill(colorInspector.getValue());
+            r.setStroke(colorInspector.getValue());
+            r.setHeight(sliderInspector.getValue() * 2);
+            r.setWidth(sliderInspector.getValue() * 2);
+        } else {
+            crearPuntoCirculo(r.getX() + (r.getHeight() / 2), r.getY() + (r.getHeight() / 2));
+            zoomGroupMarcas.getChildren().remove(r);
+        }
     }
     
     //EVENTOS MARCAS -----------------------------------
@@ -512,7 +513,7 @@ public class CartaNavegacionController implements Initializable{
         cM.show((Node)e.getSource(),e.getScreenX(), e.getScreenY());
         e.consume();
     }
-    //METODOS AYUDA CREAR Y EDITAR MARCAS ------------------------------
+    //METODOS EDITAR NODO ------------------------------
     private void editarNodo(Node n) {
         if (n instanceof Text){
                 Text texto = (Text) n;
@@ -522,15 +523,14 @@ public class CartaNavegacionController implements Initializable{
             if (circle.getFill() == Color.TRANSPARENT) {
                 aplicarValoresCirculo(circle);
             } else {
-                Shape s = (Shape) n;
-                editarPunto(s);
+                editarPuntoCirculo(circle);
             }
         } else if (n instanceof Line) {
             Line line = (Line) n;
             aplicarValoresLinea(line);
         } else {
-            Shape s = (Shape) n;
-            editarPunto(s);
+            Rectangle r = (Rectangle) n;
+            editarPuntoCuadrado(r);
         }
     }
     
