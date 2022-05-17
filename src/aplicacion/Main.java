@@ -44,7 +44,7 @@ public class Main extends Application {
         stage = primaryStage;
         primaryStage.setTitle("Subnautica");
 
-        Escena = new Scene(loadFXML("FXMLCartaNavegacion"), 900, 650);
+        Escena = new Scene(loadFXML("inicioSesion"), 900, 650);
         primaryStage.setMinHeight(650);
         primaryStage.setMinWidth(900);
         Escena.getStylesheets().add("/resources/estilos.css");
