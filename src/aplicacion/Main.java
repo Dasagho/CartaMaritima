@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -50,6 +51,9 @@ public class Main extends Application {
         Escena.getStylesheets().add("/resources/estilos.css");
         primaryStage.setScene(Escena);
         primaryStage.show();
+        
+        // Establecimiento del icono de la aplicación en miniatura
+        stage.getIcons().add(new Image("/resources/logotipos/icono-pixelizado.png"));
 
         // Manejador que captura la peticion de cerrar la ventana y ejecuta un 
         // codigo asociado al acabar

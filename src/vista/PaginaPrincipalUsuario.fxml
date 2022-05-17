@@ -51,15 +51,18 @@
                      <HBox.margin>
                         <Insets right="28.0" />
                      </HBox.margin></Label>
-                  <ImageView fx:id="imagenPerfil" fitHeight="59.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../../../MEGA/Universidad/2º%20curso/IPC%20(2ºcuatri)/Entregable%20final/Proyecto/CartaMaritima/src/resources/avatars/avatar1.png" />
-                     </image></ImageView>
-                  <MenuButton mnemonicParsing="false" translateY="20.0">
+                  <MenuButton fx:id="menuPerfil" focusTraversable="false" mnemonicParsing="false">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#pulsarEditarPerfil" text="Editar perfil" />
                       <MenuItem mnemonicParsing="false" onAction="#pulsarCerrarSesion" text="Cerrar sesión" />
                     </items>
+                     <graphic>
+                        <ImageView fx:id="imagenPerfil" fitHeight="59.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../../../Imágenes/fondos/hellstone-ruins-fantasy.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </MenuButton>
                </children>
                <padding>
@@ -85,7 +88,7 @@
             <Insets left="64.0" right="64.0" />
          </BorderPane.margin>
          <children>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pulsarRealizarProblema" prefHeight="76.0" prefWidth="472.0" text="Realizar problema">
+            <Button fx:id="botonRealizarProblema" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pulsarRealizarProblema" prefHeight="76.0" prefWidth="472.0" text="Realizar problema">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
@@ -101,11 +104,15 @@
                      </HBox.margin>
                   </Button>
                   <FlowPane maxWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
-                  <ImageView fitHeight="104.0" fitWidth="107.0" onMouseClicked="#pulsarMapa" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
-                     <image>
-                        <Image url="@../resources/iconos/download.png" />
-                     </image>
-                  </ImageView>
+                  <Button mnemonicParsing="false" onAction="#pulsarMapa">
+                     <graphic>
+                        <ImageView fitHeight="104.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/iconos/download.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </HBox>
          </children>
