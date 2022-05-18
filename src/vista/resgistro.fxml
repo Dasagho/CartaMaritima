@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.registrarseController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.registrarseController">
    <center>
       <GridPane fx:id="grid" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" vgap="5.0">
         <columnConstraints>
@@ -56,7 +56,7 @@
                <children>
                   <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="300.0">
                      <children>
-                        <Label fx:id="correo_label" text="Correo Electronico">
+                        <Label fx:id="correo_label" text="Correo Electrónico">
                            <font>
                               <Font name="System Bold" size="11.0" />
                            </font>
@@ -79,7 +79,7 @@
                         <PasswordField fx:id="contrasena_textfield" maxWidth="-Infinity" prefWidth="300.0" promptText="Pass123+" />
                      </children>
                   </VBox>
-                  <Label fx:id="contrasena_error" alignment="CENTER" ellipsisString="......." prefHeight="80.0" textAlignment="CENTER" textFill="RED" />
+                  <Label fx:id="contrasena_error" alignment="CENTER" ellipsisString="......." prefHeight="80.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
                </children>
             </VBox>
             <VBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
@@ -128,7 +128,7 @@
       </GridPane>
    </center>
    <top>
-      <HBox alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="titulo" text="REGISTRARSE" HBox.hgrow="ALWAYS">
                <HBox.margin>
@@ -138,14 +138,14 @@
                   <Insets right="30.0" />
                </padding>
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="22.0" />
                </font>
             </Label>
          </children>
       </HBox>
    </top>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
             <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
             <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />

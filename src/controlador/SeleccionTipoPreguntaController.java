@@ -110,6 +110,7 @@ public class SeleccionTipoPreguntaController implements Initializable {
     }
 
     
+    
     class ProblemasListCell extends ListCell<Problem>
     {
         @Override
