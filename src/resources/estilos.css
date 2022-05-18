@@ -21,7 +21,9 @@
 }
 
 .button:pressed {
-    -fx-background-color: #777777;
+    -fx-background-color: 
+        radial-gradient(center 50% 50%, radius 100%, #00c2c7, #0086ad);
+    -fx-text-fill: white;
     -fx-scale-x: 0.95;
     -fx-translate-y: 2;
 }
