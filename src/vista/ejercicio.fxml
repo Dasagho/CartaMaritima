@@ -9,58 +9,81 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.EjercicioController">
    <bottom>
-      <HBox fx:id="hBoxBotones" alignment="CENTER" prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox fx:id="hBoxBotones" alignment="CENTER" prefHeight="55.0" prefWidth="600.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="volver_Button" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
-            <Region fx:id="regionBotones" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <Button fx:id="confirmar_Button" defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#confirmar" text="Confirmar" />
+            <Button fx:id="volver_Button" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Button>
+            <Region fx:id="regionBotones" HBox.hgrow="ALWAYS" />
+            <Button fx:id="confirmar_Button" defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#confirmar" styleClass="estiloBotonNaranja" text="Confirmar" />
          </children>
          <padding>
-            <Insets left="40.0" right="40.0" />
+            <Insets left="128.0" right="128.0" />
          </padding>
       </HBox>
    </bottom>
    <top>
-      <VBox alignment="CENTER_LEFT" prefHeight="176.0" prefWidth="700.0" spacing="5.0" BorderPane.alignment="TOP_LEFT">
+      <VBox alignment="CENTER_LEFT" prefWidth="700.0" spacing="5.0" styleClass="estiloDifuso" BorderPane.alignment="TOP_LEFT">
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER_RIGHT" minHeight="47.0" prefHeight="47.0" styleClass="estiloCabecera">
                <children>
                   <Label text="Ejercicio">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
+                     <padding>
+                        <Insets right="32.0" />
+                     </padding>
                   </Label>
                </children>
             </HBox>
-            <Label text="Enunciado">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <TextArea fx:id="enunciado_textArea" editable="false" prefHeight="500.0" prefWidth="200.0" text="¿Si un tren sale de Salamanca a las 4 de la tarde y otro sale de Madrid 30 minutos despues, cuantos abdominales tiene que hacer batman para recuperarse de su mision antes de pagar un hospital entero?" wrapText="true" VBox.vgrow="ALWAYS">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </TextArea>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="140.0" prefHeight="140.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Enunciado">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="enunciado_textArea" editable="false" maxHeight="1.7976931348623157E308" prefWidth="444.0" text="¿Si un tren sale de Salamanca a las 4 de la tarde y otro sale de Madrid 30 minutos despues, cuantos abdominales tiene que hacer batman para recuperarse de su mision antes de pagar un hospital entero?" wrapText="true" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextArea>
+               </children>
+               <VBox.margin>
+                  <Insets left="128.0" right="128.0" />
+               </VBox.margin>
+            </GridPane>
          </children>
-         <padding>
-            <Insets left="40.0" right="40.0" top="10.0" />
-         </padding>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </VBox>
    </top>
    <center>
-      <HBox prefHeight="219.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+      <HBox styleClass="estiloDifuso" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" prefWidth="100.0" spacing="28.0" HBox.hgrow="ALWAYS">
                <children>
-                  <RadioButton fx:id="resp1_radioButton" contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="600.0" text="Respuesta 1" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                  <RadioButton fx:id="resp1_radioButton" contentDisplay="TOP" mnemonicParsing="false" prefWidth="600.0" text="Respuesta 1" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -71,7 +94,7 @@
                         <Insets left="20.0" />
                      </padding>
                   </RadioButton>
-                  <RadioButton fx:id="resp2_radioButton" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="600.0" text="Respuesta 2" textAlignment="CENTER" toggleGroup="$respuestas" wrapText="true" VBox.vgrow="ALWAYS">
+                  <RadioButton fx:id="resp2_radioButton" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefWidth="600.0" text="Respuesta 2" textAlignment="CENTER" toggleGroup="$respuestas" wrapText="true" VBox.vgrow="ALWAYS">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -79,7 +102,7 @@
                         <Insets left="20.0" />
                      </padding>
                   </RadioButton>
-                  <RadioButton fx:id="resp3_radioButton" contentDisplay="CENTER" layoutX="10.0" layoutY="28.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="600.0" text="Respuesta 3" textAlignment="CENTER" toggleGroup="$respuestas" VBox.vgrow="ALWAYS">
+                  <RadioButton fx:id="resp3_radioButton" contentDisplay="CENTER" layoutX="10.0" layoutY="28.0" mnemonicParsing="false" prefWidth="600.0" text="Respuesta 3" textAlignment="CENTER" toggleGroup="$respuestas" VBox.vgrow="ALWAYS">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -87,7 +110,7 @@
                         <Insets left="20.0" />
                      </padding>
                   </RadioButton>
-                  <RadioButton fx:id="resp4_radioButton" contentDisplay="CENTER" layoutX="10.0" layoutY="46.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="600.0" text="Respuesta 4" textAlignment="CENTER" toggleGroup="$respuestas" VBox.vgrow="ALWAYS">
+                  <RadioButton fx:id="resp4_radioButton" contentDisplay="CENTER" layoutX="10.0" layoutY="46.0" mnemonicParsing="false" prefWidth="600.0" text="Respuesta 4" textAlignment="CENTER" toggleGroup="$respuestas" VBox.vgrow="ALWAYS">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -97,11 +120,11 @@
                   </RadioButton>
                </children>
             </VBox>
-            <VBox fx:id="vBoxMapa" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+            <VBox fx:id="vBoxMapa" alignment="CENTER" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
                   <Button mnemonicParsing="false" onAction="#pulsarMapa">
                      <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/iconos/download.png" />
                            </image>
@@ -112,7 +135,7 @@
             </VBox>
          </children>
          <padding>
-            <Insets left="20.0" right="20.0" />
+            <Insets left="128.0" right="128.0" />
          </padding>
       </HBox>
    </center>

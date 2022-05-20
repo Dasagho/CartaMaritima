@@ -18,9 +18,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ResultadosUsuarioController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ResultadosUsuarioController">
    <top>
-      <HBox alignment="CENTER_RIGHT" prefHeight="49.0" prefWidth="600.0" BorderPane.alignment="CENTER_RIGHT">
+      <HBox fx:id="cabeceraFX" alignment="CENTER_RIGHT" prefHeight="49.0" prefWidth="600.0" styleClass="estiloCabecera" BorderPane.alignment="CENTER_RIGHT">
          <children>
             <Label text="RESULTADOS SESIONES">
                <font>
@@ -37,7 +37,7 @@
       </HBox>
    </top>
    <bottom>
-      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="600.0" styleClass="estiloDifusoCompleto" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="pulsarVolver" mnemonicParsing="false" onAction="#pulsarVolver" text="Volver" />
          </children>
@@ -47,7 +47,7 @@
       </HBox>
    </bottom>
    <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0" styleClass="estiloDifusoCompleto" BorderPane.alignment="CENTER">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
@@ -101,14 +101,17 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="24.0" spacing="30.0">
+                  <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="24.0" spacing="30.0" style="-fx-background-color: rgba(255, 191, 0,0.5);">
                      <children>
-                        <VBox alignment="TOP_CENTER" maxWidth="300.0" prefHeight="222.0" prefWidth="231.0" style="-fx-background-color: grey;" HBox.hgrow="ALWAYS">
+                        <VBox alignment="TOP_CENTER" maxWidth="300.0" prefHeight="222.0" prefWidth="231.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label prefHeight="37.0" prefWidth="222.0" text="DATOS DE TODAS LAS SESIONES" textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
+                                 <padding>
+                                    <Insets left="8.0" />
+                                 </padding>
                               </Label>
                               <HBox prefHeight="224.0" prefWidth="208.0" VBox.vgrow="ALWAYS">
                                  <children>
@@ -161,6 +164,9 @@
                                        </children>
                                     </VBox>
                                  </children>
+                                 <padding>
+                                    <Insets left="8.0" />
+                                 </padding>
                               </HBox>
                            </children>
                            <opaqueInsets>
@@ -171,7 +177,7 @@
                            </HBox.margin>
                         </VBox>
                         <Separator minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="168.0" prefWidth="25.0" />
-                        <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="25.0" maxWidth="300.0" prefHeight="261.0" prefWidth="206.0" style="-fx-background-color: grey;" HBox.hgrow="ALWAYS">
+                        <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="25.0" maxWidth="300.0" prefHeight="261.0" prefWidth="206.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label prefHeight="20.0" text="DATOS FECHAS SELECCIONADAS" textAlignment="CENTER" wrapText="true">
                                  <font>
@@ -207,7 +213,7 @@
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="224.0" prefWidth="43.0" spacing="30.0" HBox.hgrow="ALWAYS">
+                                    <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="224.0" prefWidth="43.0" spacing="30.0" HBox.hgrow="ALWAYS">
                                        <children>
                                           <Label fx:id="seleccionadoSesionesID" text="0">
                                              <font>
@@ -242,6 +248,9 @@
                            </HBox.margin>
                         </VBox>
                      </children>
+                     <VBox.margin>
+                        <Insets top="8.0" />
+                     </VBox.margin>
                   </HBox>
                   <BarChart fx:id="grafico" animated="false" prefHeight="257.0" prefWidth="417.0" stylesheets="@../resources/estilo_grafico.css" title="Aciertos y fallos por sesiones" VBox.vgrow="ALWAYS">
                     <xAxis>
