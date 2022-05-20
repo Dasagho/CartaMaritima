@@ -15,7 +15,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.PantallaPrincipalUsuarioController">
    <top>
-      <HBox fx:id="cabeceraFX" prefHeight="98.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="64.0" prefWidth="600.0" styleClass="estiloCabecera" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
                <children>
@@ -47,14 +47,15 @@
                      </font>
                      <HBox.margin>
                         <Insets right="28.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <MenuButton fx:id="menuPerfil" focusTraversable="false" mnemonicParsing="false">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#pulsarEditarPerfil" text="Editar perfil" />
                       <MenuItem mnemonicParsing="false" onAction="#pulsarCerrarSesion" text="Cerrar sesión" />
                     </items>
                      <graphic>
-                        <ImageView fx:id="imagenPerfil" fitHeight="59.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imagenPerfil" fitHeight="47.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../../../../Imágenes/fondos/hellstone-ruins-fantasy.jpg" />
                            </image>
@@ -70,29 +71,29 @@
       </HBox>
    </top>
    <bottom>
-      <HBox alignment="BOTTOM_LEFT" prefHeight="44.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox alignment="BOTTOM_LEFT" prefHeight="44.0" prefWidth="600.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" onAction="#pulsarCerrarSesion" text="Cerrar sesion" />
          </children>
          <padding>
-            <Insets bottom="20.0" left="20.0" />
+            <Insets bottom="20.0" left="128.0" />
          </padding>
       </HBox>
    </bottom>
    <center>
-      <VBox alignment="CENTER" maxHeight="262.0" maxWidth="720.0" prefHeight="262.0" prefWidth="472.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="262.0" prefWidth="472.0" spacing="10.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets left="64.0" right="64.0" />
+            <Insets />
          </BorderPane.margin>
          <children>
-            <Button fx:id="botonRealizarProblema" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pulsarRealizarProblema" prefHeight="76.0" prefWidth="472.0" text="Realizar problema">
+            <Button fx:id="botonRealizarProblema" defaultButton="true" maxWidth="720.0" mnemonicParsing="false" onAction="#pulsarRealizarProblema" prefHeight="76.0" prefWidth="472.0" styleClass="estiloBotonNaranja" text="Realizar problema">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
             </Button>
-            <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="472.0">
+            <HBox alignment="BOTTOM_CENTER" maxWidth="720.0" prefHeight="100.0" prefWidth="472.0">
                <children>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pulsarVerResultados" prefHeight="64.0" prefWidth="397.0" text="Ver resultados" HBox.hgrow="ALWAYS">
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pulsarVerResultados" prefHeight="64.0" prefWidth="397.0" styleClass="estiloBotonNaranja" text="Ver resultados" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
@@ -101,18 +102,26 @@
                      </HBox.margin>
                   </Button>
                   <FlowPane maxWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#pulsarMapa">
+                  <Button mnemonicParsing="false" onAction="#pulsarMapa" styleClass="estiloBotonNaranja">
                      <graphic>
-                        <ImageView fitHeight="104.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/iconos/download.png" />
-                           </image>
-                        </ImageView>
+                        <VBox alignment="CENTER">
+                           <children>
+                              <ImageView fitHeight="84.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../resources/logotipos/icono-pixelizado-miniatura-visualizable.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="VER MAPA" />
+                           </children>
+                        </VBox>
                      </graphic>
                   </Button>
                </children>
             </HBox>
          </children>
+         <padding>
+            <Insets left="64.0" right="64.0" />
+         </padding>
       </VBox>
    </center>
 </BorderPane>

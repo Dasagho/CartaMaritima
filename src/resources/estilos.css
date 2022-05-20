@@ -29,17 +29,17 @@
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-color: 
-        #8d5524,
-        #8d5524,
-        #c68642,
-        #c68642;
+        #007e97,
+        #007e97,
+        #00a3c4,
+        #00a3c4;
     -fx-text-fill: white;
     -fx-font-family: monospace;
 }
 
 
-#cabeceraFX {
-    -fx-background-color: rgba(0,96,100,0.75);
+.estiloCabecera {
+    -fx-background-color: #007e97;
 }
 
 
@@ -81,4 +81,16 @@
 #avatares {
     height: 30;
     width: 30;
+}
+
+.estiloDifuso{
+    
+    -fx-background-color:linear-gradient(to right,
+        transparent 0%, transparent  4.9%,
+        rgba(255,255,255,0.75) 5%, rgba(255,255,255,0.75) 95%,
+        transparent 95.1%, transparent 100%);
+}
+
+.estiloDifusoCompleto{
+    -fx-background-color: rgba(255,255,255,0.75) 5%;
 }

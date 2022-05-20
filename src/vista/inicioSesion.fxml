@@ -81,7 +81,7 @@
       </GridPane>
    </center>
    <top>
-      <GridPane prefHeight="113.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="113.0" prefWidth="900.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
