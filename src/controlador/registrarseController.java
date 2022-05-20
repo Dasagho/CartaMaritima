@@ -121,7 +121,7 @@ public class registrarseController implements Initializable {
 
         // Diferenciamos pagina de registro de Modificar perfil
         nickName_textfield.disableProperty().bind(secretario.usuarioActivo());
-        titulo.setText(secretario.usuarioActivo().getValue() ? "Modificar Perfil" : "Registrarse");
+        titulo.setText(secretario.usuarioActivo().getValue() ? "MODIFICAR PERFIL" : "REGISTRARSE");
 
         // Notificamos de los errores al usuario al perder el foco
         nickName_textfield.focusedProperty().addListener((obs, oldVal, newVal) -> {
@@ -188,19 +188,19 @@ public class registrarseController implements Initializable {
         restablecerErrores();
 
         if (!checkNickName(nickName_textfield.getText())) {
-            nickName_error.setText("Nombre de usuario no valido, un nombre valido debe tener entre 6 y 15 caracteres y solo puede contener mayúsculas, minúsculas, guiones o guiones bajos");
+            nickName_error.setText("Nombre de usuario no válido, un nombre válido debe tener entre 6 y 15 carácteres y solo puede contener mayúsculas, minúsculas, guiones o guiones bajos");
             nickName_textfield.requestFocus();
             return;
         }
 
         if (!User.checkEmail(email_textfield.getText())) {
-            email_error.setText("Formato del correo electronico introducido no es valido por favor introduce un correo valido con formato x@x.x");
+            email_error.setText("Formato del correo electrónico introducido no es válido por favor introduce un correo válido con formato x@x.x");
             email_textfield.requestFocus();
             return;
         }
 
         if (!checkPassword(contrasena_textfield.getText())) {
-            contrasena_error.setText("Introduce una contraseña que contenga: Entre 8 y 20 caracteres, Minimo una letra Mayúscula y Minúscula, un dígito, un caracter de los siguientes: !@#$%&*()-+= y No contener ningun espacio en blanco");
+            contrasena_error.setText("Introduce una contraseña que contenga: Entre 8 y 20 carácteres, mínimo una letra mayúscula y minúscula, un dígito, un carácter de los siguientes: !@#$%&*()-+= y no contener ningún espacio en blanco");
             contrasena_textfield.setText("");
             confirmacion_textfield.setText("");
             contrasena_textfield.requestFocus();
@@ -215,7 +215,7 @@ public class registrarseController implements Initializable {
         }
 
         if (Period.between(datePicker.getValue(), LocalDate.now()).getYears() < 16) {
-            fecha_error.setText("Debes tener 16 años o mas para poder registrarte");
+            fecha_error.setText("Debes tener 16 años o más para poder registrarte");
             return;
         }
 
@@ -275,25 +275,25 @@ public class registrarseController implements Initializable {
 
     private void comprobarErrores() {
         if (!checkNickName(nickName_textfield.getText()) && !nickName_textfield.getText().isEmpty()) {
-            nickName_error.setText("Nombre de usuario no valido, un nombre valido debe tener entre 6 y 15 caracteres y solo puede contener mayúsculas, minúsculas, guiones o guiones bajos");
+            nickName_error.setText("Nombre de usuario no válido, un nombre válido debe tener entre 6 y 15 carácteres y solo puede contener mayúsculas, minúsculas, guiones o guiones bajos");
             return;
         } else {
             nickName_error.setText("");
         }
 
         if (!User.checkEmail(email_textfield.getText()) && !email_textfield.getText().isEmpty()) {
-            email_error.setText("Formato del correo electronico introducido no es valido por favor introduce un correo valido con formato x@x.x");
+            email_error.setText("Formato del correo electrónico introducido no es válido por favor introduce un correo válido con formato x@x.x");
             return;
         } else {
             email_error.setText("");
         }
 
         if (!checkPassword(contrasena_textfield.getText()) && !contrasena_textfield.getText().isBlank()) {
-            contrasena_error.setText("Introduce una contraseña que contenga: Entre 8 y 20 caracteres, Minimo una letra Mayúscula y Minúscula, un dígito, un caracter de los siguientes: !@#$%&*()-+= y No contener ningun espacio en blanco");
+            contrasena_error.setText("Introduce una contraseña que contenga: Entre 8 y 20 carácteres, mínimo una letra mayúscula y minúscula, un dígito, un carácter de los siguientes: !@#$%&*()-+= y no contener ningún espacio en blanco");
             contrasena_textfield.setText("");
             confirmacion_textfield.setText("");
             return;
-        } else { System.out.println("aqui");
+        } else { //System.out.println("aqui");
             contrasena_error.setText("");
         }
 
@@ -366,7 +366,7 @@ public class registrarseController implements Initializable {
         grid.setVgap(5);
         grid.setAlignment(Pos.CENTER);
         // for (ColumnConstraints cc : grid.getColumnConstraints()) cc.setHalignment(HPos.CENTER);
-        grid.styleProperty().setValue("-fx-background-color: #123456");
+        grid.styleProperty().setValue("-fx-background-color: #007e97");
 
         // for (RowConstraints rc : grid.getRowConstraints()) rc.setValignment(VPos.CENTER);
         // Finalmente creamos la escena y le agregamos dimensiones y el grid

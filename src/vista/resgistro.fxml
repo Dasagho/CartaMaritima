@@ -17,9 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.registrarseController">
+<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.registrarseController">
    <center>
-      <GridPane fx:id="grid" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" vgap="5.0">
+      <GridPane fx:id="grid" alignment="CENTER" prefHeight="600.0" prefWidth="900.0" styleClass="estiloDifuso" vgap="5.0">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
           <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
@@ -39,16 +39,22 @@
                      <children>
                         <Label fx:id="nombre_label" text="Nombre de usuario">
                            <font>
-                              <Font name="System Bold" size="11.0" />
+                              <Font name="Monospaced Bold" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nickName_textfield" maxWidth="-Infinity" prefWidth="300.0" promptText="usuario123" />
+                        <TextField fx:id="nickName_textfield" maxWidth="-Infinity" prefWidth="300.0" promptText="usuario123">
+                           <font>
+                              <Font name="Monospaced Bold" size="16.0" />
+                           </font></TextField>
                      </children>
                   </VBox>
-                  <Label fx:id="nickName_error" alignment="CENTER" prefHeight="120.0" prefWidth="580.0" textAlignment="CENTER" textFill="RED" wrapText="true">
+                  <Label fx:id="nickName_error" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="38.0" prefWidth="770.0" textAlignment="CENTER" textFill="RED" wrapText="true">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
+                     <font>
+                        <Font name="Monospaced Bold" size="13.0" />
+                     </font>
                   </Label>
                </children>
             </VBox>
@@ -58,13 +64,19 @@
                      <children>
                         <Label fx:id="correo_label" text="Correo Electrónico">
                            <font>
-                              <Font name="System Bold" size="11.0" />
+                              <Font name="Monospaced Bold" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="email_textfield" maxWidth="-Infinity" prefWidth="300.0" promptText="usuario@dominio.com" />
+                        <TextField fx:id="email_textfield" maxWidth="-Infinity" prefWidth="300.0" promptText="usuario@dominio.com">
+                           <font>
+                              <Font name="Monospaced Bold" size="16.0" />
+                           </font></TextField>
                      </children>
                   </VBox>
-                  <Label fx:id="email_error" alignment="CENTER" prefHeight="80.0" prefWidth="600.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
+                  <Label fx:id="email_error" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="80.0" prefWidth="770.0" textAlignment="CENTER" textFill="RED" wrapText="true">
+                     <font>
+                        <Font name="Monospaced Bold" size="13.0" />
+                     </font></Label>
                </children>
             </VBox>
             <VBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
@@ -73,13 +85,19 @@
                      <children>
                         <Label fx:id="contrasena_label" text="Contraseña">
                            <font>
-                              <Font name="System Bold" size="11.0" />
+                              <Font name="Monospaced Bold" size="16.0" />
                            </font>
                         </Label>
-                        <PasswordField fx:id="contrasena_textfield" maxWidth="-Infinity" prefWidth="300.0" promptText="Pass123+" />
+                        <PasswordField fx:id="contrasena_textfield" maxWidth="-Infinity" prefWidth="300.0" promptText="Pass123+">
+                           <font>
+                              <Font name="Monospaced Bold" size="16.0" />
+                           </font></PasswordField>
                      </children>
                   </VBox>
-                  <Label fx:id="contrasena_error" alignment="CENTER" ellipsisString="......." prefHeight="80.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
+                  <Label fx:id="contrasena_error" alignment="CENTER" ellipsisString="......." prefHeight="38.0" prefWidth="881.0" textAlignment="CENTER" textFill="RED" wrapText="true">
+                     <font>
+                        <Font name="Monospaced Bold" size="13.0" />
+                     </font></Label>
                </children>
             </VBox>
             <VBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
@@ -88,28 +106,37 @@
                      <children>
                         <Label fx:id="confirmar_label" text="Confirmar Contraseña">
                            <font>
-                              <Font name="System Bold" size="11.0" />
+                              <Font name="Monospaced Bold" size="16.0" />
                            </font>
                         </Label>
-                        <PasswordField fx:id="confirmacion_textfield" maxWidth="-Infinity" prefWidth="300.0" />
+                        <PasswordField fx:id="confirmacion_textfield" maxWidth="-Infinity" prefWidth="300.0">
+                           <font>
+                              <Font name="Monospaced Bold" size="16.0" />
+                           </font></PasswordField>
                      </children>
                   </VBox>
-                  <Label fx:id="confirmacion_error" alignment="CENTER" prefHeight="80.0" prefWidth="600.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
+                  <Label fx:id="confirmacion_error" alignment="CENTER" prefHeight="38.0" prefWidth="891.0" textAlignment="CENTER" textFill="RED" wrapText="true">
+                     <font>
+                        <Font name="Monospaced Bold" size="13.0" />
+                     </font></Label>
                </children>
             </VBox>
             <VBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
                <children>
                   <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="300.0">
                      <children>
-                        <Label fx:id="fecha_label" minWidth="-Infinity" prefHeight="14.0" prefWidth="131.0" text="Fecha de Nacimiento">
+                        <Label fx:id="fecha_label" minWidth="-Infinity" prefHeight="20.0" prefWidth="192.0" text="Fecha de Nacimiento">
                            <font>
-                              <Font name="System Bold" size="11.0" />
+                              <Font name="Monospaced Bold" size="16.0" />
                            </font>
                         </Label>
                         <DatePicker fx:id="datePicker" editable="false" prefHeight="24.0" prefWidth="300.0" showWeekNumbers="true" />
                      </children>
                   </VBox>
-                  <Label fx:id="fecha_error" alignment="CENTER" prefHeight="80.0" prefWidth="600.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
+                  <Label fx:id="fecha_error" alignment="CENTER" prefHeight="45.0" prefWidth="917.0" textAlignment="CENTER" textFill="RED" wrapText="true">
+                     <font>
+                        <Font name="Monospaced Bold" size="13.0" />
+                     </font></Label>
                </children>
             </VBox>
             <Button mnemonicParsing="false" onAction="#cambiarAvatar" GridPane.columnSpan="2147483647" GridPane.rowIndex="5">
@@ -123,37 +150,49 @@
             </Button>
          </children>
          <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" />
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </GridPane>
    </center>
    <top>
-      <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="900.0" styleClass="estiloCabecera" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="titulo" text="REGISTRARSE" HBox.hgrow="ALWAYS">
+            <Label fx:id="titulo" prefHeight="24.0" text="REGISTRARSE" textFill="WHITE" HBox.hgrow="ALWAYS">
                <HBox.margin>
-                  <Insets />
+                  <Insets right="32.0" />
                </HBox.margin>
-               <padding>
-                  <Insets right="30.0" />
-               </padding>
                <font>
-                  <Font name="System Bold" size="22.0" />
+                  <Font name="Monospaced Bold" size="20.0" />
                </font>
             </Label>
          </children>
       </HBox>
    </top>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="900.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
          <children>
-            <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar">
+               <font>
+                  <Font name="Monospaced Bold" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Button>
             <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#guardar" text="Guardar" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#guardar" text="Guardar">
+               <font>
+                  <Font name="Monospaced Bold" size="16.0" />
+               </font></Button>
          </children>
          <padding>
-            <Insets bottom="20.0" left="45.0" right="45.0" />
+            <Insets bottom="20.0" left="128.0" right="128.0" />
          </padding>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </HBox>
    </bottom>
 </BorderPane>
