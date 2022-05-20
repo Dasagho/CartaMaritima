@@ -1,7 +1,3 @@
-.button:hover {
-    -fx-background-color: teal;
-}
-
 .button:pressed {
     -fx-background-color: teal;
     -fx-scale-x: 0.95;
@@ -12,21 +8,34 @@
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-color: 
-        #8d5524,
-        #8d5524,
-        #c68642,
-        #c68642;
+        #007e97,
+        #007e97,
+        #00a3c4,
+        #00a3c4;
     -fx-text-fill: white;
     -fx-font-family: monospace;
 }
+
+.estiloBotonNaranja{
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-color: 
+        #c77800,
+        #c77800,
+        #ffb500,
+        #ffb500;
+    -fx-text-fill: white;
+    -fx-font-family: monospace;
+}
+
 
 #avatares {
     height: 30;
     width: 30;
 }
 
-#cabeceraFX {
-    -fx-background-color: rgba(0,96,100,0.75);
+.estiloCabecera {
+    -fx-background-color: #007e97;
 }
 
 .radioButton:disabled {
@@ -35,20 +44,27 @@
 }
 
 #menuPerfil{
-    -fx-background-color: 
-    linear-gradient(#f2f2f2, #d6d6d6),
-    linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),
-    linear-gradient(#dddddd 0%, #f6f6f6 50%);
-    -fx-background-radius: 8,7,6;
-    -fx-background-insets: 0,1,2;
-    -fx-text-fill: black;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-background-color: #00a3c4;
 }
 
 .root{
+    
     -fx-font-family: monospace;
-    -fx-background-image: url("fondos/safeimagekit-pixel-art-2-claro.png");
+    -fx-background-image: url("fondos/safeimagekit-pixel-art-2.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-size: cover;
+    
+}
+
+.estiloDifuso{
+    
+    -fx-background-color:linear-gradient(to right,
+        transparent 0%, transparent  4.9%,
+        rgba(255,255,255,0.75) 5%, rgba(255,255,255,0.75) 95%,
+        transparent 95.1%, transparent 100%);
+}
+
+.estiloDifusoCompleto{
+    -fx-background-color: rgba(255,255,255,0.75) 5%;
 }
