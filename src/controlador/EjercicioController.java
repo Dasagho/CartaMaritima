@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
@@ -147,6 +148,12 @@ public class EjercicioController implements Initializable {
             mostrarResultados(respuestaCorrecta, seleccionado);
 
             respuestaUsuario(respuestaCorrecta);
+        } else {
+            Alert mensaje= new Alert(Alert.AlertType.INFORMATION);
+            mensaje.setTitle("Confirmar");
+            mensaje.setHeaderText("No ha elegido respuesta");
+            mensaje.setContentText("Por favor, elija una respuesta antes de confirmar");
+            mensaje.showAndWait();
         }
     }
 

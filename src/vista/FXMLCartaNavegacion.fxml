@@ -32,14 +32,14 @@
                <font>
                   <Font name="Monospaced Bold" size="20.0" />
                </font></Label>
-            <Button mnemonicParsing="false" onAction="#zoomOut" styleClass="estiloBotonNaranja" text="-" HBox.hgrow="ALWAYS">
+            <Button mnemonicParsing="false" onAction="#zoomOut" styleClass="estiloBotonNaranja" text="-" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Monospaced Bold" size="20.0" />
                </font></Button>
-            <Slider fx:id="zoom_slider" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="130.0" HBox.hgrow="ALWAYS" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#zoomIn" styleClass="estiloBotonNaranja" text="+" HBox.hgrow="ALWAYS">
+            <Slider id="slider-zoom" fx:id="zoom_slider" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="130.0" HBox.hgrow="ALWAYS" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#zoomIn" styleClass="estiloBotonNaranja" text="+" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Monospaced Bold" size="20.0" />
                </font></Button>
             <FlowPane HBox.hgrow="ALWAYS" />
             <Label maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" text="CARTA DE NAVEGACIÓN" textFill="WHITE" wrapText="true" HBox.hgrow="ALWAYS">
@@ -173,7 +173,7 @@
                                     <Font name="Monospaced Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Slider fx:id="sliderInspector" blockIncrement="1.0" majorTickUnit="2.0" max="20.0" min="1.0" minHeight="22.0" minWidth="20.0" minorTickCount="1" prefHeight="22.0" prefWidth="288.0" snapToTicks="true" value="10.0" />
+                              <Slider id="slider-tam" fx:id="sliderInspector" blockIncrement="1.0" majorTickUnit="2.0" max="20.0" min="1.0" minHeight="22.0" minWidth="20.0" minorTickCount="1" prefHeight="22.0" prefWidth="288.0" snapToTicks="true" value="10.0" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" layoutX="10.0" layoutY="71.0" prefHeight="55.0" prefWidth="307.0" spacing="5.0">
@@ -183,7 +183,7 @@
                                     <Font name="Monospaced Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <ColorPicker fx:id="colorInspector" minWidth="-Infinity" prefHeight="24.0" prefWidth="102.0">
+                              <ColorPicker id="choice-box" fx:id="colorInspector" minWidth="-Infinity" prefHeight="24.0" prefWidth="102.0">
                                  <value>
                                     <Color red="1.0" />
                                  </value>
@@ -197,7 +197,7 @@
                                     <Font name="Monospaced Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox fx:id="choiceBoxForma" prefHeight="25.0" prefWidth="103.0" />
+                              <ChoiceBox id="choice-box" fx:id="choiceBoxForma" prefHeight="25.0" prefWidth="103.0" />
                            </children>
                         </VBox>
                      </children>
