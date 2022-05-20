@@ -138,11 +138,11 @@ public class PantallaPrincipalUsuarioController implements Initializable {
 
         controladorRegistro.initEdicion();
 
-        Scene escena = new Scene(root, 850, 630);
-
+        Scene escena = new Scene(root, 900, 750);
+        escena.getStylesheets().add("/resources/estilos.css");
         Stage escenario = new Stage();
-        escenario.setMinHeight(630);
-        escenario.setMinWidth(850);
+        escenario.setMinHeight(750);
+        escenario.setMinWidth(900);
         escenario.setScene(escena);
         escenario.initModality(Modality.APPLICATION_MODAL); // Hacemos que la ventana nueva sea modal
         escenario.showAndWait();

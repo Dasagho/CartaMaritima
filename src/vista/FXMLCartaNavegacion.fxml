@@ -7,9 +7,6 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
@@ -28,47 +25,40 @@
 
 <VBox prefHeight="840.0" prefWidth="1490.0" stylesheets="@../resources/estilos.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.CartaNavegacionController">
    <children>
-      <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="32.0" prefWidth="1480.0" spacing="5.0" VBox.vgrow="NEVER">
+      <HBox alignment="CENTER_LEFT" fillHeight="false" minHeight="-Infinity" prefHeight="64.0" prefWidth="1480.0" spacing="5.0" styleClass="estiloCabecera" VBox.vgrow="NEVER">
          <children>
-            <MenuBar minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="172.0" HBox.hgrow="NEVER">
-              <menus>
-                <Menu mnemonicParsing="false" text="Fichero">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#cerrarAplicacion" text="Cerrar" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Editar">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#borrarTodo" text="Borrar todas las marcas" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Ayuda">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca de" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-            <Region prefHeight="32.0" prefWidth="1020.0" HBox.hgrow="ALWAYS" />
-            <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="41.0" text="Zoom" HBox.hgrow="NEVER">
+            <Region layoutX="279.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="175.0" HBox.hgrow="ALWAYS" />
+            <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="51.0" text="ZOOM" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="Monospaced Bold" size="18.0" />
                </font></Label>
-            <Button mnemonicParsing="false" onAction="#zoomOut" text="-">
+            <Button mnemonicParsing="false" onAction="#zoomOut" text="-" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Slider fx:id="zoom_slider" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="130.0" HBox.hgrow="SOMETIMES" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#zoomIn" text="+">
+            <Slider fx:id="zoom_slider" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="130.0" HBox.hgrow="ALWAYS" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#zoomIn" text="+" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font></Button>
+            <FlowPane HBox.hgrow="ALWAYS" />
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" text="CARTA DE NAVEGACIÓN" textFill="WHITE" wrapText="true" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Monospaced Bold" size="20.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets right="32.0" />
+               </padding>
+            </Label>
          </children>
          <VBox.margin>
-            <Insets bottom="5.0" left="5.0" right="15.0" top="5.0" />
+            <Insets />
          </VBox.margin>
       </HBox>
-      <HBox prefHeight="1080.0" prefWidth="1920.0" spacing="10.0">
+      <HBox prefHeight="1080.0" prefWidth="1920.0" spacing="10.0" styleClass="estiloDifusoCompleto">
          <children>
             <VBox alignment="CENTER" prefHeight="798.0" prefWidth="196.0" HBox.hgrow="ALWAYS">
                <children>
@@ -173,14 +163,14 @@
                      <children>
                         <Label text="Inspector:" textAlignment="CENTER" underline="true">
                            <font>
-                              <Font name="System Bold" size="15.0" />
+                              <Font name="Monospaced Bold" size="16.0" />
                            </font>
                         </Label>
                         <VBox alignment="CENTER" prefHeight="55.0" prefWidth="307.0">
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" text="Tamaño" textAlignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Monospaced Bold" size="16.0" />
                                  </font>
                               </Label>
                               <Slider fx:id="sliderInspector" blockIncrement="1.0" majorTickUnit="2.0" max="20.0" min="1.0" minHeight="22.0" minWidth="20.0" minorTickCount="1" prefHeight="22.0" prefWidth="288.0" snapToTicks="true" value="10.0" />
@@ -190,7 +180,7 @@
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" text="Color" textAlignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Monospaced Bold" size="16.0" />
                                  </font>
                               </Label>
                               <ColorPicker fx:id="colorInspector" minWidth="-Infinity" prefHeight="24.0" prefWidth="102.0">
@@ -204,7 +194,7 @@
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" text="Forma del punto" textAlignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Monospaced Bold" size="16.0" />
                                  </font>
                               </Label>
                               <ChoiceBox fx:id="choiceBoxForma" prefHeight="25.0" prefWidth="103.0" />
@@ -252,7 +242,7 @@
                   </StackPane>
                </children>
                <HBox.margin>
-                  <Insets bottom="15.0" right="15.0" />
+                  <Insets />
                </HBox.margin>
             </StackPane>
          </children>

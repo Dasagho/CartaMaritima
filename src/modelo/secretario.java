@@ -234,6 +234,6 @@ public class secretario {
      * format(param) -> aplicacion.Main.getStage().setTitle(param)
      */
     public static void setTitulo(String titulo) {
-        aplicacion.Main.getStage().setTitle("Subnautica" + " - " + titulo);
+        aplicacion.Main.getStage().setTitle("Nautica-Visión" + " - " + titulo);
     }
 }

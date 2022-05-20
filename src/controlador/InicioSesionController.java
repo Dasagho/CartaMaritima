@@ -62,7 +62,7 @@ public class InicioSesionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Nombramiento de la ventana
-        modelo.secretario.setTitulo("Iniciar sesion");
+        modelo.secretario.setTitulo("Iniciar sesión");
 
         // Inicializacion del Singleton a traves del modelo secretario
         modelo.secretario.initialize();
@@ -123,7 +123,7 @@ public class InicioSesionController implements Initializable {
         User usuario = modelo.secretario.getNavegacion().loginUser(email_textField.getText(), contrasena_textField.getText());
         if (usuario == null) {
             contrasena_error.setDisable(false);
-            contrasena_error.setText("La contraseña introducida no pertenece a este usuario, intentalo de nuevo con otra contraseña");
+            contrasena_error.setText("La contraseña introducida no pertenece a este usuario, inténtalo de nuevo con otra contraseña");
             contrasena_textField.setText("");
             contrasena_textField.requestFocus();
             hasOlvidadoContrasena.setVisible(true);

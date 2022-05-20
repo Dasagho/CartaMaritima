@@ -5,8 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,23 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../resources/estilos.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InicioSesionController">
-   <bottom>
-      <HBox alignment="CENTER_RIGHT" prefHeight="76.0" prefWidth="900.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="btn" defaultButton="true" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="40.0" prefWidth="140.0" text="Iniciar sesión">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin></Button>
-         </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-         <padding>
-            <Insets right="30.0" />
-         </padding>
-      </HBox>
-   </bottom>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InicioSesionController">
    <center>
       <GridPane alignment="CENTER" focusTraversable="true" prefHeight="425.0" prefWidth="900.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -40,25 +22,42 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" percentHeight="23.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <VBox alignment="CENTER" focusTraversable="true" spacing="10.0" GridPane.rowSpan="2">
                <children>
                   <Label id="label_informativo" fx:id="nombreUsuario_label" focusTraversable="false" text="Nombre de usuario">
                      <font>
-                        <Font name="System Bold" size="11.0" />
+                        <Font name="Monospaced Bold" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="email_textField" maxWidth="-Infinity" prefWidth="300.0" />
-                  <Label id="label_error" fx:id="email_error" alignment="CENTER" contentDisplay="CENTER" disable="true" focusTraversable="false" prefHeight="85.0" prefWidth="300.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
-                  <Label id="label_informativo" fx:id="contrasena_label" focusTraversable="false" text="Contraseña">
+                  <TextField fx:id="email_textField" maxWidth="-Infinity" prefWidth="300.0">
                      <font>
-                        <Font name="System Bold" size="11.0" />
+                        <Font name="Monospaced Bold" size="16.0" />
+                     </font></TextField>
+                  <Label fx:id="email_error" alignment="CENTER" contentDisplay="CENTER" disable="true" focusTraversable="false" prefHeight="82.0" prefWidth="305.0" textAlignment="CENTER" textFill="RED" wrapText="true">
+                     <font>
+                        <Font name="Monospaced Bold" size="16.0" />
+                     </font></Label>
+                  <Label fx:id="contrasena_label" focusTraversable="false" text="Contraseña">
+                     <font>
+                        <Font name="Monospaced Bold" size="16.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="contrasena_textField" maxWidth="-Infinity" prefWidth="300.0" />
-                  <Label id="label_error" fx:id="contrasena_error" alignment="CENTER" contentDisplay="CENTER" disable="true" focusTraversable="false" prefHeight="85.0" prefWidth="300.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
+                  <PasswordField fx:id="contrasena_textField" maxWidth="-Infinity" prefWidth="300.0">
+                     <font>
+                        <Font name="Monospaced Bold" size="16.0" />
+                     </font></PasswordField>
+                  <Label fx:id="contrasena_error" alignment="CENTER" contentDisplay="CENTER" disable="true" focusTraversable="false" prefHeight="82.0" prefWidth="302.0" textAlignment="CENTER" textFill="RED" wrapText="true">
+                     <font>
+                        <Font name="Monospaced Bold" size="16.0" />
+                     </font></Label>
+                  <Button fx:id="btn" defaultButton="true" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="43.0" prefWidth="297.0" text="Iniciar sesión">
+                     <font>
+                        <Font name="Monospaced Bold" size="16.0" />
+                     </font>
+                  </Button>
                </children>
                <padding>
                   <Insets top="10.0" />
@@ -66,10 +65,13 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="46.0" prefWidth="645.0" spacing="10.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
                <children>
-                  <Label id="label_informativo" fx:id="hasOlvidadoContrasena" focusTraversable="false" onMouseClicked="#hasOlvidadoTuContrasena" text="¿Ha olvidado su contraseña?" underline="true" visible="false" />
-                  <Label id="label_informativo" contentDisplay="CENTER" focusTraversable="false" onMouseClicked="#todaviaNoTienesCuenta" text="¿Todavía no tiene cuenta? Registrarse" textAlignment="CENTER" underline="true" wrapText="true">
+                  <Label fx:id="hasOlvidadoContrasena" focusTraversable="false" onMouseClicked="#hasOlvidadoTuContrasena" text="¿Ha olvidado su contraseña?" underline="true" visible="false">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="Monospaced Bold" size="16.0" />
+                     </font></Label>
+                  <Label focusTraversable="false" onMouseClicked="#todaviaNoTienesCuenta" prefHeight="40.0" text="¿Todavía no tiene cuenta? Registrarse" textAlignment="CENTER" underline="true" wrapText="true">
+                     <font>
+                        <Font name="Monospaced Bold" size="16.0" />
                      </font>
                   </Label>
                </children>
@@ -81,38 +83,17 @@
       </GridPane>
    </center>
    <top>
-      <GridPane prefHeight="113.0" prefWidth="900.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" percentHeight="100.0" vgrow="SOMETIMES" />
-         </rowConstraints>
+      <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="64.0" styleClass="estiloCabecera" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="TOP_RIGHT" GridPane.columnIndex="1">
-               <children>
-                  <Label id="label_titulo" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" text="Nautica-Visión" HBox.hgrow="NEVER">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER">
-               <children>
-                  <Button focusTraversable="false" mnemonicParsing="false" HBox.hgrow="ALWAYS">
-                     <graphic>
-                        <ImageView fitHeight="140.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/iconos/lunaCreciente.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-            </HBox>
+            <Label alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefHeight="32.0" text="NAUTICA-VISIÓN" textFill="WHITE" HBox.hgrow="NEVER">
+               <font>
+                  <Font name="Monospaced Bold" size="20.0" />
+               </font>
+               <padding>
+                  <Insets right="32.0" />
+               </padding>
+            </Label>
          </children>
-      </GridPane>
+      </HBox>
    </top>
 </BorderPane>
