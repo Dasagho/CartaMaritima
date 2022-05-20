@@ -153,12 +153,10 @@ public class EjercicioController implements Initializable {
     private void respuestaUsuario(boolean respuestaCorrecta) {
         volver_Button.setText("Volver");
         volver_Button.setOnAction(this::volver);
-        volver_Button.setScaleX(1.25);
-        volver_Button.setScaleY(1.25);
         vBoxMapa.getChildren().clear();
         Text t = new Text();
         t.styleProperty().set("-fx-font-size:25px");
-        t.setText(respuestaCorrecta ? "RESPUESTA CORRECTA, ¡ENHORABUENA!" : "RESPUESTA INCORRECTA, INTÉNTALO DE NUEVO");
+        t.setText(respuestaCorrecta ? "RESPUESTA CORRECTA,\n ¡ENHORABUENA!" : "RESPUESTA INCORRECTA,\n INTÉNTALO DE NUEVO");
         t.setFill(respuestaCorrecta ? Color.GREEN : Color.RED);
         vBoxMapa.getChildren().add(t);
 
@@ -172,8 +170,9 @@ public class EjercicioController implements Initializable {
             Parent root = miCargador.load();
             Scene escena = new Scene(root, 850, 550);
             Stage escenario = new Stage();
-            escenario.setMinHeight(550);
-            escenario.setMinWidth(850);
+            escenario.setTitle("Carta de navegación");
+            escenario.setMinHeight(750);
+            escenario.setMinWidth(900);
             escenario.setScene(escena);
             escena.getStylesheets().add("/resources/estilos.css");
             escenario.show();

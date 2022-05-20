@@ -44,6 +44,7 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import modelo.secretario;
 /**
  *
  * @author Germán
@@ -162,6 +163,7 @@ public class CartaNavegacionController implements Initializable{
         choiceBoxForma.setItems(listaFormas);
         choiceBoxForma.setValue("Circulo");
         vboxFormaPunto.disableProperty().bind(puntoBoton.selectedProperty().not());
+        
     }
     
     

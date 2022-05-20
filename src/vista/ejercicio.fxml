@@ -17,36 +17,42 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.EjercicioController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.EjercicioController">
    <bottom>
       <HBox fx:id="hBoxBotones" alignment="CENTER" prefHeight="55.0" prefWidth="600.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="volver_Button" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar">
+            <Button fx:id="volver_Button" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" styleClass="estiloBotonAzul" text="Cancelar">
                <HBox.margin>
                   <Insets />
-               </HBox.margin></Button>
+               </HBox.margin>
+               <font>
+                  <Font name="Monospaced Bold" size="18.0" />
+               </font></Button>
             <Region fx:id="regionBotones" HBox.hgrow="ALWAYS" />
-            <Button fx:id="confirmar_Button" defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#confirmar" styleClass="estiloBotonNaranja" text="Confirmar" />
+            <Button fx:id="confirmar_Button" defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#confirmar" styleClass="estiloBotonAzul" text="Confirmar">
+               <font>
+                  <Font name="Monospaced Bold" size="18.0" />
+               </font></Button>
          </children>
          <padding>
-            <Insets left="128.0" right="128.0" />
+            <Insets bottom="20.0" left="128.0" right="128.0" />
          </padding>
       </HBox>
    </bottom>
    <top>
       <VBox alignment="CENTER_LEFT" prefWidth="700.0" spacing="5.0" styleClass="estiloDifuso" BorderPane.alignment="TOP_LEFT">
          <children>
-            <HBox alignment="CENTER_RIGHT" minHeight="47.0" prefHeight="47.0" styleClass="estiloCabecera">
+            <HBox alignment="CENTER_RIGHT" minHeight="47.0" prefHeight="64.0" styleClass="estiloCabecera">
                <children>
-                  <Label text="Ejercicio">
+                  <Label prefHeight="23.0" text="EJERCICIO" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="22.0" />
+                        <Font name="Monospaced Bold" size="20.0" />
                      </font>
-                     <padding>
-                        <Insets right="32.0" />
-                     </padding>
                   </Label>
                </children>
+               <padding>
+                  <Insets right="32.0" />
+               </padding>
             </HBox>
             <GridPane>
               <columnConstraints>
@@ -59,12 +65,12 @@
                <children>
                   <Label text="Enunciado">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="Monospaced Bold" size="18.0" />
                      </font>
                   </Label>
                   <TextArea fx:id="enunciado_textArea" editable="false" maxHeight="1.7976931348623157E308" prefWidth="444.0" text="¿Si un tren sale de Salamanca a las 4 de la tarde y otro sale de Madrid 30 minutos despues, cuantos abdominales tiene que hacer batman para recuperarse de su mision antes de pagar un hospital entero?" wrapText="true" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
-                        <Font size="16.0" />
+                        <Font name="Monospaced Regular" size="18.0" />
                      </font>
                   </TextArea>
                </children>
@@ -81,11 +87,11 @@
    <center>
       <HBox styleClass="estiloDifuso" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" prefWidth="100.0" spacing="28.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" prefWidth="100.0" spacing="40.0" HBox.hgrow="ALWAYS">
                <children>
                   <RadioButton fx:id="resp1_radioButton" contentDisplay="TOP" mnemonicParsing="false" prefWidth="600.0" text="Respuesta 1" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Monospaced Bold" size="18.0" />
                      </font>
                      <toggleGroup>
                         <ToggleGroup fx:id="respuestas" />
@@ -96,23 +102,23 @@
                   </RadioButton>
                   <RadioButton fx:id="resp2_radioButton" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefWidth="600.0" text="Respuesta 2" textAlignment="CENTER" toggleGroup="$respuestas" wrapText="true" VBox.vgrow="ALWAYS">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Monospaced Bold" size="18.0" />
                      </font>
                      <padding>
                         <Insets left="20.0" />
                      </padding>
                   </RadioButton>
-                  <RadioButton fx:id="resp3_radioButton" contentDisplay="CENTER" layoutX="10.0" layoutY="28.0" mnemonicParsing="false" prefWidth="600.0" text="Respuesta 3" textAlignment="CENTER" toggleGroup="$respuestas" VBox.vgrow="ALWAYS">
+                  <RadioButton fx:id="resp3_radioButton" contentDisplay="CENTER" layoutX="10.0" layoutY="28.0" mnemonicParsing="false" prefWidth="600.0" text="Respuesta 3" textAlignment="CENTER" toggleGroup="$respuestas" wrapText="true" VBox.vgrow="ALWAYS">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Monospaced Bold" size="18.0" />
                      </font>
                      <padding>
                         <Insets left="20.0" />
                      </padding>
                   </RadioButton>
-                  <RadioButton fx:id="resp4_radioButton" contentDisplay="CENTER" layoutX="10.0" layoutY="46.0" mnemonicParsing="false" prefWidth="600.0" text="Respuesta 4" textAlignment="CENTER" toggleGroup="$respuestas" VBox.vgrow="ALWAYS">
+                  <RadioButton fx:id="resp4_radioButton" contentDisplay="CENTER" layoutX="10.0" layoutY="46.0" mnemonicParsing="false" prefWidth="600.0" text="Respuesta 4" textAlignment="CENTER" toggleGroup="$respuestas" wrapText="true" VBox.vgrow="ALWAYS">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Monospaced Bold" size="18.0" />
                      </font>
                      <padding>
                         <Insets left="20.0" />
@@ -122,13 +128,25 @@
             </VBox>
             <VBox fx:id="vBoxMapa" alignment="CENTER" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Button mnemonicParsing="false" onAction="#pulsarMapa">
+                  <Button mnemonicParsing="false" onAction="#pulsarMapa" styleClass="estiloBotonNaranja">
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/iconos/download.png" />
-                           </image>
-                        </ImageView>
+                        <VBox alignment="CENTER">
+                           <children>
+                              <ImageView fitHeight="90.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../resources/logotipos/icono-pixelizado-miniatura-visualizable.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="VER MAPA" textFill="#4d413a">
+                                 <font>
+                                    <Font name="Monospaced Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </padding>
+                        </VBox>
                      </graphic>
                   </Button>
                </children>

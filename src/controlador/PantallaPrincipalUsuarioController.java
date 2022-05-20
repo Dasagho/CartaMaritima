@@ -161,6 +161,7 @@ public class PantallaPrincipalUsuarioController implements Initializable {
             escenario.setMinWidth(850);
             escenario.setScene(escena);
             escena.getStylesheets().add("/resources/estilos.css");
+            escenario.setTitle("Carta de navegación");
             escenario.show();
 
             escenario.setOnCloseRequest(new EventHandler<WindowEvent>() {

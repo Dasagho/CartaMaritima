@@ -1,31 +1,37 @@
-.root{
-    -fx-font-family: monospace;
-    -fx-background-image: url("fondos/safeimagekit-pixel-art-2-claro.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
-    -fx-background-size: cover;
-}
-
-
-/** 
-    Estilos para animar los botones y sus reacciones
-**/
-
-.button:hover {
+.estiloBotonAzul:hover {
     -fx-padding: 8 15 8 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
-    -fx-background-color: #8d5524;
+    -fx-background-color: #00a3c4;
     -fx-text-fill: white;
 }
 
-.button:pressed {
-    -fx-background-color: #8d5524;
+.estiloBotonAzul:pressed {
+    -fx-background-color: #007e97;
     -fx-text-fill: white;
     -fx-scale-x: 0.95;
     -fx-translate-y: 2;
 }
 
-.button {
+.estiloBotonAzul:selected {
+    -fx-background-color: #007e97;
+    -fx-text-fill: white;
+    -fx-scale-x: 0.95;
+    -fx-translate-y: 2;
+}
+
+.estiloBotonNaranja:hover {
+    -fx-padding: 8 15 8 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-color: #ffb500;
+}
+
+.estiloBotonNaranja:pressed {
+    -fx-background-color:  #c77800;
+    -fx-scale-x: 0.95;
+    -fx-translate-y: 2;
+}
+
+.estiloBotonAzul {
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-color: 
@@ -34,9 +40,19 @@
         #00a3c4,
         #00a3c4;
     -fx-text-fill: white;
-    -fx-font-family: monospace;
+    -fx-text-style: bold;
 }
 
+.estiloBotonNaranja{
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-color: 
+        #c77800,
+        #c77800,
+        #ffb500,
+        #ffb500;
+    -fx-text-fill: #4d413a;
+}
 
 .estiloCabecera {
     -fx-background-color: #007e97;
