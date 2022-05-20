@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
@@ -14,18 +13,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.SeleccionTipoPreguntaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.SeleccionTipoPreguntaController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="47.0" styleClass="estiloCabecera">
+            <HBox alignment="CENTER_RIGHT" prefHeight="64.0" styleClass="estiloCabecera">
                <children>
-                  <Label text="SELECCIÓN DE PREGUNTA">
+                  <Label text="SELECCIÓN DE PREGUNTA" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="Monospaced Bold" size="20.0" />
                      </font>
                      <padding>
                         <Insets right="32.0" />
@@ -35,10 +34,13 @@
             </HBox>
             <HBox styleClass="estiloDifuso">
                <children>
-                  <Label prefHeight="64.0" prefWidth="600.0" style="-fx-background-color: regba(255,255,0,0.75);" text="Elige un problema a realizar:">
+                  <Label prefHeight="64.0" prefWidth="600.0" text="Elige un problema a realizar:">
                      <padding>
                         <Insets left="128.0" />
                      </padding>
+                     <font>
+                        <Font name="Monospaced Bold" size="20.0" />
+                     </font>
                   </Label>
                </children>
             </HBox>
@@ -57,8 +59,14 @@
                      <toggleGroup>
                         <ToggleGroup fx:id="sel" />
                      </toggleGroup>
+                     <font>
+                        <Font name="Monospaced Regular" size="20.0" />
+                     </font>
                   </RadioButton>
-                  <RadioButton fx:id="selConcreto" mnemonicParsing="false" text="Elegir un problema concreto:" toggleGroup="$sel" />
+                  <RadioButton fx:id="selConcreto" mnemonicParsing="false" text="Elegir un problema concreto:" toggleGroup="$sel">
+                     <font>
+                        <Font name="Monospaced Regular" size="20.0" />
+                     </font></RadioButton>
                </children>
                <VBox.margin>
                   <Insets />
@@ -72,34 +80,31 @@
             </HBox>
          </children>
          <padding>
-            <Insets left="64.0" right="64.0" />
+            <Insets left="128.0" right="128.0" />
          </padding>
       </VBox>
    </center>
    <bottom>
       <VBox prefHeight="72.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
          <children>
-            <Separator VBox.vgrow="ALWAYS" />
-            <Separator layoutX="10.0" layoutY="10.0">
-               <padding>
-                  <Insets right="200.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Separator>
             <HBox alignment="CENTER" prefHeight="100.0">
                <children>
-                  <Button cancelButton="true" mnemonicParsing="false" onAction="#pulsarCancelar" text="Cancelar">
+                  <Button cancelButton="true" mnemonicParsing="false" onAction="#pulsarCancelar" styleClass="estiloBotonAzul" text="Cancelar">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <font>
+                        <Font name="Monospaced Bold" size="16.0" />
+                     </font>
                   </Button>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button fx:id="botonAceptar" defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#pulsarAceptar" text="Aceptar">
+                  <Button fx:id="botonAceptar" defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#pulsarAceptar" styleClass="estiloBotonAzul" text="Aceptar">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <font>
+                        <Font name="Monospaced Bold" size="16.0" />
+                     </font>
                   </Button>
                </children>
                <VBox.margin>

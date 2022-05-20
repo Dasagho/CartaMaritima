@@ -188,6 +188,8 @@ public class ResultadosUsuarioController implements Initializable {
         //Animaciones labels ------------------------------------------------------------------
         fechaDesde.focusedProperty().addListener((obs, oldVal, newVal) -> {modelo.secretario.animacion(newVal, desdeLabel);});
         fechaHasta.focusedProperty().addListener((obs, oldVal, newVal) -> {modelo.secretario.animacion(newVal, hastaLabel);});
+        
+        secretario.setTitulo("Ver Resultados");
     }
     
     @FXML

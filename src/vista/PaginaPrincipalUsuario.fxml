@@ -95,55 +95,79 @@
       </HBox>
    </top>
    <bottom>
-      <HBox alignment="BOTTOM_LEFT" minHeight="-Infinity" prefHeight="64.0" prefWidth="600.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="64.0" prefWidth="600.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#pulsarCerrarSesion" text="Cerrar sesión">
+            <Button mnemonicParsing="false" onAction="#pulsarCerrarSesion" styleClass="estiloBotonAzul" text="Cerrar sesión">
                <font>
-                  <Font name="Monospaced Regular" size="16.0" />
-               </font></Button>
+                  <Font name="Monospaced Bold" size="16.0" />
+               </font>
+            </Button>
          </children>
          <padding>
-            <Insets bottom="20.0" left="128.0" />
+            <Insets bottom="20.0" left="128.0" right="128.0" />
          </padding>
       </HBox>
    </bottom>
    <center>
-      <VBox alignment="CENTER" prefWidth="900.0" spacing="10.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefWidth="900.0" spacing="30.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
          <children>
-            <Button fx:id="botonRealizarProblema" defaultButton="true" maxWidth="720.0" mnemonicParsing="false" onAction="#pulsarRealizarProblema" prefHeight="76.0" prefWidth="472.0" styleClass="estiloBotonNaranja" text="Realizar problema">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Button>
-            <HBox alignment="BOTTOM_CENTER" maxWidth="720.0" prefHeight="100.0" prefWidth="472.0">
+            <HBox alignment="BOTTOM_CENTER" layoutX="100.0" layoutY="255.0" maxWidth="720.0" minHeight="-Infinity" prefHeight="120.0" prefWidth="720.0">
                <children>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pulsarVerResultados" prefHeight="64.0" prefWidth="397.0" styleClass="estiloBotonNaranja" text="Ver resultados" HBox.hgrow="ALWAYS">
+                  <VBox alignment="BOTTOM_CENTER" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Button fx:id="botonRealizarProblema" defaultButton="true" maxHeight="-Infinity" maxWidth="720.0" mnemonicParsing="false" onAction="#pulsarRealizarProblema" prefWidth="720.0" styleClass="estiloBotonNaranja" text="Realizar problema" textFill="#4d413a" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="Monospaced Bold" size="28.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="51.0" fitWidth="1.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" maxWidth="720.0" minHeight="-Infinity" prefHeight="120.0" prefWidth="720.0">
+               <children>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pulsarVerResultados" prefWidth="503.0" styleClass="estiloBotonNaranja" text="Ver resultados" HBox.hgrow="ALWAYS">
                      <font>
-                        <Font name="System Bold" size="28.0" />
+                        <Font name="Monospaced Bold" size="28.0" />
                      </font>
                      <HBox.margin>
                         <Insets bottom="8.0" />
                      </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <ImageView fitHeight="43.0" fitWidth="1.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
                   </Button>
                   <FlowPane maxWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
                   <Button mnemonicParsing="false" onAction="#pulsarMapa" styleClass="estiloBotonNaranja">
                      <graphic>
                         <VBox alignment="CENTER">
                            <children>
-                              <ImageView fitHeight="84.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                              <ImageView fitHeight="84.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                                  <image>
                                     <Image url="@../resources/logotipos/icono-pixelizado-miniatura-visualizable.png" />
                                  </image>
                               </ImageView>
-                              <Label text="VER MAPA" />
+                              <Label text="VER MAPA" textFill="#4d413a">
+                                 <font>
+                                    <Font name="Monospaced Bold" size="18.0" />
+                                 </font></Label>
                            </children>
                         </VBox>
                      </graphic>
                   </Button>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
          </children>
          <padding>

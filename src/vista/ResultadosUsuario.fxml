@@ -18,13 +18,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ResultadosUsuarioController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ResultadosUsuarioController">
    <top>
-      <HBox fx:id="cabeceraFX" alignment="CENTER_RIGHT" prefHeight="49.0" prefWidth="600.0" styleClass="estiloCabecera" BorderPane.alignment="CENTER_RIGHT">
+      <HBox fx:id="cabeceraFX" alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="600.0" styleClass="estiloCabecera" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <Label text="RESULTADOS SESIONES">
+            <Label text="RESULTADOS SESIONES" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="Monospaced Bold" size="20.0" />
                </font>
             </Label>
          </children>
@@ -32,14 +32,17 @@
             <Insets />
          </BorderPane.margin>
          <padding>
-            <Insets right="20.0" />
+            <Insets right="32.0" />
          </padding>
       </HBox>
    </top>
    <bottom>
       <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="600.0" styleClass="estiloDifusoCompleto" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="pulsarVolver" mnemonicParsing="false" onAction="#pulsarVolver" text="Volver" />
+            <Button fx:id="pulsarVolver" mnemonicParsing="false" onAction="#pulsarVolver" styleClass="estiloBotonAzul" text="Volver">
+               <font>
+                  <Font name="Monospaced Bold" size="16.0" />
+               </font></Button>
          </children>
          <padding>
             <Insets left="30.0" />
@@ -65,11 +68,11 @@
                            <children>
                               <Label fx:id="desdeLabel" text="Desde el día">
                                  <font>
-                                    <Font name="System Bold" size="12.0" />
+                                    <Font name="Monospaced Bold" size="14.0" />
                                  </font></Label>
                               <Label fx:id="hastaLabel" text="Hasta el día" GridPane.rowIndex="1">
                                  <font>
-                                    <Font name="System Bold" size="12.0" />
+                                    <Font name="Monospaced Bold" size="14.0" />
                                  </font></Label>
                               <DatePicker fx:id="fechaDesde" onAction="#dataPickerCambiado" GridPane.columnIndex="1">
                                  <GridPane.margin>
@@ -99,15 +102,15 @@
                   </TableView>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                <children>
                   <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="24.0" spacing="30.0" style="-fx-background-color: rgba(255, 191, 0,0.5);">
                      <children>
                         <VBox alignment="TOP_CENTER" maxWidth="300.0" prefHeight="222.0" prefWidth="231.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label prefHeight="37.0" prefWidth="222.0" text="DATOS DE TODAS LAS SESIONES" textAlignment="CENTER" wrapText="true">
+                              <Label prefHeight="37.0" text="DATOS DE TODAS LAS SESIONES" textAlignment="CENTER" wrapText="true">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="Monospaced Bold" size="14.0" />
                                  </font>
                                  <padding>
                                     <Insets left="8.0" />
@@ -119,22 +122,22 @@
                                        <children>
                                           <Label text="Nº Sesiones:">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="10.0" layoutY="83.0" prefHeight="19.0" prefWidth="188.0" text="Nº Problemas realizados:">
+                                          <Label layoutX="10.0" layoutY="83.0" prefHeight="19.0" text="Nº Problemas realizados:">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                           </Label>
                                           <Label layoutX="10.0" layoutY="91.0" text="Nº Aciertos:">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                           </Label>
                                           <Label layoutX="10.0" layoutY="100.0" text="Nº Fallos:">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                           </Label>
                                        </children>
@@ -143,22 +146,22 @@
                                        <children>
                                           <Label fx:id="totalSesionesID" text="0">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                           </Label>
                                           <Label fx:id="totalProblemasID" layoutX="10.0" layoutY="83.0" text="0">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                           </Label>
                                           <Label fx:id="totalAciertosID" layoutX="10.0" layoutY="91.0" text="0">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                           </Label>
                                           <Label fx:id="totalFallosID" layoutX="10.0" layoutY="100.0" text="0">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                           </Label>
                                        </children>
@@ -181,7 +184,7 @@
                            <children>
                               <Label prefHeight="20.0" text="DATOS FECHAS SELECCIONADAS" textAlignment="CENTER" wrapText="true">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="Monospaced Bold" size="14.0" />
                                  </font>
                               </Label>
                               <HBox prefHeight="224.0" prefWidth="208.0" VBox.vgrow="ALWAYS">
@@ -190,25 +193,25 @@
                                        <children>
                                           <Label text="Nº Sesiones:">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                              <VBox.margin>
                                                 <Insets />
                                              </VBox.margin>
                                           </Label>
-                                          <Label layoutX="10.0" layoutY="83.0" prefHeight="19.0" prefWidth="188.0" text="Nº Problemas realizados:">
+                                          <Label layoutX="10.0" layoutY="83.0" prefHeight="19.0" text="Nº Problemas realizados:">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                           </Label>
                                           <Label layoutX="10.0" layoutY="91.0" text="Nº Aciertos:">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                           </Label>
                                           <Label layoutX="10.0" layoutY="100.0" text="Nº Fallos:">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                           </Label>
                                        </children>
@@ -217,22 +220,22 @@
                                        <children>
                                           <Label fx:id="seleccionadoSesionesID" text="0">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                           </Label>
                                           <Label fx:id="seleccionadoProblemasID" layoutX="10.0" layoutY="83.0" text="0">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="13.0" />
                                              </font>
                                           </Label>
                                           <Label fx:id="seleccionadoAciertosID" layoutX="10.0" layoutY="91.0" text="0">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                           </Label>
                                           <Label fx:id="seleccionadoFallosID" layoutX="10.0" layoutY="100.0" text="0">
                                              <font>
-                                                <Font name="System Bold" size="13.0" />
+                                                <Font name="Monospaced Bold" size="14.0" />
                                              </font>
                                           </Label>
                                        </children>
@@ -252,7 +255,7 @@
                         <Insets top="8.0" />
                      </VBox.margin>
                   </HBox>
-                  <BarChart fx:id="grafico" animated="false" prefHeight="257.0" prefWidth="417.0" stylesheets="@../resources/estilo_grafico.css" title="Aciertos y fallos por sesiones" VBox.vgrow="ALWAYS">
+                  <BarChart fx:id="grafico" animated="false" prefHeight="257.0" prefWidth="472.0" stylesheets="@../resources/estilo_grafico.css" title="Aciertos y fallos por sesiones" VBox.vgrow="ALWAYS">
                     <xAxis>
                       <CategoryAxis animated="false" label="Sesiones" side="BOTTOM" />
                     </xAxis>

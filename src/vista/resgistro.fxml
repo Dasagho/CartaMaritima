@@ -174,7 +174,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="900.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
          <children>
-            <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar">
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelar" styleClass="estiloBotonAzul" text="Cancelar">
                <font>
                   <Font name="Monospaced Bold" size="16.0" />
                </font>
@@ -182,7 +182,7 @@
                   <Insets />
                </HBox.margin></Button>
             <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#guardar" text="Guardar">
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#guardar" styleClass="estiloBotonAzul" text="Guardar">
                <font>
                   <Font name="Monospaced Bold" size="16.0" />
                </font></Button>

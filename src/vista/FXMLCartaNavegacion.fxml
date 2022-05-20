@@ -30,14 +30,14 @@
             <Region layoutX="279.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="175.0" HBox.hgrow="ALWAYS" />
             <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="51.0" text="ZOOM" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
-                  <Font name="Monospaced Bold" size="18.0" />
+                  <Font name="Monospaced Bold" size="20.0" />
                </font></Label>
-            <Button mnemonicParsing="false" onAction="#zoomOut" text="-" HBox.hgrow="ALWAYS">
+            <Button mnemonicParsing="false" onAction="#zoomOut" styleClass="estiloBotonNaranja" text="-" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font></Button>
             <Slider fx:id="zoom_slider" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="130.0" HBox.hgrow="ALWAYS" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#zoomIn" text="+" HBox.hgrow="ALWAYS">
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#zoomIn" styleClass="estiloBotonNaranja" text="+" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font></Button>
@@ -68,7 +68,7 @@
                            <children>
                               <FlowPane alignment="TOP_CENTER" hgap="5.0" prefHeight="450.0" prefWidth="361.0" vgap="5.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ToggleButton fx:id="panearBoton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#seleccionarTipoMarca" prefHeight="50.0" prefWidth="50.0" selected="true">
+                                    <ToggleButton fx:id="panearBoton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#seleccionarTipoMarca" prefHeight="50.0" prefWidth="50.0" selected="true" styleClass="estiloBotonAzul">
                                        <graphic>
                                           <ImageView fitHeight="49.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -80,7 +80,7 @@
                                           <ToggleGroup fx:id="herramientas" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="puntoBoton" layoutX="12.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#seleccionarTipoMarca" prefHeight="50.0" prefWidth="50.0" toggleGroup="$herramientas">
+                                    <ToggleButton fx:id="puntoBoton" layoutX="12.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#seleccionarTipoMarca" prefHeight="50.0" prefWidth="50.0" styleClass="estiloBotonAzul" toggleGroup="$herramientas">
                                        <graphic>
                                           <ImageView fitHeight="46.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -89,7 +89,7 @@
                                           </ImageView>
                                        </graphic>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="circuloBoton" layoutX="95.0" layoutY="146.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#seleccionarTipoMarca" prefHeight="50.0" prefWidth="50.0" toggleGroup="$herramientas">
+                                    <ToggleButton fx:id="circuloBoton" layoutX="95.0" layoutY="146.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#seleccionarTipoMarca" prefHeight="50.0" prefWidth="50.0" styleClass="estiloBotonAzul" toggleGroup="$herramientas">
                                        <graphic>
                                           <ImageView fitHeight="49.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -98,7 +98,7 @@
                                           </ImageView>
                                        </graphic>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="textoBoton" layoutX="121.0" layoutY="146.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#seleccionarTipoMarca" prefHeight="50.0" prefWidth="50.0" toggleGroup="$herramientas">
+                                    <ToggleButton fx:id="textoBoton" layoutX="121.0" layoutY="146.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#seleccionarTipoMarca" prefHeight="50.0" prefWidth="50.0" styleClass="estiloBotonAzul" toggleGroup="$herramientas">
                                        <graphic>
                                           <ImageView fitHeight="49.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -107,7 +107,7 @@
                                           </ImageView>
                                        </graphic>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="lineaBoton" layoutX="67.0" layoutY="200.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#seleccionarTipoMarca" prefHeight="50.0" prefWidth="50.0" toggleGroup="$herramientas">
+                                    <ToggleButton fx:id="lineaBoton" layoutX="67.0" layoutY="200.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#seleccionarTipoMarca" prefHeight="50.0" prefWidth="50.0" styleClass="estiloBotonAzul" toggleGroup="$herramientas">
                                        <graphic>
                                           <ImageView fitHeight="49.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -116,7 +116,7 @@
                                           </ImageView>
                                        </graphic>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="extremosBoton" layoutX="94.0" layoutY="200.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#seleccionarTipoMarca" prefHeight="50.0" prefWidth="50.0" toggleGroup="$herramientas">
+                                    <ToggleButton fx:id="extremosBoton" layoutX="94.0" layoutY="200.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#seleccionarTipoMarca" prefHeight="50.0" prefWidth="50.0" styleClass="estiloBotonAzul" toggleGroup="$herramientas">
                                        <graphic>
                                           <ImageView fitHeight="49.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -142,7 +142,7 @@
                                     </ImageView>
                                  </graphic>
                               </CheckBox>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#borrarTodo" prefHeight="50.0" prefWidth="50.0">
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#borrarTodo" prefHeight="50.0" prefWidth="50.0" styleClass="estiloBotonAzul">
                                  <graphic>
                                     <ImageView fitHeight="50.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
