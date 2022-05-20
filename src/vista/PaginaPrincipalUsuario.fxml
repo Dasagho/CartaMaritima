@@ -73,7 +73,7 @@
                         <Insets right="28.0" />
                      </HBox.margin>
                   </Label>
-                  <MenuButton fx:id="menuPerfil" focusTraversable="false" mnemonicParsing="false">
+                  <MenuButton id="choice-box" fx:id="menuPerfil" focusTraversable="false" mnemonicParsing="false">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#pulsarEditarPerfil" text="Editar perfil" />
                       <MenuItem mnemonicParsing="false" onAction="#pulsarCerrarSesion" text="Cerrar sesión" />

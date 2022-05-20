@@ -104,6 +104,10 @@
      -fx-background-color:  #00a3c4;
 }
 
+#choice-box .context-menu .menu-item:hover{
+     -fx-background-color:  #007e97;
+}
+
 .root{
     
     -fx-font-family: monospace;
