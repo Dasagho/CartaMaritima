@@ -75,7 +75,10 @@
             <HBox fx:id="contenedorEleccion" alignment="CENTER" maxHeight="270.0" maxWidth="1280.0" prefWidth="500.0" spacing="5.0">
                <children>
                   <ListView fx:id="vistaDeLista" maxWidth="-Infinity" prefWidth="400.0" HBox.hgrow="ALWAYS" />
-                  <TextArea fx:id="enunciado" editable="false" wrapText="true" HBox.hgrow="ALWAYS" />
+                  <TextArea fx:id="enunciado" editable="false" wrapText="true" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Monospaced Regular" size="18.0" />
+                     </font></TextArea>
                </children>
             </HBox>
          </children>
@@ -94,7 +97,7 @@
                         <Insets />
                      </HBox.margin>
                      <font>
-                        <Font name="Monospaced Bold" size="16.0" />
+                        <Font name="Monospaced Bold" size="18.0" />
                      </font>
                   </Button>
                   <Region HBox.hgrow="ALWAYS" />
@@ -103,7 +106,7 @@
                         <Insets />
                      </HBox.margin>
                      <font>
-                        <Font name="Monospaced Bold" size="16.0" />
+                        <Font name="Monospaced Bold" size="18.0" />
                      </font>
                   </Button>
                </children>
@@ -116,7 +119,7 @@
             <Insets />
          </BorderPane.margin>
          <padding>
-            <Insets left="128.0" right="128.0" />
+            <Insets bottom="20.0" left="128.0" right="128.0" />
          </padding>
       </VBox>
    </bottom>

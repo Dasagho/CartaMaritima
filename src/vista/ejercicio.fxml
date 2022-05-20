@@ -19,7 +19,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.EjercicioController">
    <bottom>
-      <HBox fx:id="hBoxBotones" alignment="CENTER" prefHeight="55.0" prefWidth="600.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
+      <HBox fx:id="hBoxBotones" alignment="CENTER" prefHeight="96.0" prefWidth="900.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="volver_Button" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" styleClass="estiloBotonAzul" text="Cancelar">
                <HBox.margin>
@@ -35,7 +35,7 @@
                </font></Button>
          </children>
          <padding>
-            <Insets bottom="20.0" left="128.0" right="128.0" />
+            <Insets left="128.0" right="128.0" />
          </padding>
       </HBox>
    </bottom>
