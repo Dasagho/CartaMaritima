@@ -117,7 +117,7 @@ public class SeleccionTipoPreguntaController implements Initializable {
         protected void updateItem(Problem item, boolean empty)
         {   super.updateItem(item, empty);
             if (item==null) setText(null);
-            else setText( (problemas.indexOf(item)+1) + ". " + item.getText().substring(0, 39) + "...");
+            else setText( (problemas.indexOf(item)+1) + ". " + item.getText().substring(0, 25) + "...");
         }
     }
 }

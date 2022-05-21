@@ -17,7 +17,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -25,7 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -177,11 +176,13 @@ public class EjercicioController implements Initializable {
             Parent root = miCargador.load();
             Scene escena = new Scene(root, 850, 550);
             Stage escenario = new Stage();
-            escenario.setTitle("Carta de navegación");
+            escenario.setTitle("Nautica-Visión - Carta de navegación");
             escenario.setMinHeight(750);
             escenario.setMinWidth(900);
             escenario.setScene(escena);
             escena.getStylesheets().add("/resources/estilos.css");
+            // Establecimiento del icono de la aplicación en miniatura
+            escenario.getIcons().add(new Image("/resources/logotipos/icono-pixelizado-miniatura.png"));
             escenario.show();
 
             escenario.setOnCloseRequest(new EventHandler<WindowEvent>() {

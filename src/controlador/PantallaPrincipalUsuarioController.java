@@ -8,10 +8,8 @@ package controlador;
 import static aplicacion.Main.setRoot;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,12 +23,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import model.Session;
 
 /**
  * FXML Controller class
@@ -145,6 +142,9 @@ public class PantallaPrincipalUsuarioController implements Initializable {
         escenario.setMinWidth(900);
         escenario.setScene(escena);
         escenario.initModality(Modality.APPLICATION_MODAL); // Hacemos que la ventana nueva sea modal
+        escenario.setTitle("Nautica-Visión - Editar perfil");
+        // Establecimiento del icono de la aplicación en miniatura
+        escenario.getIcons().add(new Image("/resources/logotipos/icono-pixelizado-miniatura.png"));
         escenario.showAndWait();
         imagenPerfil.setImage(modelo.secretario.getUsuario().getAvatar()); // Actualiza la img de perfil por si ha sido modificada
     }
@@ -161,7 +161,9 @@ public class PantallaPrincipalUsuarioController implements Initializable {
             escenario.setMinWidth(850);
             escenario.setScene(escena);
             escena.getStylesheets().add("/resources/estilos.css");
-            escenario.setTitle("Carta de navegación");
+            escenario.setTitle("Nautica-Visión - Carta de navegación");
+            // Establecimiento del icono de la aplicación en miniatura
+            escenario.getIcons().add(new Image("/resources/logotipos/icono-pixelizado-miniatura.png"));
             escenario.show();
 
             escenario.setOnCloseRequest(new EventHandler<WindowEvent>() {

@@ -53,7 +53,7 @@ public class Main extends Application {
         primaryStage.show();
         
         // Establecimiento del icono de la aplicación en miniatura
-        stage.getIcons().add(new Image("/resources/logotipos/icono-pixelizado.png"));
+        stage.getIcons().add(new Image("/resources/logotipos/icono-pixelizado-miniatura.png"));
 
         // Manejador que captura la peticion de cerrar la ventana y ejecuta un 
         // codigo asociado al acabar
@@ -64,8 +64,8 @@ public class Main extends Application {
                 if (modelo.secretario.usuarioActivo().get()) {
                     Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
                     alerta.setTitle("Cerrar sesión");
-                    alerta.setHeaderText("Cerrar sesión");
-                    alerta.setContentText("¿Seguro que quieres cerrar la sesión?\n ");
+                    alerta.setHeaderText("Al salir se cerrará la sesión.");
+                    alerta.setContentText("¿Seguro que quieres salir?\n ");
                     Optional<ButtonType> respuesta = alerta.showAndWait();
                     if (respuesta.isPresent() && respuesta.get() == ButtonType.OK) {
                         // Se cierra la sesión

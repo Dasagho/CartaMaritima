@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InicioSesionController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InicioSesionController">
    <center>
       <GridPane alignment="CENTER" focusTraversable="true" prefHeight="425.0" prefWidth="900.0" styleClass="estiloDifuso" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -53,11 +53,15 @@
                      <font>
                         <Font name="Monospaced Bold" size="16.0" />
                      </font></Label>
-                  <Button fx:id="btn" defaultButton="true" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="43.0" prefWidth="297.0" styleClass="estiloBotonAzul" text="Iniciar sesión">
-                     <font>
-                        <Font name="Monospaced Bold" size="16.0" />
-                     </font>
-                  </Button>
+                  <HBox alignment="CENTER" prefHeight="51.0" prefWidth="645.0">
+                     <children>
+                        <Button fx:id="btn" defaultButton="true" mnemonicParsing="false" onAction="#iniciarSesion" prefWidth="297.0" styleClass="estiloBotonAzul" text="Iniciar sesión">
+                           <font>
+                              <Font name="Monospaced Bold" size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
                <padding>
                   <Insets top="10.0" />

@@ -11,34 +11,23 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import javafx.animation.FadeTransition;
-import javafx.animation.ParallelTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -49,14 +38,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-import javafx.util.Duration;
 import model.User;
 import static model.User.checkNickName;
 import static model.User.checkPassword;
@@ -114,7 +99,7 @@ public class registrarseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         // Nombramiento de la ventana
-        modelo.secretario.setTitulo("Registrarse");
+        if (!modelo.secretario.usuarioActivo().getValue())  modelo.secretario.setTitulo("Registrarse");
 
         // Asignacion de la fecha actual al datePicker para evitar errores de NullPointer
         datePicker.setValue(LocalDate.now());
@@ -159,7 +144,7 @@ public class registrarseController implements Initializable {
 
     public void initEdicion() { // Invocado desde la pantalla principal de usuario
         // enEdicion = true;
-        modelo.secretario.setTitulo("Editar Perfil");
+        // modelo.secretario.setTitulo("Editar Perfil");
         titulo.setText("EDITAR PERFIL");
         // System.out.println("Correcto");
         nickName_textfield.setText(modelo.secretario.getUsuario().getNickName());
@@ -185,7 +170,7 @@ public class registrarseController implements Initializable {
 
     @FXML
     private void guardar(ActionEvent event) throws IOException {
-        restablecerErrores();
+        //restablecerErrores();
 
         if (!checkNickName(nickName_textfield.getText())) {
             nickName_error.setText("Nombre de usuario no válido, un nombre válido debe tener entre 6 y 15 carácteres y solo puede contener mayúsculas, minúsculas, guiones o guiones bajos");
@@ -290,16 +275,13 @@ public class registrarseController implements Initializable {
 
         if (!checkPassword(contrasena_textfield.getText()) && !contrasena_textfield.getText().isBlank()) {
             contrasena_error.setText("Introduce una contraseña que contenga: Entre 8 y 20 carácteres, mínimo una letra mayúscula y minúscula, un dígito, un carácter de los siguientes: !@#$%&*()-+= y no contener ningún espacio en blanco");
-            contrasena_textfield.setText("");
-            confirmacion_textfield.setText("");
             return;
-        } else { //System.out.println("aqui");
+        } else {
             contrasena_error.setText("");
         }
 
         if (!contrasena_textfield.getText().equals(confirmacion_textfield.getText()) && !confirmacion_textfield.getText().isEmpty()) {
             confirmacion_error.setText("No coinciden las contraseñas");
-            confirmacion_textfield.setText("");
             return;
         } else {
             confirmacion_error.setText("");
